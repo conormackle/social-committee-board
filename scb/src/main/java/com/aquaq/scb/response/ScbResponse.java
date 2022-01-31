@@ -33,9 +33,9 @@ public class ScbResponse {
 
     public static ScbResponse createFailedResponse(Exception exception){
         ScbResponse response = new ScbResponse();
-        log.error(exception);
         response.setResponseCode(ResponseCodes.INTERNAL_SERVER_ERROR);
         response.setResponse(exception);
+        log.error(exception);
         return response;
     }
 }
