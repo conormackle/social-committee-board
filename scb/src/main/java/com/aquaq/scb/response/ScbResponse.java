@@ -19,15 +19,23 @@ public class ScbResponse {
 
     public ScbResponse() {
         timeReceived = GeneralUtils.getCurrentTs();
-        responseCode = 1;
+        responseCode = ResponseCodes.SUCCESS;
     }
 
-    public static ScbResponse createResponse(Object responseObject){
+    public static ScbResponse createSuccessResponse(Object responseObject){
         ScbResponse response = new ScbResponse();
         response.setResponse(responseObject);
         response.setTimeReturned(System.currentTimeMillis());
         log.debug("response = " + response);
 
+        return response;
+    }
+
+    public static ScbResponse createFailedResponse(Exception exception){
+        ScbResponse response = new ScbResponse();
+        log.error(exception);
+        response.setResponseCode(ResponseCodes.INTERNAL_SERVER_ERROR);
+        response.setResponse(exception);
         return response;
     }
 }
