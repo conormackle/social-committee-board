@@ -5,6 +5,8 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Log4j2
 @Service
 public class UsersService {
@@ -18,9 +20,14 @@ public class UsersService {
 
     public ScbResponse getByUserId(Integer userId){
         try{
-            return ScbResponse.createSuccessResponse(usersRepository.getById(userId));
+            Optional<UsersModel> usersModels = usersRepository.findById(userId);
+            if(usersModels.isPresent()){
+                return ScbResponse.createSuccessResponse(usersModels);
+            }else{
+                return ScbResponse.createSuccessResponse(String.format("No user found for ID: %s", userId));
+            }
         }catch(Exception e){
-            return ScbResponse.createFailedResponse(e);
+            return ScbResponse.createExceptionResponse(e);
         }
     }
 }
