@@ -26,6 +26,6 @@ public class UsersController {
     @GetMapping("/users/getByUserId/{userId}")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
     public ScbResponse getByUserId(@PathVariable Integer userId) {
-        return ScbResponse.createResponse(userService.getByUserId(userId));
+        return userService.getByUserId(userId);
     }
 }

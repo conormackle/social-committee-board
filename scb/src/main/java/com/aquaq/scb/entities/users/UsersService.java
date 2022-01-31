@@ -9,8 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UsersService {
 
-    final
-    private UsersRepository usersRepository;
+    private final UsersRepository usersRepository;
 
     @Autowired
     public UsersService(UsersRepository usersRepository){
@@ -18,8 +17,10 @@ public class UsersService {
     }
 
     public ScbResponse getByUserId(Integer userId){
-        return null;
+        try{
+            return ScbResponse.createSuccessResponse(usersRepository.getById(userId));
+        }catch(Exception e){
+            return ScbResponse.createFailedResponse(e);
+        }
     }
-
-
 }
