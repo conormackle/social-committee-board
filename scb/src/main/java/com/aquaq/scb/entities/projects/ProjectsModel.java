@@ -1,8 +1,7 @@
 package com.aquaq.scb.entities.projects;
 import com.aquaq.scb.entities.users.UsersModel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -22,12 +21,12 @@ public class ProjectsModel {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name="name")
-    private String name;
-
     @Column(name="details")
     private String details;
 
+    @JsonIgnore
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
             name = "user_projects",
