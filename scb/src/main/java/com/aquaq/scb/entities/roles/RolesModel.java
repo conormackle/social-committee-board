@@ -1,9 +1,8 @@
 package com.aquaq.scb.entities.roles;
 
 import com.aquaq.scb.entities.users.UsersModel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -25,6 +24,9 @@ public class RolesModel {
     @Column(name="name")
     private String name;
 
+    @JsonIgnore
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
             name = "user_roles",
