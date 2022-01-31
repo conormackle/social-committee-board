@@ -31,7 +31,17 @@ public class ScbResponse {
         return response;
     }
 
-    public static ScbResponse createFailedResponse(Exception exception){
+    public static ScbResponse createNotFoundResponse(Object responseObject){
+        ScbResponse response = new ScbResponse();
+        response.setResponse(responseObject);
+        response.setResponseCode(ResponseCodes.NOT_FOUND_ERROR);
+        response.setTimeReturned(System.currentTimeMillis());
+        log.debug("response = " + response);
+
+        return response;
+    }
+
+    public static ScbResponse createExceptionResponse(Exception exception){
         ScbResponse response = new ScbResponse();
         response.setResponseCode(ResponseCodes.INTERNAL_SERVER_ERROR);
         response.setResponse(exception);
