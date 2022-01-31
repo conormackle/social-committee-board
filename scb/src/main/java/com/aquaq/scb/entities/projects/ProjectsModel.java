@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -24,9 +25,6 @@ public class ProjectsModel {
     @Column(name="name")
     private String name;
 
-    @Column(name="date")
-    private LocalDateTime date;
-
     @Column(name="details")
     private String details;
 
@@ -36,6 +34,6 @@ public class ProjectsModel {
             joinColumns = { @JoinColumn(name = "project_id") },
             inverseJoinColumns = { @JoinColumn(name = "user_id") }
     )
-    private Set<UsersModel> user;
+    private Set<UsersModel> user = new HashSet<>();
 
 }

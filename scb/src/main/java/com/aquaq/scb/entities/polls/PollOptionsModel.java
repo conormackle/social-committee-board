@@ -6,7 +6,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -24,4 +26,7 @@ public class PollOptionsModel {
 
     @Column(name="votes")
     private int votes;
+
+    @ManyToMany(mappedBy = "pollOptions")
+    private Set<PollsModel> polls = new HashSet<>();
 }
