@@ -1,3 +1,5 @@
+/* harry brankin initial table create queries */
+
 CREATE TABLE `users` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`name` VARCHAR(155),
