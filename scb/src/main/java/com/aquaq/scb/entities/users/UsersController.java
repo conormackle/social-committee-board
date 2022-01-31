@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Log4j2
 @RestController
-@Api(tags = {"Entities"})
+@Api(tags = {"Users"})
 public class UsersController {
 
     final
