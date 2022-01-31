@@ -27,9 +27,9 @@ CREATE TABLE `roles` (
 CREATE TABLE `user_roles` (
 	`user_id` INT NOT NULL,
 	`role_id` INT NOT NULL,
-	PRIMARY KEY (`user_id`),
      FOREIGN KEY (user_id) REFERENCES users(id),
-      FOREIGN KEY (role_id) REFERENCES roles(id)
+      FOREIGN KEY (role_id) REFERENCES roles(id),
+	  PRIMARY KEY (role_id, user_id)
 );
 
 CREATE TABLE `polls` (
@@ -50,7 +50,8 @@ CREATE TABLE `poll_poll_option` (
 	`poll_id` INT NOT NULL,
 	`poll_option_id` INT NOT NULL,
     FOREIGN KEY (poll_id) REFERENCES polls(id),
-      FOREIGN KEY (poll_option_id) REFERENCES poll_options(id)
+      FOREIGN KEY (poll_option_id) REFERENCES poll_options(id),
+	  PRIMARY KEY (poll_id, poll_option_id)
 );
 
 CREATE TABLE `projects` (
@@ -65,7 +66,8 @@ CREATE TABLE `user_projects` (
 	`user_id` INT NOT NULL,
 	`project_id` INT NOT NULL,
      FOREIGN KEY (user_id) REFERENCES users(id),
-      FOREIGN KEY (project_id) REFERENCES projects(id)
+      FOREIGN KEY (project_id) REFERENCES projects(id),
+	  PRIMARY KEY (project_id, user_id)
 );
 
 CREATE TABLE `audit` (
