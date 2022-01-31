@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -27,8 +28,8 @@ public class RolesModel {
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
             name = "user_roles",
-            joinColumns = { @JoinColumn(name = "project_id") },
+            joinColumns = { @JoinColumn(name = "role_id") },
             inverseJoinColumns = { @JoinColumn(name = "user_id") }
     )
-    private Set<UsersModel> user;
+    private Set<UsersModel> user = new HashSet<>();
 }

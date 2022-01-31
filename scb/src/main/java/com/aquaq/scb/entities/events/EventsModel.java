@@ -28,7 +28,8 @@ public class EventsModel {
     @Column(name="details")
     private String details;
 
-    @Column(name="user_id")
+    @ManyToOne
+    @JoinColumn(name="user_id", nullable=false)
     private UsersModel user;
 
 }

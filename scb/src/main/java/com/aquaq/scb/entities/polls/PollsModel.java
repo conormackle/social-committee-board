@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -27,7 +29,12 @@ public class PollsModel {
     @Column(name="details")
     private String details;
 
-    @Column(name="poll_options")
-    private List<PollOptionsModel> pollOptions;
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "poll_poll_option",
+            joinColumns = { @JoinColumn(name = "poll_id") },
+            inverseJoinColumns = { @JoinColumn(name = "poll_option_id") }
+    )
+    private Set<PollOptionsModel> pollOptions = new HashSet<>();
 
 }

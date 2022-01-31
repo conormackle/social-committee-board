@@ -1,5 +1,6 @@
 package com.aquaq.scb.entities.users;
 
+import com.aquaq.scb.entities.events.EventsModel;
 import com.aquaq.scb.entities.projects.ProjectsModel;
 import com.aquaq.scb.entities.roles.RolesModel;
 import lombok.AllArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.EventListenerProxy;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -31,9 +33,12 @@ public class UsersModel {
     @Column(name="email_verified")
     private int emailVerified;
 
-    @ManyToMany(mappedBy = "users")
+    @ManyToMany(mappedBy = "user")
     private Set<ProjectsModel> projects = new HashSet<>();
 
-    @ManyToMany(mappedBy = "roles")
+    @ManyToMany(mappedBy = "user")
     private Set<RolesModel> roles = new HashSet<>();
+
+    @OneToMany(mappedBy="user")
+    private Set<EventsModel> events;
 }
