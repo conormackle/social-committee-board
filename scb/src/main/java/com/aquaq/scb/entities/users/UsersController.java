@@ -27,10 +27,18 @@ public class UsersController {
         return userService.getByUserId(userId);
     }
 
-    @PostMapping("/users/saveUser")
+    @PostMapping("/users/createUser/")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
-    public ScbResponse createuser(@RequestBody UsersModel usersModel){
+    public ScbResponse createUser(@RequestBody UsersModel usersModel){
         ScbResponse usersModelResponse = userService.createUser(usersModel);
+        return usersModelResponse;
+    }
+
+
+    @PutMapping("/updateUser/{userId}")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ScbResponse updateUser(@RequestBody UsersModel usersModel,  @PathVariable Integer userId){
+        ScbResponse usersModelResponse = userService.updateUser(usersModel, userId);
         return usersModelResponse;
     }
 }
