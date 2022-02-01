@@ -30,4 +30,13 @@ public class UsersService {
             return ScbResponse.createExceptionResponse(e);
         }
     }
+
+    public ScbResponse createUser(UsersModel usersModel){
+        try {
+           UsersModel savedUsersModel = usersRepository.save(usersModel);
+           return ScbResponse.createSuccessResponse(savedUsersModel);
+        }catch(Exception e){
+            return ScbResponse.createExceptionResponse(e);
+        }
+    }
 }

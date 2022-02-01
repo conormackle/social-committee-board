@@ -6,9 +6,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Log4j2
 @RestController
@@ -27,5 +25,12 @@ public class UsersController {
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
     public ScbResponse getByUserId(@PathVariable Integer userId) {
         return userService.getByUserId(userId);
+    }
+
+    @PostMapping("/users/saveUser")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ScbResponse createuser(@RequestBody UsersModel usersModel){
+        ScbResponse usersModelResponse = userService.createUser(usersModel);
+        return usersModelResponse;
     }
 }
