@@ -8,6 +8,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Log4j2
@@ -23,11 +24,24 @@ public class ProjectsService {
 
     public ScbResponse getByProjectId(Integer projectId){
         try{
-            Optional<ProjectsModel> projectsModels = projectsRepository.findById(projectId);
-            if(projectsModels.isPresent()){
-                return ScbResponse.createSuccessResponse(projectsModels);
+            Optional<ProjectsModel> projectsModel = projectsRepository.findById(projectId);
+            if(projectsModel.isPresent()){
+                return ScbResponse.createSuccessResponse(projectsModel);
             }else{
                 return ScbResponse.createSuccessResponse(String.format("No project found for ID: %s", projectId));
+            }
+        }catch(Exception e){
+            return ScbResponse.createExceptionResponse(e);
+        }
+    }
+
+    public ScbResponse getProjects(){
+        try{
+            List<ProjectsModel> projectsModels = projectsRepository.findAll();
+            if(!projectsModels.isEmpty()){
+                return ScbResponse.createSuccessResponse(projectsModels);
+            }else{
+                return ScbResponse.createSuccessResponse(String.format("No projects found"));
             }
         }catch(Exception e){
             return ScbResponse.createExceptionResponse(e);

@@ -25,6 +25,12 @@ public class ProjectsController {
         this.projectsService = projectsService;
     }
 
+    @GetMapping("/projects")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ScbResponse getProjects() {
+        return projectsService.getProjects();
+    }
+
     @GetMapping("/projects/getByProjectId/{projectId}")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
     public ScbResponse getByProjectId(@PathVariable Integer projectId) {

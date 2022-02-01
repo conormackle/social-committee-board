@@ -25,9 +25,16 @@ public class EventsController {
         this.eventsService = eventsService;
     }
 
+    @GetMapping("/events")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ScbResponse getEvents() {
+        return eventsService.getEvents();
+    }
+
     @GetMapping("/events/getByEventId/{eventId}")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
     public ScbResponse getByEventId(@PathVariable Integer eventId) {
         return eventsService.getByEventId(eventId);
     }
+
 }

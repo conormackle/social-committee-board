@@ -31,21 +31,53 @@ public class UsersModel {
     @Column(name="email_verified")
     private int emailVerified;
 
-    @JsonIgnore
+    //@JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToMany(mappedBy = "user")
     private Set<ProjectsModel> projects = new HashSet<>();
 
-    @JsonIgnore
+    //@JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToMany(mappedBy = "user")
     private Set<RolesModel> roles = new HashSet<>();
 
-    @JsonIgnore
+    //@JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy="user")
     private Set<EventsModel> events;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getEmailVerified() {
+        return emailVerified;
+    }
+
+    public void setEmailVerified(int emailVerified) {
+        this.emailVerified = emailVerified;
+    }
 }
