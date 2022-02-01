@@ -9,10 +9,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-public class GeneralUtilsTest {
+class GeneralUtilsTest {
 
     @Test
-    public void test_getCurrentTs_returns_current_timestamp_in_millis() {
+    void test_getCurrentTs_returns_current_timestamp_in_millis() {
         assertEquals(GeneralUtils.getCurrentTs(), System.currentTimeMillis());
     }
 }

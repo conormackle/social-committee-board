@@ -21,17 +21,34 @@ public class UsersController {
         this.userService = userService;
     }
 
-    @GetMapping("/users/getByUserId/{userId}")
+    @GetMapping("/users/getById/{userId}")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
-    public ScbResponse getByUserId(@PathVariable Integer userId) {
-        return userService.getByUserId(userId);
+    public ScbResponse getById(@PathVariable Integer userId) {
+        return userService.getById(userId);
     }
 
     @PostMapping("/users/createUser/")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
-    public ScbResponse createUser(@RequestBody UsersModel usersModel){
-        ScbResponse usersModelResponse = userService.createUser(usersModel);
-        return usersModelResponse;
+    public ScbResponse createUser(@RequestBody UsersDto usersDto) {
+        return userService.createUser(usersDto);
+    }
+
+    @GetMapping("/users/getAll")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ScbResponse getAll() {
+        return userService.getAll();
+    }
+
+    @PutMapping("/users/update")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ScbResponse update(@RequestBody UsersDto requestDto) {
+        return userService.update(requestDto);
+    }
+
+    @PutMapping("/users/delete/{userId}")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ScbResponse delete(@PathVariable Integer userId) {
+        return userService.delete(userId);
     }
 
 
