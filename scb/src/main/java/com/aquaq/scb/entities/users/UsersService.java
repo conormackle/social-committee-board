@@ -28,7 +28,7 @@ public class UsersService {
     public ScbResponse getAll(){
         try{
             Optional<List<UsersModel>> usersModels = Optional.of(usersRepository.findAll());
-            return ScbResponse.createSuccessResponse(usersModels);
+            return ScbResponse.createSuccessResponse(usersModels.get());
         }catch(Exception e){
             return ScbResponse.createExceptionResponse(e);
         }
