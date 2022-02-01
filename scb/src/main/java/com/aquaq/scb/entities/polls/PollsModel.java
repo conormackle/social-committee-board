@@ -1,9 +1,8 @@
 package com.aquaq.scb.entities.polls;
 
 import com.aquaq.scb.entities.users.UsersModel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -23,12 +22,47 @@ public class PollsModel {
     @Column(name = "id")
     private Integer id;
 
+    public Set<PollOptionsModel> getPollOptions() {
+        return pollOptions;
+    }
+
+    public void setPollOptions(Set<PollOptionsModel> pollOptions) {
+        this.pollOptions = pollOptions;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
+
     @Column(name="name")
     private String name;
 
     @Column(name="details")
     private String details;
 
+    //@JsonIgnore
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
             name = "poll_poll_option",

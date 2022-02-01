@@ -35,4 +35,27 @@ public class ProjectsModel {
     )
     private Set<UsersModel> user = new HashSet<>();
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
+
+    public Set<UsersModel> getUser() {
+        return user;
+    }
+
+    public void setUser(Set<UsersModel> user) {
+        this.user = user;
+    }
 }
