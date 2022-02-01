@@ -1162,3 +1162,4 @@ Caused by: java.lang.ClassNotFoundException: com.fasterxml.jackson.databind.intr
 	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:182)
 	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:519)
 	... 23 common frames omitted
+2022-02-01 15:37:39,739  [WARN]  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration  [Code line: 219]  [Thread: main]  [Message:spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning]
