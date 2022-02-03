@@ -82,14 +82,13 @@ class PollsServiceTest {
 
     @Test
     void test_getById_returns_errorResponse_when_throwsException() {
-
         Mockito.when(pollsRepository.findById(id)).thenThrow(new RuntimeException());
         actualResponse = pollsService.getById(id);
         testExceptionScbResponse(actualResponse);
     }
 
     @Test
-    void test_createUser_returns_user() {
+    void test_create_returns_model() {
         PollsModel model = getModel(id);
         Mockito.when(pollsRepository.save(model)).thenReturn(model);
         actualResponse = pollsService.create(model);
@@ -99,7 +98,7 @@ class PollsServiceTest {
     }
 
     @Test
-    void test_createUser_returns_errorResponse_when_throwsException() {
+    void test_create_returns_errorResponse_when_throwsException() {
         PollsModel model = getModel(id);
         Mockito.when(pollsRepository.save(model)).thenThrow(new RuntimeException());
         actualResponse = pollsService.create(model);
@@ -107,7 +106,7 @@ class PollsServiceTest {
     }
 
     @Test
-    void test_updateUser_returns_user() {
+    void test_update_returns_model() {
         Optional<PollsModel> modelBeforeUpdateOpt = Optional.of(getModel(id));
         PollsModel modelRequestToChangeName = PollsModel.builder().name("testName2").id(id).build();
         Mockito.when(pollsRepository.findById(id)).thenReturn(modelBeforeUpdateOpt);
@@ -119,7 +118,7 @@ class PollsServiceTest {
     }
 
     @Test
-    void test_updateUser_returns_noEntityFound() {
+    void test_update_returns_noEntityFound() {
         PollsModel modelRequestToChangeName = PollsModel.builder().name("testName2").id(id).build();
         Mockito.when(pollsRepository.findById(id)).thenReturn(Optional.empty());
         actualResponse = pollsService.update(modelRequestToChangeName, id);
@@ -129,7 +128,7 @@ class PollsServiceTest {
     }
 
     @Test
-    void test_updateUser_returns_errorResponse_when_findById_throwsException() {
+    void test_update_returns_errorResponse_when_findById_throwsException() {
         PollsModel modelRequestToChangeName = PollsModel.builder().name("testName2").id(id).build();
         Mockito.when(pollsRepository.findById(id)).thenThrow(new RuntimeException());
         actualResponse = pollsService.update(modelRequestToChangeName, id);
@@ -137,12 +136,12 @@ class PollsServiceTest {
     }
 
     @Test
-    void test_updateUser_returns_errorResponse_when_save_throwsException() {
-        Optional<PollsModel> userBeforeUpdateOpt = Optional.of(getModel(id));
-        PollsModel userRequestToChangeName = PollsModel.builder().name("testName2").id(id).build();
-        Mockito.when(pollsRepository.findById(id)).thenReturn(userBeforeUpdateOpt);
+    void test_update_returns_errorResponse_when_save_throwsException() {
+        Optional<PollsModel> modelBeforeUpdateOpt = Optional.of(getModel(id));
+        PollsModel modelRequestToChangeName = PollsModel.builder().name("testName2").id(id).build();
+        Mockito.when(pollsRepository.findById(id)).thenReturn(modelBeforeUpdateOpt);
         Mockito.when(pollsRepository.save(any())).thenThrow(new RuntimeException());
-        actualResponse = pollsService.update(userRequestToChangeName, id);
+        actualResponse = pollsService.update(modelRequestToChangeName, id);
         testExceptionScbResponse(actualResponse);
     }
 
