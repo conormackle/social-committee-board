@@ -1,0 +1,8 @@
+.top-nav {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  font-size: 1.5rem;
+  padding: 10px;
+  border-bottom: 1px solid #f0f1f2;
+}

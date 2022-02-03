@@ -1,0 +1,9 @@
+.side-nav {
+  margin-right: 20px;
+}
+.side-nav ul {
+  position: fixed;
+  top: 59px;
+  width: 15%;
+  height: -webkit-calc(100vh - 59px);
+}
