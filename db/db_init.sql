@@ -4,6 +4,7 @@ CREATE TABLE `users` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`name` VARCHAR(155),
 	`email` VARCHAR(155),
+	`location` VARCHAR(55),
 	`email_verified` BOOLEAN NOT NULL,
 	PRIMARY KEY (`id`)
 );
@@ -90,4 +91,19 @@ CREATE TABLE `audit_child` (
 	`new_value` VARCHAR(255),
 	PRIMARY KEY (`id`),
     FOREIGN KEY (audit_id) REFERENCES audit(id)
+);
+
+CREATE TABLE `post_categories` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(55) NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `posts` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`content` VARCHAR(555) NOT NULL,
+	`user_id_posted_by` INT NOT NULL,
+	`post_category_id` INT NOT NULL,
+	PRIMARY KEY (`id`),
+	FOREIGN KEY (`post_category_id`) REFERENCES users(id)
 );
