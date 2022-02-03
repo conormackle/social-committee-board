@@ -1,11 +1,13 @@
 package com.aquaq.scb.entities.users;
 
+import com.aquaq.scb.entities.mapper.ModelPropertyMapper;
 import com.aquaq.scb.response.ScbResponse;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
+
 import static com.aquaq.scb.utils.GeneralUtils.copyModelProperties;
 
 @Log4j2
@@ -31,11 +33,7 @@ public class UsersService {
     public ScbResponse getById(int id){
         try{
             Optional<UsersModel> usersModel = usersRepository.findById(id);
-            if(usersModel.isPresent()){
-                return ScbResponse.createSuccessResponse(usersModel);
-            }else{
-                return ScbResponse.createSuccessResponse(String.format("No entity found with ID: %s", id));
-            }
+            return usersModel.map(ScbResponse::createSuccessResponse).orElseGet(() -> ScbResponse.createSuccessResponse(String.format("No entity found with ID: %s", id)));
         }catch(Exception e){
             return ScbResponse.createExceptionResponse(e);
         }
@@ -49,19 +47,21 @@ public class UsersService {
         }
     }
 
-    public ScbResponse delete(int userId){
-        try{
-//            Optional<UsersModel> usersModel = usersRepository.findById(userId);
+//    public ScbResponse delete(int id){
+//        try{
+//
+//            Optional<UsersModel> usersModel = usersRepository.findById(id);
 //            usersModel.setDeleted(false);
 //            usersRepository.save(UsersMapper.toUserModel(usersModel));
-            return ScbResponse.createSuccessResponse("Success");
-        }catch(Exception e){
-            return ScbResponse.createExceptionResponse(e);
-        }
-    }
+//            return ScbResponse.createSuccessResponse("Success");
+//        }catch(Exception e){
+//            return ScbResponse.createExceptionResponse(e);
+//        }
+//    }
 
     public ScbResponse update(UsersModel usersModel, int id){
         try {
+
             UsersModel updatedUsersModel;
             Optional<UsersModel> savedUsersModel = usersRepository.findById(id);
             if(savedUsersModel.isPresent()){

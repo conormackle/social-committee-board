@@ -30,7 +30,7 @@ public class UsersModel {
     private String email;
 
     @Column(name="email_verified")
-    private int emailVerified;
+    private Integer emailVerified;
 
     //@JsonIgnore
     @ToString.Exclude

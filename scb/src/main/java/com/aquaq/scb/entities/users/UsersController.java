@@ -48,7 +48,8 @@ public class UsersController {
     @PutMapping("/users/delete/{userId}")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
     public ScbResponse delete(@PathVariable Integer userId) {
-        return userService.delete(userId);
+//        return userService.delete(userId);
+        return null;
     }
 
 }
