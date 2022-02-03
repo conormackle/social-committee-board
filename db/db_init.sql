@@ -105,5 +105,6 @@ CREATE TABLE `posts` (
 	`user_id_posted_by` INT NOT NULL,
 	`post_category_id` INT NOT NULL,
 	PRIMARY KEY (`id`),
-	FOREIGN KEY (`post_category_id`) REFERENCES users(id)
+	FOREIGN KEY (`post_category_id`) REFERENCES post_categories(id),
+	FOREIGN KEY (`user_id_posted_by`) REFERENCES users(id)
 );
