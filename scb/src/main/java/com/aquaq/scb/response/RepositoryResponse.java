@@ -91,7 +91,7 @@ public class RepositoryResponse extends ScbResponse {
             this.setResponseCode(ResponseCodes.BAD_REQUEST_ERROR);
             this.setResponse("Failed to execute SQL procedure");
         } else {
-            this.setResponse(String.format("Successfully executed SQL procedure"));
+            this.setResponse("Successfully executed SQL procedure");
         }
     }
 
@@ -109,7 +109,7 @@ public class RepositoryResponse extends ScbResponse {
             this.setResponseCode(ResponseCodes.BAD_REQUEST_ERROR);
             this.setResponse("Failed to execute SQL function");
         } else {
-            this.setResponse(String.format("Successfully executed SQL function"));
+            this.setResponse("Successfully executed SQL function");
         }
     }
 }

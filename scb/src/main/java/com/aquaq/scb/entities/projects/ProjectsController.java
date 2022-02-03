@@ -1,7 +1,6 @@
 package com.aquaq.scb.entities.projects;
 
 
-import com.aquaq.scb.entities.users.UsersService;
 import com.aquaq.scb.response.ScbResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

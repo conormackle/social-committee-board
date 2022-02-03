@@ -1,4 +1,4 @@
-package com.aquaq.scb;
+package com.aquaq.scb.config.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

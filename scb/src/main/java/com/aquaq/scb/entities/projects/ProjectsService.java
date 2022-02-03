@@ -1,13 +1,9 @@
 package com.aquaq.scb.entities.projects;
 
-
-import com.aquaq.scb.entities.users.UsersModel;
-import com.aquaq.scb.entities.users.UsersRepository;
 import com.aquaq.scb.response.ScbResponse;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -41,7 +37,7 @@ public class ProjectsService {
             if(!projectsModels.isEmpty()){
                 return ScbResponse.createSuccessResponse(projectsModels);
             }else{
-                return ScbResponse.createSuccessResponse(String.format("No projects found"));
+                return ScbResponse.createSuccessResponse("No projects found");
             }
         }catch(Exception e){
             return ScbResponse.createExceptionResponse(e);

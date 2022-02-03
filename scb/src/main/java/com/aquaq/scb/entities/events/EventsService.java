@@ -1,7 +1,5 @@
 package com.aquaq.scb.entities.events;
 
-import com.aquaq.scb.entities.projects.ProjectsModel;
-import com.aquaq.scb.entities.projects.ProjectsRepository;
 import com.aquaq.scb.response.ScbResponse;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +38,7 @@ public class EventsService {
             if(!eventsModels.isEmpty()){
                 return ScbResponse.createSuccessResponse(eventsModels);
             }else{
-                return ScbResponse.createSuccessResponse(String.format("No events found"));
+                return ScbResponse.createSuccessResponse("No events found");
             }
         }catch(Exception e){
             return ScbResponse.createExceptionResponse(e);

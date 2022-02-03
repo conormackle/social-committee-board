@@ -1,4 +1,4 @@
-package com.aquaq.scb;
+package com.aquaq.scb.config.swagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

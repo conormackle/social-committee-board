@@ -36,13 +36,13 @@ public class UsersModel {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToMany(mappedBy = "user")
-    private Set<ProjectsModel> projects = new HashSet<>();
+    private Set<ProjectsModel> projects;
 
     //@JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToMany(mappedBy = "user")
-    private Set<RolesModel> roles = new HashSet<>();
+    private Set<RolesModel> roles;
 
     //@JsonIgnore
     @ToString.Exclude
