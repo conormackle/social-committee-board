@@ -30,7 +30,7 @@ public class UsersController {
     @PostMapping("/users/createUser/")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
     public ScbResponse createUser(@RequestBody UsersModel user) {
-        return userService.createUser(user);
+        return userService.create(user);
     }
 
     @GetMapping("/users/getAll")
@@ -39,16 +39,16 @@ public class UsersController {
         return userService.getAll();
     }
 
-    @PutMapping("/users/update/{userId}")
+    @PutMapping("/users/update/{id}")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
-    public ScbResponse update(@RequestBody UsersModel user,  @PathVariable Integer userId) {
-        return userService.update(user, userId);
+    public ScbResponse update(@RequestBody UsersModel model,  @PathVariable Integer id) {
+        return userService.update(model, id);
     }
 
-    @PutMapping("/users/delete/{userId}")
+    @PutMapping("/users/delete/{id}")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
-    public ScbResponse delete(@PathVariable Integer userId) {
-//        return userService.delete(userId);
+    public ScbResponse delete(@PathVariable Integer id) {
+//        return userService.delete(id);
         return null;
     }
 

@@ -86,7 +86,7 @@ class UsersServiceTest {
     void test_createUser_returns_user() {
         UsersModel user = getUserModel(userId);
         Mockito.when(usersRepository.save(user)).thenReturn(user);
-        actualResponse = usersService.createUser(user);
+        actualResponse = usersService.create(user);
         expectedResponse.setResponse(user);
         expectedResponse.setResponseCode(ResponseCodes.SUCCESS);
         testSuccessScbResponse(expectedResponse, actualResponse);
@@ -96,7 +96,7 @@ class UsersServiceTest {
     void test_createUser_returns_errorResponse_when_throwsException() {
         UsersModel user = getUserModel(userId);
         Mockito.when(usersRepository.save(user)).thenThrow(new RuntimeException());
-        actualResponse = usersService.createUser(user);
+        actualResponse = usersService.create(user);
         testExceptionScbResponse(actualResponse);
     }
 

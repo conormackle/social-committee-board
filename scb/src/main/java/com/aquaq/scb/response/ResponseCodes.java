@@ -1,6 +1,9 @@
 package com.aquaq.scb.response;
 
 public class ResponseCodes {
+
+    private ResponseCodes(){}
+
     public static final int INTERNAL_SERVER_ERROR = 500;
     public static final int NOT_FOUND_ERROR = 404;
     public static final int BAD_REQUEST_ERROR = 400;

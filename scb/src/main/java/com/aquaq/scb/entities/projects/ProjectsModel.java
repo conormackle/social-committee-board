@@ -2,11 +2,8 @@ package com.aquaq.scb.entities.projects;
 import com.aquaq.scb.entities.users.UsersModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Data
