@@ -1,7 +1,5 @@
 package com.aquaq.scb.entities.audits;
 
-import com.aquaq.scb.entities.users.UsersModel;
-import com.aquaq.scb.entities.users.UsersService;
 import com.aquaq.scb.response.ScbResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -29,7 +27,7 @@ public class AuditsController {
         return auditsService.getById(id);
     }
 
-    @GetMapping("/users/getAll")
+    @GetMapping("/audits/getAll")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
     public ScbResponse getAll() {
         return auditsService.getAll();
