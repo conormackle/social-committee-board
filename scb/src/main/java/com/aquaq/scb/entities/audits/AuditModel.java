@@ -31,7 +31,7 @@ public class AuditModel {
     @EqualsAndHashCode.Exclude
     @ManyToOne
     @JoinColumn(name = "changed_by_user_id")
-    private UsersModel usersModel;
+    private UsersModel user;
 
     @Column(name = "entity_id")
     private Integer entityId;

@@ -29,7 +29,7 @@ public class AuditsController {
         return auditsService.getById(id);
     }
 
-    @GetMapping("/users/getAll")
+    @GetMapping("/audits/getAll")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
     public ScbResponse getAll() {
         return auditsService.getAll();
