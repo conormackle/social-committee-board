@@ -4,7 +4,7 @@
 .card-carousel .ant-carousel .slick-prev:focus {
   font-size: 25px;
   z-index: 2;
-  color: rgba(0, 0, 0, 0.5);
+  color: #188fff80;
 }
 .card-carousel .ant-carousel .slick-prev {
   left: -7px;
@@ -15,7 +15,7 @@
 
 .card-carousel .ant-carousel .slick-prev:hover,
 .card-carousel .ant-carousel .slick-next:hover {
-  color: rgba(0, 0, 0, 0.7);
+  color: #1890ff;
 }
 .card-container {
   padding: 10px;
@@ -25,15 +25,15 @@
 }
 .card-carousel .ant-carousel .slick-dots li button,
 .card-carousel .ant-carousel .slick-dots li.slick-active button {
-  background: rgba(0, 0, 0, 0.8);
+  background: #1890ff;;
 }
 
 .card.main {
   display: inline-block;
   border-radius: 5px;
   border: 0;
-  width: 380px;
-  height: 300px;
+  width: 360px;
+  height: 250px;
   margin: 0 10px 15px;
   user-select: none;
 }
