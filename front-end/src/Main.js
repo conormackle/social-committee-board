@@ -1,20 +1,24 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+
 import TopNavigation from './TopNavigation'
 import SideNavigation from './SideNavigation'
 import Home from './Content/Home'
 
 export default function Main() {
   return (
-    <div>
+    <Router>
       <TopNavigation />
       <SideNavigation />
       <div className="content">
         <div className="primary-content">
-          <Home />
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+          </Routes>
         </div>
       </div>
       <div className="pinned-content">
         <div>some pinned content</div>
       </div>
-    </div>
+    </Router>
   )
 }
