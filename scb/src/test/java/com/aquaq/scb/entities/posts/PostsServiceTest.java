@@ -92,7 +92,7 @@ class PostsServiceTest {
     }
 
     @Test
-    void test_createUser_returns_user() {
+    void test_createPost_returns_post() {
         PostsModel model = getModel(id);
         Mockito.when(postsRepository.save(model)).thenReturn(model);
         actualResponse = postsService.create(model);
@@ -102,7 +102,7 @@ class PostsServiceTest {
     }
 
     @Test
-    void test_createUser_returns_errorResponse_when_throwsException() {
+    void test_createPost_returns_errorResponse_when_throwsException() {
         PostsModel model = getModel(id);
         Mockito.when(postsRepository.save(model)).thenThrow(new RuntimeException());
         actualResponse = postsService.create(model);
@@ -110,7 +110,7 @@ class PostsServiceTest {
     }
 
     @Test
-    void test_updateUser_returns_user() {
+    void test_updatePost_returns_user() {
         Optional<PostsModel> modelBeforeUpdateOpt = Optional.of(getModel(id));
         PostsModel modelRequestToChangeName = PostsModel.builder().content("testName2").id(id).build();
         Mockito.when(postsRepository.findById(id)).thenReturn(modelBeforeUpdateOpt);
@@ -122,7 +122,7 @@ class PostsServiceTest {
     }
 
     @Test
-    void test_updateUser_returns_noEntityFound() {
+    void test_updatePost_returns_noEntityFound() {
         PostsModel modelRequestToChangeName = PostsModel.builder().content("testName2").id(id).build();
         Mockito.when(postsRepository.findById(id)).thenReturn(Optional.empty());
         actualResponse = postsService.update(modelRequestToChangeName, id);
@@ -132,7 +132,7 @@ class PostsServiceTest {
     }
 
     @Test
-    void test_updateUser_returns_errorResponse_when_findById_throwsException() {
+    void test_updatePost_returns_errorResponse_when_findById_throwsException() {
         PostsModel modelRequestToChangeName = PostsModel.builder().content("testName2").id(id).build();
         Mockito.when(postsRepository.findById(id)).thenThrow(new RuntimeException());
         actualResponse = postsService.update(modelRequestToChangeName, id);
@@ -140,7 +140,7 @@ class PostsServiceTest {
     }
 
     @Test
-    void test_updateUser_returns_errorResponse_when_save_throwsException() {
+    void test_updatePost_returns_errorResponse_when_save_throwsException() {
         Optional<PostsModel> userBeforeUpdateOpt = Optional.of(getModel(id));
         PostsModel userRequestToChangeName = PostsModel.builder().content("testName2").id(id).build();
         Mockito.when(postsRepository.findById(id)).thenReturn(userBeforeUpdateOpt);
