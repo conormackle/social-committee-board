@@ -1,6 +1,8 @@
 package com.aquaq.scb.entities.users;
 
+import com.aquaq.scb.entities.audits.AuditModel;
 import com.aquaq.scb.entities.events.EventsModel;
+import com.aquaq.scb.entities.posts.PostsModel;
 import com.aquaq.scb.entities.projects.ProjectsModel;
 import com.aquaq.scb.entities.roles.RolesModel;
 import lombok.*;
@@ -49,5 +51,15 @@ public class UsersModel {
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy="user")
     private Set<EventsModel> events;
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy="user")
+    private Set<AuditModel> audits;
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy="user")
+    private Set<PostsModel> posts;
 
 }
