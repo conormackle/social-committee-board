@@ -94,7 +94,7 @@ public class EventsServiceTest {
     }
 
     @Test
-    void test_createPost_returns_post() {
+    void test_createEvent_returns_event() {
         EventsModel model = getModel(id);
         Mockito.when(eventsRepository.save(model)).thenReturn(model);
         actualResponse = eventsService.create(model);
@@ -104,7 +104,7 @@ public class EventsServiceTest {
     }
 
     @Test
-    void test_createPost_returns_errorResponse_when_throwsException() {
+    void test_createEvent_returns_errorResponse_when_throwsException() {
         EventsModel model = getModel(id);
         Mockito.when(eventsRepository.save(model)).thenThrow(new RuntimeException());
         actualResponse = eventsService.create(model);
@@ -112,7 +112,7 @@ public class EventsServiceTest {
     }
 
     @Test
-    void test_updatePost_returns_user() {
+    void test_updateEvent_returns_event() {
         Optional<EventsModel> modelBeforeUpdateOpt = Optional.of(getModel(id));
         EventsModel modelRequestToChangeName = EventsModel.builder()
                 .name("name")
@@ -129,7 +129,7 @@ public class EventsServiceTest {
     }
 
     @Test
-    void test_updatePost_returns_noEntityFound() {
+    void test_updateEvent_returns_noEntityFound() {
         EventsModel modelRequestToChangeName = EventsModel.builder()
                 .name("name")
                 .id(id)
@@ -144,7 +144,7 @@ public class EventsServiceTest {
     }
 
     @Test
-    void test_updatePost_returns_errorResponse_when_findById_throwsException() {
+    void test_updateEvent_returns_errorResponse_when_findById_throwsException() {
         EventsModel modelRequestToChangeName =  EventsModel.builder()
                 .name("name")
                 .id(id)
@@ -157,7 +157,7 @@ public class EventsServiceTest {
     }
 
     @Test
-    void test_updatePost_returns_errorResponse_when_save_throwsException() {
+    void test_updateEvent_returns_errorResponse_when_save_throwsException() {
         Optional<EventsModel> userBeforeUpdateOpt = Optional.of(getModel(id));
         EventsModel userRequestToChangeName = EventsModel.builder()
                 .name("name")
