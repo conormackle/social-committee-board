@@ -2,26 +2,24 @@
 .card-carousel .ant-carousel .slick-next,
 .card-carousel .ant-carousel .slick-next:focus,
 .card-carousel .ant-carousel .slick-prev:focus {
-  font-size: 25px;
+  font-size: 60px;
   z-index: 2;
   color: #188fff80;
+  top: 45%;
 }
 .card-carousel .ant-carousel .slick-prev {
-  left: -7px;
+  left: -40px;
 }
 .card-carousel .ant-carousel .slick-next {
-  right: -2px;
+  right: 0px;
 }
 
 .card-carousel .ant-carousel .slick-prev:hover,
 .card-carousel .ant-carousel .slick-next:hover {
   color: #1890ff;
 }
-.card-container {
-  padding: 10px;
-}
 .card-carousel .ant-carousel .slick-dots-bottom {
-  bottom: 8px;
+  bottom: -18px;
 }
 .card-carousel .ant-carousel .slick-dots li button,
 .card-carousel .ant-carousel .slick-dots li.slick-active button {
@@ -29,12 +27,10 @@
 }
 
 .card.main {
-  display: inline-block;
   border-radius: 5px;
   border: 0;
-  width: 360px;
-  height: 250px;
-  margin: 0 10px 15px;
+  margin: 10px;
+  height: 300px;
   user-select: none;
 }
 .card.main .ant-card-cover {

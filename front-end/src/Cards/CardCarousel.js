@@ -1,6 +1,5 @@
-import { LeftCircleOutlined, RightCircleOutlined } from '@ant-design/icons'
+import { CaretLeftOutlined, CaretRightOutlined } from '@ant-design/icons'
 import { Carousel } from 'antd'
-import _ from 'lodash'
 import './index.css'
 
 export default function CardCarousel(props) {
@@ -11,12 +10,12 @@ export default function CardCarousel(props) {
         autoplay
         arrows
         draggable
-        prevArrow={<LeftCircleOutlined />}
-        nextArrow={<RightCircleOutlined />}
+        slidesToShow={3}
+        slidesToScroll={3}
+        prevArrow={<CaretLeftOutlined />}
+        nextArrow={<CaretRightOutlined />}
       >
-        {_.chunk(children, 3).map((sublist, index) => (
-          <div key={index} className='card-container'>{sublist}</div>
-        ))}
+          {children}
       </Carousel>
     </div>
   )
