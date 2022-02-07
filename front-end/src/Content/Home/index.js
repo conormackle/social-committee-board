@@ -57,7 +57,7 @@ export default function index() {
           ))}
         </CardCarousel>
       </Section>
-      <Section header="Section">
+      <Section header="Announcements">
         <div>hello</div>
       </Section>
       <Section header="Section">
