@@ -110,7 +110,7 @@ class PostsServiceTest {
     }
 
     @Test
-    void test_updatePost_returns_user() {
+    void test_updatePost_returns_post() {
         Optional<PostsModel> modelBeforeUpdateOpt = Optional.of(getModel(id));
         PostsModel modelRequestToChangeName = PostsModel.builder().content("testName2").id(id).build();
         Mockito.when(postsRepository.findById(id)).thenReturn(modelBeforeUpdateOpt);
