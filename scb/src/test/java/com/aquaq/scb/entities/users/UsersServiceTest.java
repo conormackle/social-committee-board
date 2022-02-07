@@ -1,5 +1,6 @@
 package com.aquaq.scb.entities.users;
 
+import com.aquaq.scb.entities.mapper.ModelPropertyMapper;
 import com.aquaq.scb.response.ResponseCodes;
 import com.aquaq.scb.response.ScbResponse;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,6 +31,9 @@ class UsersServiceTest {
     private ScbResponse expectedResponse;
     private ScbResponse actualResponse;
     private final int userId = 5;
+
+    @Mock
+    private ModelPropertyMapper modelPropertyMapper;
 
     @BeforeEach
     private void initAll(){

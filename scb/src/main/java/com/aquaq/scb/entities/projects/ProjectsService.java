@@ -18,20 +18,20 @@ public class ProjectsService {
         this.projectsRepository = projectsRepository;
     }
 
-    public ScbResponse getByProjectId(Integer projectId){
+    public ScbResponse getById(Integer id){
         try{
-            Optional<ProjectsModel> projectsModel = projectsRepository.findById(projectId);
+            Optional<ProjectsModel> projectsModel = projectsRepository.findById(id);
             if(projectsModel.isPresent()){
                 return ScbResponse.createSuccessResponse(projectsModel);
             }else{
-                return ScbResponse.createSuccessResponse(String.format("No project found for ID: %s", projectId));
+                return ScbResponse.createSuccessResponse(String.format("No project found for ID: %s", id));
             }
         }catch(Exception e){
             return ScbResponse.createExceptionResponse(e);
         }
     }
 
-    public ScbResponse getProjects(){
+    public ScbResponse getAll(){
         try{
             List<ProjectsModel> projectsModels = projectsRepository.findAll();
             if(!projectsModels.isEmpty()){

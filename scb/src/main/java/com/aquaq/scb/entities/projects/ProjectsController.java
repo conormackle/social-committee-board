@@ -26,13 +26,13 @@ public class ProjectsController {
 
     @GetMapping("/projects")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
-    public ScbResponse getProjects() {
-        return projectsService.getProjects();
+    public ScbResponse getall() {
+        return projectsService.getAll();
     }
 
     @GetMapping("/projects/getByProjectId/{projectId}")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
-    public ScbResponse getByProjectId(@PathVariable Integer projectId) {
-        return projectsService.getByProjectId(projectId);
+    public ScbResponse getById(@PathVariable Integer projectId) {
+        return projectsService.getById(projectId);
     }
 }
