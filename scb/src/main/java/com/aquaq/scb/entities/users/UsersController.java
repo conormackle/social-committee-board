@@ -21,16 +21,16 @@ public class UsersController {
         this.userService = userService;
     }
 
-    @GetMapping("/users/getById/{userId}")
+    @GetMapping("/users/getById/{id}")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
-    public ScbResponse getById(@PathVariable Integer userId) {
-        return userService.getById(userId);
+    public ScbResponse getById(@PathVariable Integer id) {
+        return userService.getById(id);
     }
 
-    @PostMapping("/users/createUser/")
+    @PostMapping("/users/create/")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
-    public ScbResponse createUser(@RequestBody UsersModel user) {
-        return userService.create(user);
+    public ScbResponse createUser(@RequestBody UsersModel model) {
+        return userService.create(model);
     }
 
     @GetMapping("/users/getAll")

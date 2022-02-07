@@ -1,15 +1,16 @@
 package com.aquaq.scb.entities.projects;
+import com.aquaq.scb.entities.audits.AuditChildModel;
 import com.aquaq.scb.entities.users.UsersModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 @Table(name="projects")
 public class ProjectsModel {
 
@@ -30,29 +31,9 @@ public class ProjectsModel {
             joinColumns = { @JoinColumn(name = "project_id") },
             inverseJoinColumns = { @JoinColumn(name = "user_id") }
     )
-    private Set<UsersModel> user = new HashSet<>();
+    private Set<UsersModel> user;
 
-    public Integer getId() {
-        return id;
-    }
+    @Column(name="created_by_user_id")
+    private Integer createdByUserId;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getDetails() {
-        return details;
-    }
-
-    public void setDetails(String details) {
-        this.details = details;
-    }
-
-    public Set<UsersModel> getUser() {
-        return user;
-    }
-
-    public void setUser(Set<UsersModel> user) {
-        this.user = user;
-    }
 }

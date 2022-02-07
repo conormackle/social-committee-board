@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-import static com.aquaq.scb.utils.GeneralUtils.copyModelProperties;
-
 @Log4j2
 @Service
 public class UsersService {

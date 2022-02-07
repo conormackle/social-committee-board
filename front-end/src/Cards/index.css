@@ -1,0 +1,101 @@
+.card-carousel .ant-carousel .slick-prev,
+.card-carousel .ant-carousel .slick-next,
+.card-carousel .ant-carousel .slick-next:focus,
+.card-carousel .ant-carousel .slick-prev:focus {
+  font-size: 25px;
+  z-index: 2;
+  color: #188fff80;
+}
+.card-carousel .ant-carousel .slick-prev {
+  left: -7px;
+}
+.card-carousel .ant-carousel .slick-next {
+  right: -2px;
+}
+
+.card-carousel .ant-carousel .slick-prev:hover,
+.card-carousel .ant-carousel .slick-next:hover {
+  color: #1890ff;
+}
+.card-container {
+  padding: 10px;
+}
+.card-carousel .ant-carousel .slick-dots-bottom {
+  bottom: 8px;
+}
+.card-carousel .ant-carousel .slick-dots li button,
+.card-carousel .ant-carousel .slick-dots li.slick-active button {
+  background: #1890ff;;
+}
+
+.card.main {
+  display: inline-block;
+  border-radius: 5px;
+  border: 0;
+  width: 360px;
+  height: 250px;
+  margin: 0 10px 15px;
+  user-select: none;
+}
+.card.main .ant-card-cover {
+  height: 100%;
+}
+.card.main .ant-card-cover img {
+  height: 100%;
+  border-radius: 5px;
+  object-fit: cover;
+}
+.card.main .ant-card-body {
+  padding: 0;
+}
+.card.main:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.6));
+  border-radius: 5px;
+}
+
+.card.text {
+  z-index: 1;
+  position: absolute;
+  color: white;
+  width: 100%;
+  bottom: 0;
+  padding: 0 40px 20px;
+}
+.card.title {
+  font-weight: bold;
+  font-size: 25px;
+}
+.card.author {
+  font-weight: bold;
+}
+.card.date {
+  color: rgba(255, 255, 255, 0.75);
+}
+.card.comments {
+  position: absolute;
+  right: 40px;
+  bottom: 20px;
+  display: flex;
+}
+.card.comments .anticon {
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+.card.tag {
+  z-index: 2;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: white;
+  font-weight: bold;
+  padding: 3px 6px;
+  background: black;
+  border-radius: 5px;
+}

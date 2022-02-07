@@ -1,0 +1,10 @@
+.section {
+  margin-bottom: 50px;
+  background-color: #fafafa;
+  border-radius: 10px;
+  padding: 10px 25px 25px;
+  box-shadow: 0px 0px 15px -5px rgba(0,0,0,0.1);
+}
+h1.section-header {
+  font-weight: bold;
+}
