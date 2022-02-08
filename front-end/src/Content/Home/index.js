@@ -1,7 +1,7 @@
 import CardCarousel from '../../Cards/CardCarousel'
 import MainCard from '../../Cards/MainCard'
 import Section from '../../Layout/Section'
-import './index.css'
+import './index.scss'
 
 const cardData = [
   {

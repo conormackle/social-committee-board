@@ -1,6 +1,6 @@
 import { CaretLeftOutlined, CaretRightOutlined } from '@ant-design/icons'
 import { Carousel } from 'antd'
-import './index.css'
+import './index.scss'
 
 export default function CardCarousel(props) {
   const { children } = props
@@ -11,7 +11,6 @@ export default function CardCarousel(props) {
         arrows
         draggable
         slidesToShow={3}
-        slidesToScroll={3}
         prevArrow={<CaretLeftOutlined />}
         nextArrow={<CaretRightOutlined />}
       >
