@@ -24,13 +24,13 @@ public class EventsService {
         this.modelPropertyMapper  = modelPropertyMapper;
     }
 
-    public ScbResponse getById(Integer eventId){
+    public ScbResponse getById(Integer id){
         try{
-            Optional<EventsModel> eventsModels = eventsRepository.findById(eventId);
-            if(eventsModels.isPresent()){
-                return ScbResponse.createSuccessResponse(eventsModels);
+            Optional<EventsModel> model = eventsRepository.findById(id);
+            if(model.isPresent()){
+               return model.map(ScbResponse::createSuccessResponse).orElseGet(() -> ScbResponse.createSuccessResponse(String.format("No entity found with ID: %s", id)));
             }else{
-                return ScbResponse.createSuccessResponse(String.format("No event found for ID: %s", eventId));
+                return ScbResponse.createSuccessResponse(String.format("No entity found with ID: %s", id));
             }
         }catch(Exception e){
             return ScbResponse.createExceptionResponse(e);
@@ -43,7 +43,7 @@ public class EventsService {
             if(!eventsModels.isEmpty()){
                 return ScbResponse.createSuccessResponse(eventsModels);
             }else{
-                return ScbResponse.createSuccessResponse("No events found");
+                return ScbResponse.createSuccessResponse("No entities found");
             }
         }catch(Exception e){
             return ScbResponse.createExceptionResponse(e);
