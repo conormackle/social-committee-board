@@ -30,16 +30,16 @@ body {
 
 .primary-content {
   overflow: auto;
-  width: 70%;
+  width: 65%;
   height: -webkit-calc(100vh - 59px);
-  padding: 15px 10px 0;
+  padding: 15px 40px 0;
 }
 
 .pinned-content {
   position: fixed;
   top: 59px;
   right: 0;
-  width: 15%;
+  width: 17.5%;
   padding: 10px;
   overflow: hidden;
   height: -webkit-calc(100vh - 64px);

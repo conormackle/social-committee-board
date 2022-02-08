@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-
 import TopNavigation from './TopNavigation'
 import SideNavigation from './SideNavigation'
 import Home from './Content/Home'
+import { SmallCalendar } from './Content/Calendars/SmallCalendar'
 
 export default function Main() {
   return (
@@ -17,7 +17,7 @@ export default function Main() {
         </div>
       </div>
       <div className="pinned-content">
-        <div>some pinned content</div>
+        <SmallCalendar />
       </div>
     </Router>
   )
