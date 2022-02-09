@@ -24,7 +24,14 @@ public class UsersController {
     @GetMapping("/users/getById/{id}")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
     public ScbResponse getById(@PathVariable Integer id) {
-        return userService.getById(id);
+        try{
+            return userService.getById(id);
+        }catch(Exception e){
+            System.out.println(e);
+            ScbResponse scbResponse = new ScbResponse();
+            scbResponse.setResponse(e);
+            return scbResponse;
+        }
     }
 
     @PostMapping("/users/create/")

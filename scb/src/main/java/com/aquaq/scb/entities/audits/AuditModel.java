@@ -27,6 +27,7 @@ public class AuditModel {
     @Column(name = "timestamp")
     private LocalDateTime timestamp;
 
+    @JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne
@@ -42,6 +43,7 @@ public class AuditModel {
     @Column(name = "change_type")
     private String changeType;
 
+    @JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy="audit")
