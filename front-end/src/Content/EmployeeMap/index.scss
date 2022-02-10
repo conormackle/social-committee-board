@@ -1,0 +1,29 @@
+@import '../../colours.scss';
+
+.map-container {
+  height: 300px;
+}
+
+.marker {
+  width: 0;
+  height: 0;
+  span {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    box-sizing:border-box;
+    width: 15px;
+    height: 15px;
+    color:#fff;
+    background: $blue1;
+    border: 1px solid $gray1;
+    border-radius: 0 70% 70%;
+    box-shadow:0 0 2px #000;
+    cursor: pointer;
+    transform-origin:0 0;
+    transform: rotateZ(-135deg);
+  }
+  b {transform: rotateZ(135deg)}
+}
+
+.mapboxgl-control-container { display: none; }
