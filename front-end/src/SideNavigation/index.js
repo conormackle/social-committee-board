@@ -1,5 +1,5 @@
 import { Menu } from 'antd'
-import './index.css'
+import './index.scss'
 
 export default function index() {
   return (

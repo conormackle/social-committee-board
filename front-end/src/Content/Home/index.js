@@ -1,7 +1,7 @@
 import CardCarousel from '../../Cards/CardCarousel'
 import MainCard from '../../Cards/MainCard'
 import Section from '../../Layout/Section'
-import './index.css'
+import './index.scss'
 
 const cardData = [
   {
@@ -57,7 +57,7 @@ export default function index() {
           ))}
         </CardCarousel>
       </Section>
-      <Section header="Section">
+      <Section header="Announcements">
         <div>hello</div>
       </Section>
       <Section header="Section">
