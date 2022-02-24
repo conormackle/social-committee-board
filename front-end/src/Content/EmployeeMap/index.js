@@ -8,7 +8,7 @@ const mapStyle = {
   height: '100%'
 }
 
-const mapboxAccessToken = process.env.MAPBOX_ACCESS_TOKEN
+const mapboxAccessToken = null
 
 export default function EmployeeMap() {
   const [markers, setMarkers] = useState([
