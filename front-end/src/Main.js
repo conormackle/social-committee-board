@@ -3,6 +3,7 @@ import TopNavigation from './TopNavigation'
 import SideNavigation from './SideNavigation'
 import Home from './Content/Home'
 import { SmallCalendar } from './Content/Calendars/SmallCalendar'
+import EmployeeMap from './Content/EmployeeMap'
 
 export default function Main() {
   return (
@@ -18,6 +19,7 @@ export default function Main() {
       </div>
       <div className="pinned-content">
         <SmallCalendar />
+        <EmployeeMap />
       </div>
     </Router>
   )
