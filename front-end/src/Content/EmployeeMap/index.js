@@ -3,12 +3,12 @@ import { useState } from 'react'
 import "mapbox-gl/dist/mapbox-gl.css";
 import './index.scss'
 
-const mapboxAccessToken = 'pk.eyJ1IjoiZHJleW5vbGRzYXF1YXEiLCJhIjoiY2t6aDZiaTU0MDE5MDJvcDM1eG83aDAxZCJ9.nbsoY5m7_XSWqj78RwdAJA'
-
 const mapStyle = {
   width: '100%',
   height: '100%'
 }
+
+const mapboxAccessToken = process.env.MAPBOX_ACCESS_TOKEN
 
 export default function EmployeeMap() {
   const [markers, setMarkers] = useState([
@@ -40,17 +40,17 @@ export default function EmployeeMap() {
   ])
 
   const RenderMarker = ({ name, longitude, latitude }) => {
-    console.log(longitude, latitude)
     return (
-    <Marker
-      key={name}
-      longitude={longitude}
-      latitude={latitude}
-      pitchAlignment={'map'}
-    >
-      <div className="marker"><span></span></div>
-    </Marker>
-  )}
+      <Marker
+        key={name}
+        longitude={longitude}
+        latitude={latitude}
+        pitchAlignment={'map'}
+      >
+        <div className="marker"><span></span></div>
+      </Marker>
+    )
+  }
 
   return (
     <div className="map-container">
@@ -63,8 +63,6 @@ export default function EmployeeMap() {
           latitude: 45,
           zoom: 0
         }}
-        onClick={e => console.log(e.lngLat)}
-        
       >
         {markers.map(RenderMarker)}
       </ReactMapGL>
