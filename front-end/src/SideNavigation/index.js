@@ -1,22 +1,18 @@
 import { Menu } from 'antd'
+import { Link } from 'react-router-dom'
+import { useLocation } from 'react-router'
 import './index.scss'
 
-export default function index() {
+export default function SideNavigation() {
+  const location = useLocation()
+
   return (
     <div className="side-nav">
-      <Menu mode="inline" defaultSelectedKeys={['1']} defaultOpenKeys={['sub1']}>
-        <Menu.Item key="1">option1</Menu.Item>
-        <Menu.Item key="2">option2</Menu.Item>
-        <Menu.Item key="3">option3</Menu.Item>
-        <Menu.Item key="4">option4</Menu.Item>
-        <Menu.Item key="5">option5</Menu.Item>
-        <Menu.Item key="6">option6</Menu.Item>
-        <Menu.Item key="7">option7</Menu.Item>
-        <Menu.Item key="8">option8</Menu.Item>
-        <Menu.Item key="9">option9</Menu.Item>
-        <Menu.Item key="10">option10</Menu.Item>
-        <Menu.Item key="11">option11</Menu.Item>
-        <Menu.Item key="12">option12</Menu.Item>
+      <Menu mode="inline" defaultSelectedKeys={[location.pathname]} defaultOpenKeys={['sub1']}>
+        <Menu.Item key="/"><Link to="/">Home</Link></Menu.Item>
+        <Menu.Item key="/events"><Link to="/events">Events</Link></Menu.Item>
+        <Menu.Item key="/projects"><Link to="/projects">Projects</Link></Menu.Item>
+        <Menu.Item key="/polls"><Link to="/polls">Polls</Link></Menu.Item>
       </Menu>
     </div>
   )

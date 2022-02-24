@@ -23,7 +23,7 @@ public class EventsController {
         this.eventsService = eventsService;
     }
 
-    @GetMapping("/events")
+    @GetMapping("/events/getAll")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
     public ScbResponse getEvents() {
         return eventsService.getAll();

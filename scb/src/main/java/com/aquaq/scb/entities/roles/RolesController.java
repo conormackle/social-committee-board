@@ -22,7 +22,7 @@ public class RolesController {
         this.rolesService = rolesService;
     }
 
-    @GetMapping("/roles")
+    @GetMapping("/roles/getAll")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
     public ScbResponse getProjects() {
         return rolesService.getAll();
