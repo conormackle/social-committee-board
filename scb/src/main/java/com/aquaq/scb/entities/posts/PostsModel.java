@@ -25,13 +25,14 @@ public class PostsModel {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id_posted_by")
     private UsersModel user;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne
-    @JoinColumn(name = "changed_by_user_id")
+    @JoinColumn(name = "post_category_id")
     private PostCategoriesModel postCategory;
+
 
 }
