@@ -2,9 +2,11 @@ package com.aquaq.scb.entities.users;
 
 import com.aquaq.scb.entities.audits.AuditModel;
 import com.aquaq.scb.entities.events.EventsModel;
+import com.aquaq.scb.entities.polls.PollOptionVoteModel;
 import com.aquaq.scb.entities.posts.PostsModel;
 import com.aquaq.scb.entities.projects.ProjectsModel;
 import com.aquaq.scb.entities.roles.RolesModel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -61,5 +63,11 @@ public class UsersModel {
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy="user")
     private Set<PostsModel> posts;
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @JsonIgnore
+    @OneToMany(mappedBy = "id.user")
+    private Set<PollOptionVoteModel> pollOptionVotes;
 
 }
