@@ -9,13 +9,21 @@ CREATE TABLE `users` (
 	PRIMARY KEY (`id`)
 );
 
+CREATE TABLE `event_categories` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(55) NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
 CREATE TABLE `events` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`name` VARCHAR(155),
 	`date` DATETIME,
 	`details` VARCHAR(555),
-    `created_by_user_id` INT NOT NULL,
-    FOREIGN KEY (created_by_user_id) REFERENCES users(id),
+    	`created_by_user_id` INT NOT NULL,
+	`event_category_id` INT NOT NULL,
+    	FOREIGN KEY (created_by_user_id) REFERENCES users(id),
+	FOREIGN KEY (event_category_id) REFERENCES event_categories(id),
 	PRIMARY KEY (`id`)
 );
 
