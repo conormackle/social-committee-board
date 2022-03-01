@@ -2,6 +2,7 @@ package com.aquaq.scb.entities.posts;
 
 
 import com.aquaq.scb.entities.events.EventsModel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,6 +26,7 @@ public class PostCategoriesModel {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
+    @JsonIgnore
     @OneToMany(mappedBy="postCategory")
     private Set<PostsModel> posts;
 }

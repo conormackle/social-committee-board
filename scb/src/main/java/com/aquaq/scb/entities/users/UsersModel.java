@@ -39,6 +39,7 @@ public class UsersModel {
     //@JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
+    @JsonIgnore
     @ManyToMany(mappedBy = "user")
     private Set<ProjectsModel> projects;
 
@@ -51,6 +52,7 @@ public class UsersModel {
     //@JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
+    @JsonIgnore
     @OneToMany(mappedBy="user")
     private Set<EventsModel> events;
 
@@ -62,6 +64,7 @@ public class UsersModel {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
+    @JsonIgnore
     @OneToMany(mappedBy="user")
     private Set<PostsModel> posts;
 

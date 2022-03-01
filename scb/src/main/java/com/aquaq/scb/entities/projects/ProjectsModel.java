@@ -22,7 +22,7 @@ public class ProjectsModel {
     @Column(name="details")
     private String details;
 
-    @JsonIgnore
+
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToMany(cascade = { CascadeType.ALL })
