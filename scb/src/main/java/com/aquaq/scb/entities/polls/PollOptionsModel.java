@@ -30,4 +30,10 @@ public class PollOptionsModel {
     @OneToMany(mappedBy ="id.pollOption")
     private Set<PollOptionVoteModel> votes;
 
+    @Transient
+    public int numberOfVotes;
+
+    public Integer getNumberOfVotes() {
+        return votes.size();
+    }
 }

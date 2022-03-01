@@ -56,6 +56,7 @@ public class UsersModel {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
+    @JsonIgnore
     @OneToMany(mappedBy="user")
     private Set<AuditModel> audits;
 
