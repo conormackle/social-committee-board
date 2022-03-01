@@ -28,7 +28,6 @@ public class EventsModel {
     @Column(name="details")
     private String details;
 
-    @JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne
