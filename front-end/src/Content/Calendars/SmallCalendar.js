@@ -1,5 +1,7 @@
 import { Calendar } from 'antd'
 import _ from 'lodash'
+import { useContext } from 'react'
+import { EventsContext } from '../../context/EventsContext'
 import './index.scss'
 
 const eventDates = [
@@ -25,7 +27,6 @@ function cellClass(date) {
   const day = parseInt(getDay(date))
   const month = parseInt(getMonth(date))
   const eventDay = _.find(eventDates, { day, month })
-  console.log(day, month, eventDay)
   if (eventDay) {
     return `event ${eventDay.type}`
   }
@@ -37,6 +38,8 @@ function dateCell(date) {
 }
 
 export function SmallCalendar() {
+  const { events } = useContext(EventsContext)
+  console.log(events)
   return (
     <div className="small-calendar">
       <Calendar fullscreen={false} dateFullCellRender={dateCell} />

@@ -21,13 +21,19 @@ public class PollOptionsModel {
     @Column(name="name")
     private String name;
 
-    @Column(name="votes")
-    private int votes;
-
     @JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @ManyToMany(mappedBy = "pollOptions")
-    private Set<PollsModel> polls;
+    @ManyToOne
+    private PollsModel poll;
 
+    @OneToMany(mappedBy ="id.pollOption")
+    private Set<PollOptionVoteModel> votes;
+
+    @Transient
+    public int numberOfVotes;
+
+    public Integer getNumberOfVotes() {
+        return votes.size();
+    }
 }

@@ -1,4 +1,5 @@
 package com.aquaq.scb.entities.events;
+import com.aquaq.scb.entities.posts.PostCategoriesModel;
 import com.aquaq.scb.entities.users.UsersModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
@@ -28,12 +29,17 @@ public class EventsModel {
     @Column(name="details")
     private String details;
 
-    @JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne
     @JoinColumn(name = "created_by_user_id")
     private UsersModel user;
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToOne
+    @JoinColumn(name = "event_category_id")
+    private EventCategoriesModel eventCategory;
 
     public Integer getId() {
         return id;
