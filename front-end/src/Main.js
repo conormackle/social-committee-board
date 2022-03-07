@@ -10,6 +10,7 @@ import CurrentPoll from './Content/Polls/CurrentPoll'
 import Projects from './Content/Projects'
 import Events from './Content/Events'
 
+import Contact from './Content/Contact'
 export default function Main() {
   return (
     <Router>
@@ -32,6 +33,7 @@ export default function Main() {
           <CurrentPoll />
         </div>
       </EventsProvider>
+      <Contact />
     </Router>
   )
 }
