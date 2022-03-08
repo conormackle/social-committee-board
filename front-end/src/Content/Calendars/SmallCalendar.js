@@ -1,18 +1,18 @@
-import { Calendar } from 'antd'
+import { Calendar, Popover } from 'antd'
 import _ from 'lodash'
 import { useContext } from 'react'
 import { EventsContext } from '../../context/EventsContext'
 import './index.scss'
 
 const eventDates = [
-  { day: 2, month: 2, type: 'community' },
-  { day: 7, month: 2, type: 'holiday' },
-  { day: 12, month: 2, type: 'community' },
-  { day: 16, month: 2, type: 'holiday' },
-  { day: 19, month: 2, type: 'sports' },
-  { day: 19, month: 2, type: 'dining' },
-  { day: 21, month: 2, type: 'community' },
-  { day: 25, month: 2, type: 'sports' }
+  { day: 2, month: 3, type: 'orange', title: 'Event 1', description: 'This is an event' },
+  { day: 7, month: 3, type: 'red', title: 'Event 2', description: 'This is an event' },
+  { day: 12, month: 3, type: 'orange', title: 'Event 3', description: 'This is an event' },
+  { day: 16, month: 3, type: 'red', title: 'Event 4', description: 'This is an event' },
+  { day: 19, month: 3, type: 'green', title: 'Event 5', description: 'This is an event' },
+  { day: 19, month: 3, type: 'green', title: 'Event 6', description: 'This is an event' },
+  { day: 21, month: 3, type: 'orange', title: 'Event 7', description: 'This is an event' },
+  { day: 25, month: 3, type: 'green', title: 'Event 7', description: 'This is an event' }
 ]
 
 function getDay(date) {
@@ -23,23 +23,22 @@ function getMonth(date) {
   return date.format('MM')
 }
 
-function cellClass(date) {
-  const day = parseInt(getDay(date))
-  const month = parseInt(getMonth(date))
-  const eventDay = _.find(eventDates, { day, month })
-  if (eventDay) {
-    return `event ${eventDay.type}`
-  }
-  return ''
-}
-
-function dateCell(date) {
-  return <span className={cellClass(date)}>{getDay(date)}</span>
-}
-
 export function SmallCalendar() {
   const { events } = useContext(EventsContext)
   console.log(events)
+
+  function dateCell(date) {
+    const day = parseInt(getDay(date))
+    const month = parseInt(getMonth(date))
+    const eventDay = _.find(eventDates, { day, month })
+
+    return (
+      <Popover title={eventDay?.title} content={eventDay?.description} trigger="hover">
+        <span className={eventDay ? `event ${eventDay.type}` : ''}>{getDay(date)}</span>
+      </Popover>
+    )
+  }
+
   return (
     <div className="small-calendar">
       <Calendar fullscreen={false} dateFullCellRender={dateCell} />

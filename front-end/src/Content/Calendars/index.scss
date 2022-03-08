@@ -2,13 +2,15 @@
   .event {
     border-radius: 15px;
     padding: 2px 4px;
-    &.community {
+    position: relative;
+    z-index: 1;
+    &.green {
       background-color: #54c71abb;
     }
-    &.sports {
+    &.orange {
       background-color: #fadb14bb;
     }
-    &.holiday {
+    &.red {
       background-color: #f5222dbb;
     }
   }
