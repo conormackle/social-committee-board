@@ -8,9 +8,11 @@ import { EventsProvider } from './context/EventsContext'
 import Polls from './Content/Polls'
 import CurrentPoll from './Content/Polls/CurrentPoll'
 import Projects from './Content/Projects'
-import Events from './Content/Events'
-
+import EventsUpcoming from './Content/Events/Upcoming'
+import EventsCalendar from './Content/Events/Calendar'
 import Contact from './Content/Contact'
+import NotFound from './NotFound'
+
 export default function Main() {
   return (
     <Router>
@@ -20,17 +22,29 @@ export default function Main() {
         <div className="content">
           <div className="primary-content">
             <Routes>
-              <Route exact path="/" element={<Home />} />
-              <Route path="/events" element={<Events />} />
-              <Route path="/projects" element={<Projects />} />
-              <Route path="/polls" element={<Polls />} />
+              <Route path="/" element={<Home />} />
+              <Route path="events/upcoming" element={<EventsUpcoming />} />
+              <Route path="events/calendar" element={<EventsCalendar />} />
+              <Route path="projects" element={<Projects />} />
+              <Route path="polls" element={<Polls />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </div>
         </div>
         <div className="pinned-content">
-          <SmallCalendar />
-          <EmployeeMap />
-          <CurrentPoll />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <SmallCalendar />
+                  <EmployeeMap />
+                  <CurrentPoll />
+                </>
+              }
+            />
+            <Route exact path="*" element={<></>} />
+          </Routes>
         </div>
       </EventsProvider>
       <Contact />

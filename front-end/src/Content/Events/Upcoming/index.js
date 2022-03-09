@@ -1,7 +1,7 @@
 import { useContext } from 'react'
-import { EventsContext } from '../../context/EventsContext'
+import { EventsContext } from '../../../context/EventsContext'
 import moment from 'moment'
-import Section from '../../Layout/Section'
+import Section from '../../../Layout/Section'
 
 export default function Projects() {
   const { events } = useContext(EventsContext)
