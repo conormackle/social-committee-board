@@ -1,4 +1,4 @@
-package com.aquaq.scb.config.security.ldapfinal;
+package com.aquaq.scb.config.security.ldap;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

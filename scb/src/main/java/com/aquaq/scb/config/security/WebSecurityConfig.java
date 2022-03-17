@@ -1,7 +1,7 @@
 package com.aquaq.scb.config.security;//package com.aquaq.scb.config.security;
 
-import com.aquaq.scb.config.security.ldapfinal.JwtAuthenticationEntryPoint;
-import com.aquaq.scb.config.security.ldapfinal.JwtFilter;
+import com.aquaq.scb.config.security.ldap.JwtAuthenticationEntryPoint;
+import com.aquaq.scb.config.security.ldap.JwtFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests().antMatchers("/login").permitAll()
-                .anyRequest().hasRole("ADMIN")
+                .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
                 .and()

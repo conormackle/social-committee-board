@@ -1,6 +1,5 @@
-package com.aquaq.scb.config.security.ldapfinal;
+package com.aquaq.scb.config.security.ldap;
 
-import com.aquaq.scb.config.security.oauth.Constants;
 import com.aquaq.scb.entities.roles.RolesModel;
 import com.aquaq.scb.entities.users.UsersModel;
 import com.aquaq.scb.entities.users.UsersRepository;

@@ -1,4 +1,4 @@
-package com.aquaq.scb.config.security.ldapfinal;
+package com.aquaq.scb.config.security.ldap;
 
 import java.io.IOException;
 import javax.servlet.FilterChain;

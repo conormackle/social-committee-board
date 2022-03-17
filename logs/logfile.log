@@ -55,9 +55,9 @@ Caused by: java.lang.IllegalArgumentException: role should not start with 'ROLE_
 	... 22 common frames omitted
 2022-03-17 10:23:01,158  [WARN]  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration  [Code line: 219]  [Thread: main]  [Message:spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning]
 2022-03-17 10:24:42,360  [WARN]  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration  [Code line: 219]  [Thread: main]  [Message:spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning]
-2022-03-17 10:45:23,089  [WARN]  org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext  [Code line: 591]  [Thread: main]  [Message:Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanDefinitionStoreException: Failed to parse configuration class [com.aquaq.scb.ScbApplication]; nested exception is org.springframework.context.annotation.ConflictingBeanDefinitionException: Annotation-specified bean name 'ldapAuthenticationProvider' for bean class [com.aquaq.scb.config.security.ldapfinal.LdapAuthenticationProvider] conflicts with existing, non-compatible bean definition of same name and class [com.aquaq.scb.config.security.ldap.LdapAuthenticationProvider]]
+2022-03-17 10:45:23,089  [WARN]  org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext  [Code line: 591]  [Thread: main]  [Message:Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanDefinitionStoreException: Failed to parse configuration class [com.aquaq.scb.ScbApplication]; nested exception is org.springframework.context.annotation.ConflictingBeanDefinitionException: Annotation-specified bean name 'ldapAuthenticationProvider' for bean class [com.aquaq.scb.config.security.ldap.LdapAuthenticationProvider] conflicts with existing, non-compatible bean definition of same name and class [com.aquaq.scb.config.security.ldap.LdapAuthenticationProvider]]
 2022-03-17 10:45:23,191  [ERROR]  org.springframework.boot.SpringApplication  [Code line: 821]  [Thread: main]  [Message:Application run failed]
-org.springframework.beans.factory.BeanDefinitionStoreException: Failed to parse configuration class [com.aquaq.scb.ScbApplication]; nested exception is org.springframework.context.annotation.ConflictingBeanDefinitionException: Annotation-specified bean name 'ldapAuthenticationProvider' for bean class [com.aquaq.scb.config.security.ldapfinal.LdapAuthenticationProvider] conflicts with existing, non-compatible bean definition of same name and class [com.aquaq.scb.config.security.ldap.LdapAuthenticationProvider]
+org.springframework.beans.factory.BeanDefinitionStoreException: Failed to parse configuration class [com.aquaq.scb.ScbApplication]; nested exception is org.springframework.context.annotation.ConflictingBeanDefinitionException: Annotation-specified bean name 'ldapAuthenticationProvider' for bean class [com.aquaq.scb.config.security.ldap.LdapAuthenticationProvider] conflicts with existing, non-compatible bean definition of same name and class [com.aquaq.scb.config.security.ldap.LdapAuthenticationProvider]
 	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:189)
 	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:331)
 	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:247)
@@ -72,7 +72,7 @@ org.springframework.beans.factory.BeanDefinitionStoreException: Failed to parse 
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1303)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1292)
 	at com.aquaq.scb.ScbApplication.main(ScbApplication.java:15)
-Caused by: org.springframework.context.annotation.ConflictingBeanDefinitionException: Annotation-specified bean name 'ldapAuthenticationProvider' for bean class [com.aquaq.scb.config.security.ldapfinal.LdapAuthenticationProvider] conflicts with existing, non-compatible bean definition of same name and class [com.aquaq.scb.config.security.ldap.LdapAuthenticationProvider]
+Caused by: org.springframework.context.annotation.ConflictingBeanDefinitionException: Annotation-specified bean name 'ldapAuthenticationProvider' for bean class [com.aquaq.scb.config.security.ldap.LdapAuthenticationProvider] conflicts with existing, non-compatible bean definition of same name and class [com.aquaq.scb.config.security.ldap.LdapAuthenticationProvider]
 	at org.springframework.context.annotation.ClassPathBeanDefinitionScanner.checkCandidate(ClassPathBeanDefinitionScanner.java:349)
 	at org.springframework.context.annotation.ClassPathBeanDefinitionScanner.doScan(ClassPathBeanDefinitionScanner.java:287)
 	at org.springframework.context.annotation.ComponentScanAnnotationParser.parse(ComponentScanAnnotationParser.java:128)
@@ -87,8 +87,8 @@ java.lang.IllegalArgumentException: Cannot pass null or empty values to construc
 	at org.springframework.util.Assert.isTrue(Assert.java:121)
 	at org.springframework.security.core.userdetails.User.<init>(User.java:110)
 	at org.springframework.security.core.userdetails.User.<init>(User.java:87)
-	at com.aquaq.scb.config.security.ldapfinal.JwtUserDetailsService.loadUserByUsername(JwtUserDetailsService.java:36)
-	at com.aquaq.scb.config.security.ldapfinal.JwtFilter.doFilterInternal(JwtFilter.java:43)
+	at com.aquaq.scb.config.security.ldap.JwtUserDetailsService.loadUserByUsername(JwtUserDetailsService.java:36)
+	at com.aquaq.scb.config.security.ldap.JwtFilter.doFilterInternal(JwtFilter.java:43)
 	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
 	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
 	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103)
@@ -143,8 +143,8 @@ java.lang.IllegalArgumentException: Cannot pass null or empty values to construc
 	at org.springframework.util.Assert.isTrue(Assert.java:121)
 	at org.springframework.security.core.userdetails.User.<init>(User.java:110)
 	at org.springframework.security.core.userdetails.User.<init>(User.java:87)
-	at com.aquaq.scb.config.security.ldapfinal.JwtUserDetailsService.loadUserByUsername(JwtUserDetailsService.java:36)
-	at com.aquaq.scb.config.security.ldapfinal.JwtFilter.doFilterInternal(JwtFilter.java:43)
+	at com.aquaq.scb.config.security.ldap.JwtUserDetailsService.loadUserByUsername(JwtUserDetailsService.java:36)
+	at com.aquaq.scb.config.security.ldap.JwtFilter.doFilterInternal(JwtFilter.java:43)
 	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
 	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
 	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103)
@@ -196,8 +196,8 @@ java.lang.IllegalArgumentException: Cannot pass null or empty values to construc
 	at java.base/java.lang.Thread.run(Thread.java:829)
 2022-03-17 10:49:17,971  [ERROR]  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/].[dispatcherServlet]  [Code line: 175]  [Thread: http-nio-8080-exec-4]  [Message:Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.Exception: User does not exist] with root cause]
 java.lang.Exception: User does not exist
-	at com.aquaq.scb.config.security.ldapfinal.LdapAuthenticationProvider.authenticate(LdapAuthenticationProvider.java:53)
-	at com.aquaq.scb.config.security.ldapfinal.JwtController.createToken(JwtController.java:31)
+	at com.aquaq.scb.config.security.ldap.LdapAuthenticationProvider.authenticate(LdapAuthenticationProvider.java:53)
+	at com.aquaq.scb.config.security.ldap.AuthController.createToken(JwtController.java:31)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -239,7 +239,7 @@ java.lang.Exception: User does not exist
 	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
 	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
 	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
-	at com.aquaq.scb.config.security.ldapfinal.JwtFilter.doFilterInternal(JwtFilter.java:54)
+	at com.aquaq.scb.config.security.ldap.JwtFilter.doFilterInternal(JwtFilter.java:54)
 	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
 	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
 	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103)
@@ -292,8 +292,8 @@ java.lang.Exception: User does not exist
 2022-03-17 10:50:01,814  [WARN]  com.zaxxer.hikari.pool.HikariPool  [Code line: 788]  [Thread: HikariPool-1 housekeeper]  [Message:HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=49s31ms442µs700ns).]
 2022-03-17 10:50:01,843  [ERROR]  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/].[dispatcherServlet]  [Code line: 175]  [Thread: http-nio-8080-exec-5]  [Message:Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.Exception: User does not exist] with root cause]
 java.lang.Exception: User does not exist
-	at com.aquaq.scb.config.security.ldapfinal.LdapAuthenticationProvider.authenticate(LdapAuthenticationProvider.java:53)
-	at com.aquaq.scb.config.security.ldapfinal.JwtController.createToken(JwtController.java:31)
+	at com.aquaq.scb.config.security.ldap.LdapAuthenticationProvider.authenticate(LdapAuthenticationProvider.java:53)
+	at com.aquaq.scb.config.security.ldap.AuthController.createToken(JwtController.java:31)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -335,7 +335,7 @@ java.lang.Exception: User does not exist
 	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
 	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
 	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
-	at com.aquaq.scb.config.security.ldapfinal.JwtFilter.doFilterInternal(JwtFilter.java:54)
+	at com.aquaq.scb.config.security.ldap.JwtFilter.doFilterInternal(JwtFilter.java:54)
 	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
 	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
 	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103)
@@ -387,8 +387,8 @@ java.lang.Exception: User does not exist
 	at java.base/java.lang.Thread.run(Thread.java:829)
 2022-03-17 10:50:29,142  [ERROR]  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/].[dispatcherServlet]  [Code line: 175]  [Thread: http-nio-8080-exec-8]  [Message:Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.Exception: User does not exist] with root cause]
 java.lang.Exception: User does not exist
-	at com.aquaq.scb.config.security.ldapfinal.LdapAuthenticationProvider.authenticate(LdapAuthenticationProvider.java:53)
-	at com.aquaq.scb.config.security.ldapfinal.JwtController.createToken(JwtController.java:31)
+	at com.aquaq.scb.config.security.ldap.LdapAuthenticationProvider.authenticate(LdapAuthenticationProvider.java:53)
+	at com.aquaq.scb.config.security.ldap.AuthController.createToken(JwtController.java:31)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -430,7 +430,7 @@ java.lang.Exception: User does not exist
 	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
 	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
 	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
-	at com.aquaq.scb.config.security.ldapfinal.JwtFilter.doFilterInternal(JwtFilter.java:54)
+	at com.aquaq.scb.config.security.ldap.JwtFilter.doFilterInternal(JwtFilter.java:54)
 	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
 	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
 	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103)
@@ -482,8 +482,8 @@ java.lang.Exception: User does not exist
 	at java.base/java.lang.Thread.run(Thread.java:829)
 2022-03-17 10:50:42,175  [ERROR]  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/].[dispatcherServlet]  [Code line: 175]  [Thread: http-nio-8080-exec-10]  [Message:Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.Exception: User does not exist] with root cause]
 java.lang.Exception: User does not exist
-	at com.aquaq.scb.config.security.ldapfinal.LdapAuthenticationProvider.authenticate(LdapAuthenticationProvider.java:53)
-	at com.aquaq.scb.config.security.ldapfinal.JwtController.createToken(JwtController.java:31)
+	at com.aquaq.scb.config.security.ldap.LdapAuthenticationProvider.authenticate(LdapAuthenticationProvider.java:53)
+	at com.aquaq.scb.config.security.ldap.AuthController.createToken(JwtController.java:31)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -525,7 +525,7 @@ java.lang.Exception: User does not exist
 	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
 	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
 	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
-	at com.aquaq.scb.config.security.ldapfinal.JwtFilter.doFilterInternal(JwtFilter.java:54)
+	at com.aquaq.scb.config.security.ldap.JwtFilter.doFilterInternal(JwtFilter.java:54)
 	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
 	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
 	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103)
@@ -577,8 +577,8 @@ java.lang.Exception: User does not exist
 	at java.base/java.lang.Thread.run(Thread.java:829)
 2022-03-17 10:51:51,549  [ERROR]  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/].[dispatcherServlet]  [Code line: 175]  [Thread: http-nio-8080-exec-3]  [Message:Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.Exception: User does not exist] with root cause]
 java.lang.Exception: User does not exist
-	at com.aquaq.scb.config.security.ldapfinal.LdapAuthenticationProvider.authenticate(LdapAuthenticationProvider.java:53)
-	at com.aquaq.scb.config.security.ldapfinal.JwtController.createToken(JwtController.java:31)
+	at com.aquaq.scb.config.security.ldap.LdapAuthenticationProvider.authenticate(LdapAuthenticationProvider.java:53)
+	at com.aquaq.scb.config.security.ldap.AuthController.createToken(JwtController.java:31)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -620,7 +620,7 @@ java.lang.Exception: User does not exist
 	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
 	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
 	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
-	at com.aquaq.scb.config.security.ldapfinal.JwtFilter.doFilterInternal(JwtFilter.java:54)
+	at com.aquaq.scb.config.security.ldap.JwtFilter.doFilterInternal(JwtFilter.java:54)
 	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
 	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
 	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103)
@@ -721,8 +721,8 @@ java.lang.IllegalArgumentException: Cannot pass null or empty values to construc
 	at org.springframework.util.Assert.isTrue(Assert.java:121)
 	at org.springframework.security.core.userdetails.User.<init>(User.java:110)
 	at org.springframework.security.core.userdetails.User.<init>(User.java:87)
-	at com.aquaq.scb.config.security.ldapfinal.JwtUserDetailsService.loadUserByUsername(JwtUserDetailsService.java:36)
-	at com.aquaq.scb.config.security.ldapfinal.JwtController.createToken(JwtController.java:37)
+	at com.aquaq.scb.config.security.ldap.JwtUserDetailsService.loadUserByUsername(JwtUserDetailsService.java:36)
+	at com.aquaq.scb.config.security.ldap.AuthController.createToken(JwtController.java:37)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -764,7 +764,7 @@ java.lang.IllegalArgumentException: Cannot pass null or empty values to construc
 	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
 	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
 	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
-	at com.aquaq.scb.config.security.ldapfinal.JwtFilter.doFilterInternal(JwtFilter.java:54)
+	at com.aquaq.scb.config.security.ldap.JwtFilter.doFilterInternal(JwtFilter.java:54)
 	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
 	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
 	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103)
@@ -820,8 +820,8 @@ io.jsonwebtoken.SignatureException: JWT signature does not match locally compute
 	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:354)
 	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:481)
 	at io.jsonwebtoken.impl.DefaultJwtParser.parseClaimsJws(DefaultJwtParser.java:541)
-	at com.aquaq.scb.config.security.ldapfinal.TokenManager.getUsernameFromToken(TokenManager.java:34)
-	at com.aquaq.scb.config.security.ldapfinal.JwtFilter.doFilterInternal(JwtFilter.java:33)
+	at com.aquaq.scb.config.security.ldap.TokenManager.getUsernameFromToken(TokenManager.java:34)
+	at com.aquaq.scb.config.security.ldap.JwtFilter.doFilterInternal(JwtFilter.java:33)
 	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
 	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
 	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103)
