@@ -4,6 +4,8 @@
 /front-end/node_modules
 /.pnp
 .pnp.js
+.idea
+/logs
 
 # testing
 /front-end/coverage
