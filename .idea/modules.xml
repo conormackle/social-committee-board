@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/scb/scb.iml" filepath="$PROJECT_DIR$/scb/scb.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/social-committee-board.iml" filepath="$PROJECT_DIR$/.idea/social-committee-board.iml" />
-    </modules>
-  </component>
-</project>
