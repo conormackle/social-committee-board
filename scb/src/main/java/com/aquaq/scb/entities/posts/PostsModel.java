@@ -33,4 +33,5 @@ public class PostsModel {
     @JoinColumn(name = "post_category_id")
     private PostCategoriesModel postCategory;
 
+
 }

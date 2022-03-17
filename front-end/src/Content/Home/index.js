@@ -1,7 +1,9 @@
+import { useEffect, useState } from 'react'
+import { getAll } from '../../api'
 import CardCarousel from '../../Cards/CardCarousel'
 import MainCard from '../../Cards/MainCard'
 import Section from '../../Layout/Section'
-import './index.css'
+import './index.scss'
 
 const cardData = [
   {
@@ -39,7 +41,18 @@ const cardData = [
   }
 ]
 
-export default function index() {
+export default function Home() {
+  const [posts, setPosts] = useState(null)
+  // ! endpoint broken
+  useEffect(() => {
+    const getData = async () => {
+      const { data } = await getAll('posts')
+      setPosts(data)
+      console.log(data)
+    }
+    getData()
+  }, [])
+
   return (
     <>
       <Section header="Latest Posts">
@@ -57,7 +70,7 @@ export default function index() {
           ))}
         </CardCarousel>
       </Section>
-      <Section header="Section">
+      <Section header="Announcements">
         <div>hello</div>
       </Section>
       <Section header="Section">

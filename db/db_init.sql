@@ -9,13 +9,21 @@ CREATE TABLE `users` (
 	PRIMARY KEY (`id`)
 );
 
+CREATE TABLE `event_categories` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(55) NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
 CREATE TABLE `events` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`name` VARCHAR(155),
 	`date` DATETIME,
 	`details` VARCHAR(555),
-    `created_by_user_id` INT NOT NULL,
-    FOREIGN KEY (created_by_user_id) REFERENCES users(id),
+    	`created_by_user_id` INT NOT NULL,
+	`event_category_id` INT NOT NULL,
+    	FOREIGN KEY (created_by_user_id) REFERENCES users(id),
+	FOREIGN KEY (event_category_id) REFERENCES event_categories(id),
 	PRIMARY KEY (`id`)
 );
 
@@ -42,17 +50,10 @@ CREATE TABLE `polls` (
 
 CREATE TABLE `poll_options` (
 	`id` INT NOT NULL AUTO_INCREMENT,
-	`name` VARCHAR(155) NOT NULL,
-	`votes` INT NOT NULL,
-	PRIMARY KEY (`id`)
-);
-
-CREATE TABLE `poll_poll_option` (
 	`poll_id` INT NOT NULL,
-	`poll_option_id` INT NOT NULL,
-    FOREIGN KEY (poll_id) REFERENCES polls(id),
-      FOREIGN KEY (poll_option_id) REFERENCES poll_options(id),
-	  PRIMARY KEY (poll_id, poll_option_id)
+	`name` VARCHAR(155) NOT NULL,
+	FOREIGN KEY (poll_id) REFERENCES polls(id),
+	PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `projects` (
@@ -107,4 +108,12 @@ CREATE TABLE `posts` (
 	PRIMARY KEY (`id`),
 	FOREIGN KEY (`post_category_id`) REFERENCES post_categories(id),
 	FOREIGN KEY (`user_id_posted_by`) REFERENCES users(id)
+);
+
+CREATE TABLE `poll_option_vote` (
+	`poll_option_id` INT NOT NULL,
+	`user_id` INT NOT NULL,
+     FOREIGN KEY (user_id) REFERENCES users(id),
+      FOREIGN KEY (poll_option_id) REFERENCES poll_options(id),
+	  PRIMARY KEY (poll_option_id, user_id)
 );

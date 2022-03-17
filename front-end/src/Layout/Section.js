@@ -1,4 +1,4 @@
-import './index.css'
+import './index.scss'
 
 export default function Section(props) {
   const { header, children } = props

@@ -1,0 +1,12 @@
+.ant-picker-calendar.event-calendar {
+  padding: 3px;
+  border-radius: 3px;
+  .events {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    &.ant-badge-status {
+      font-size: 12px;
+    }
+  }
+}
