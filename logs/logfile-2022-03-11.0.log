@@ -1,0 +1,26 @@
+2022-03-11 08:40:08,819  [WARN]  com.zaxxer.hikari.pool.HikariPool  [Code line: 788]  [Thread: HikariPool-1 housekeeper]  [Message:HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=14h23m54s576ms982µs400ns).]
+2022-03-11 10:12:48,218  [WARN]  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration  [Code line: 219]  [Thread: main]  [Message:spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning]
+2022-03-11 10:18:37,907  [WARN]  org.apache.catalina.util.SessionIdGeneratorBase  [Code line: 173]  [Thread: http-nio-8080-exec-2]  [Message:Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [749] milliseconds.]
+2022-03-11 12:09:37,114  [WARN]  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration  [Code line: 219]  [Thread: main]  [Message:spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning]
+2022-03-11 12:09:38,226  [WARN]  org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext  [Code line: 591]  [Thread: main]  [Message:Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'authenticationController': Unsatisfied dependency expressed through field 'jwtTokenProvider'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.aquaq.scb.config.security.ldap.JwtTokenProvider' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}]
+2022-03-11 12:09:38,391  [ERROR]  org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter  [Code line: 40]  [Thread: main]  [Message:
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field jwtTokenProvider in com.aquaq.scb.config.security.ldap.contoller.AuthenticationController required a bean of type 'com.aquaq.scb.config.security.ldap.JwtTokenProvider' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'com.aquaq.scb.config.security.ldap.JwtTokenProvider' in your configuration.
+]
+2022-03-11 12:10:43,425  [WARN]  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration  [Code line: 219]  [Thread: main]  [Message:spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning]
+2022-03-11 12:13:03,689  [WARN]  org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver  [Code line: 208]  [Thread: http-nio-8080-exec-2]  [Message:Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]]
+2022-03-11 14:23:38,539  [WARN]  com.zaxxer.hikari.pool.HikariPool  [Code line: 788]  [Thread: HikariPool-1 housekeeper]  [Message:HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=53s591ms312µs700ns).]

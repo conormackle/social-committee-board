@@ -21,7 +21,6 @@ public class OAuthFilter extends OncePerRequestFilter {
         String xAuth = request.getHeader(Constants.HEADER_NAME);
         if (StringUtils.isBlank(xAuth)) {
             filterChain.doFilter(request, response);
-            return;
         } else {
             try {
                 OAuthTokenHolder holder = new OAuthTokenHolder(xAuth);
