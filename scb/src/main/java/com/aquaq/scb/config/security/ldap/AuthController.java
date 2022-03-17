@@ -1,6 +1,7 @@
 package com.aquaq.scb.config.security.ldap;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.DisabledException;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @CrossOrigin
@@ -28,9 +31,9 @@ public class AuthController {
         try {
             ldapAuthenticationProvider.authenticate(request.getUsername(), request.getPassword());
         } catch (DisabledException e) {
-            throw new Exception("USER_DISABLED", e);
-        } catch (AuthenticationException e) {
-            throw new Exception("INVALID_CREDENTIALS", e);
+            return new ResponseEntity<>("USER_DISABLED", HttpStatus.UNAUTHORIZED);
+        } catch (LdapAuthenticationException e) {
+            return new ResponseEntity<>("UNAUTHORIZED", HttpStatus.UNAUTHORIZED);
         }
         final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());
         final String jwtToken = tokenManager.generateJwtToken(userDetails);
