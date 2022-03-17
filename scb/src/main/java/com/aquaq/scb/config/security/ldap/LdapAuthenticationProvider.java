@@ -36,7 +36,7 @@ public class LdapAuthenticationProvider
         ldapTemplate = new LdapTemplate(contextSource);
     }
 
-    public Authentication authenticate(String username, String password) throws Exception
+    public Authentication authenticate(String username, String password) throws LdapAuthenticationException
     {
         initContext();
         Filter filter = new EqualsFilter("uid", username);
@@ -47,7 +47,7 @@ public class LdapAuthenticationProvider
             return new UsernamePasswordAuthenticationToken(userDetails,
                     password, new ArrayList<>());
         } else {
-            throw new Exception("User does not exist");
+            throw new LdapAuthenticationException("User does not exist in LDAP!");
         }
     }
 }
