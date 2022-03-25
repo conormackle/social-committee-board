@@ -5,7 +5,6 @@ import com.aquaq.scb.config.security.oauth.oauth2.OAuthService;
 import com.aquaq.scb.entities.users.UsersRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,7 +21,6 @@ public class GithubAuthService extends OAuthService {
     @Override
     public UserData getUser(String tokenValue) throws JsonProcessingException {
         String httpResponse = getHttpResponse(tokenValue, Constants.GITHUB_USER_URI);
-        Gson gson = new Gson();
         ObjectMapper mapper = new ObjectMapper();
         UserData userData = mapper.readValue(httpResponse, UserData.class);
         String email = getUserEmail(tokenValue);
