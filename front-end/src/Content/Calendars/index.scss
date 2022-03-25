@@ -1,0 +1,17 @@
+.small-calendar {
+  .event {
+    border-radius: 15px;
+    padding: 2px 4px;
+    position: relative;
+    z-index: 1;
+    &.green {
+      background-color: #54c71abb;
+    }
+    &.orange {
+      background-color: #fadb14bb;
+    }
+    &.red {
+      background-color: #f5222dbb;
+    }
+  }
+}

@@ -27,12 +27,7 @@ public class PollsModel {
     //@JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-            name = "poll_poll_option",
-            joinColumns = { @JoinColumn(name = "poll_id") },
-            inverseJoinColumns = { @JoinColumn(name = "poll_option_id") }
-    )
+    @OneToMany(cascade = { CascadeType.ALL }, mappedBy = "poll")
     private Set<PollOptionsModel> pollOptions;
 
 }

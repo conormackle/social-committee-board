@@ -1,6 +1,6 @@
 import { Card } from 'antd'
 import { MessageFilled } from '@ant-design/icons'
-import './index.css'
+import './index.scss'
 
 export default function MainCard(props) {
   const { title, author, date, comments, tag, image } = props

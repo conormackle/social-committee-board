@@ -1,7 +1,7 @@
-package com.aquaq.scb.entities.posts;
+package com.aquaq.scb.entities.events;
 
 
-import com.aquaq.scb.entities.events.EventsModel;
+import com.aquaq.scb.entities.posts.PostsModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
@@ -13,8 +13,8 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Builder
-@Table(name="post_categories")
-public class PostCategoriesModel {
+@Table(name="event_categories")
+public class EventCategoriesModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +27,6 @@ public class PostCategoriesModel {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @JsonIgnore
-    @OneToMany(mappedBy="postCategory")
-    private Set<PostsModel> posts;
+    @OneToMany(mappedBy="eventCategory")
+    private Set<EventsModel> events;
 }
