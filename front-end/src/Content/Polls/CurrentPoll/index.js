@@ -7,7 +7,11 @@ export default function CurrentPoll() {
     <Poll
       name="Choose a colour"
       details="Which is your favourite?"
-      pollOptions={['Red', 'Green', 'Blue']}
+      pollOptions={[
+        { id: 0, name: 'Red', numberOfVotes: 0 },
+        { id: 1, name: 'Green', numberOfVotes: 8 },
+        { id: 2, name: 'Blue', numberOfVotes: 12 }
+      ]}
       onSubmit={() => setSubmitted(true)}
       submitted={submitted}
     />
