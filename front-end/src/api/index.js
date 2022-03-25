@@ -1,6 +1,6 @@
 import { get, post, put } from 'axios'
 
-const baseUrl = 'http://localhost:8080'
+const baseUrl = 'http://ec2-63-34-220-104.eu-west-1.compute.amazonaws.com'
 
 export const getAll = (controller) => get(`${baseUrl}/${controller}/getAll`)
 export const getById = (controller, id) => get(`${baseUrl}/${controller}/getById/${id}`)

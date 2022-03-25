@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { CSSTransition } from 'react-transition-group'
+import { FadeIn } from '../../Animations'
 import ContactButton from './ContactButton'
 import ContactForm from './ContactForm'
 
@@ -12,10 +12,10 @@ export default function Contact() {
 
   return (
     <div className="contact">
-      <CSSTransition in={showInput} timeout={200} classNames="fade-in" unmountOnExit>
+      <FadeIn render={showInput}>
         <ContactForm close={toggleInput} />
-      </CSSTransition>
-      {!false && <ContactButton toggle={toggleInput} />}
+      </FadeIn>
+      <ContactButton toggle={toggleInput} />
     </div>
   )
 }

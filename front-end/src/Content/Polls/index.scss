@@ -1,3 +1,23 @@
+@import '../../colours.scss';
+
 .poll-radio {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
+}
+.poll-results {
+  .vote-option {
+    margin: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 10px -5px rgba(0, 0, 0, 0.4);
+    .name {
+      font-weight: bold;
+    }
+    .percent {
+      font-weight: bold;
+      float: right;
+    }
+    .total {
+      color: $gray7;
+    }
+  }
 }
