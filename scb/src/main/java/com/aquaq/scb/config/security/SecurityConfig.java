@@ -59,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         http.cors().and()
                 .addFilterBefore(tokenAuthorizationFilter(), BasicAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers("/users/getAll").hasRole(ADMIN_ROLE)
+//                .antMatchers("/users/getAll").hasRole(ADMIN_ROLE)
                 .anyRequest().permitAll();
     }
 
