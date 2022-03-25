@@ -1,6 +1,6 @@
 package com.aquaq.scb.config.security;
 
-import com.aquaq.scb.config.security.oauth.github.GithubAuthenticationProvider;
+import com.aquaq.scb.config.security.oauth.oauth2.OAuthAuthenticationProvider;
 import com.aquaq.scb.config.security.oauth.oauth2.OAuthFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +14,7 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import static com.aquaq.scb.config.security.oauth.Constants.*;
 
 import java.util.Arrays;
 
@@ -24,15 +25,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Configuration
     protected static class AuthenticationSecurity extends GlobalAuthenticationConfigurerAdapter {
 
-        private final GithubAuthenticationProvider oAuthAuthenticationProvider;
+        private final OAuthAuthenticationProvider oAuthAuthenticationProvider;
 
         @Autowired
-        public AuthenticationSecurity(GithubAuthenticationProvider oAuthAuthenticationProvider) {
+        public AuthenticationSecurity(OAuthAuthenticationProvider oAuthAuthenticationProvider) {
             this.oAuthAuthenticationProvider = oAuthAuthenticationProvider;
         }
 
         @Override
-        public void init(AuthenticationManagerBuilder auth) throws Exception {
+        public void init(AuthenticationManagerBuilder auth) {
             auth.authenticationProvider(oAuthAuthenticationProvider);
         }
     }
@@ -58,13 +59,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         http.cors().and()
                 .addFilterBefore(tokenAuthorizationFilter(), BasicAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers("/users/getAll").hasRole("ADMIN")
+                .antMatchers("/users/getAll").hasRole(ADMIN_ROLE)
                 .anyRequest().permitAll();
-//                .and()
-//                .oauth2Login();
     }
-
-//    @Autowired
-//    private GithubOAuth2UserService userService;
 
 }
