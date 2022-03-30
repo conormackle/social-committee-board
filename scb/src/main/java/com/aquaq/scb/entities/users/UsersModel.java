@@ -15,8 +15,7 @@ import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 @Entity
 @Builder
 @Table(name="users")
@@ -46,7 +45,7 @@ public class UsersModel {
     //@JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @ManyToMany(mappedBy = "user")
+    @ManyToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<RolesModel> roles;
 
     //@JsonIgnore
