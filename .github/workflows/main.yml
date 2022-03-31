@@ -1,4 +1,4 @@
-name: Deployment
+name: SCB Deployment
 on:
   push:
     branches:
