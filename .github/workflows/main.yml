@@ -40,8 +40,8 @@ jobs:
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           #aws_session_token: ${{ secrets.AWS_SESSION_TOKEN }}
           use_existing_version_if_available: true
-          application_name: SCB
-          environment_name: Scb-env
+          application_name: bulletin-board
+          environment_name: Bulletinboard-env
           version_label: ${{github.SHA}}
           region: eu-west-1
           deployment_package: scb-0.0.1-SNAPSHOT.jar
