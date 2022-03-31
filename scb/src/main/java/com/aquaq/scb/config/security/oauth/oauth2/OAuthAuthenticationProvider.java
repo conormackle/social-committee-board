@@ -56,7 +56,7 @@ public class OAuthAuthenticationProvider implements AuthenticationProvider {
                 email = githubAuthService.getEmail(userData);
                 grantedAuthorities = githubAuthService.getAuthorities(email);
             }
-        }catch(JsonProcessingException exception){
+        }catch(JsonProcessingException | OAuth2Exception exception){
             log.error(exception);
         }
 
