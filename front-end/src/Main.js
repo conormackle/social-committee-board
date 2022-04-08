@@ -13,42 +13,49 @@ import EventsCalendar from './Content/Events/Calendar'
 import Contact from './Content/Contact'
 import NotFound from './NotFound'
 import { UserProvider } from './context/UserContext'
+import Login from './Content/Login'
+import PrivateRoute from './Content/Reusable/PrivateRoute'
 
 export default function Main() {
   return (
     <Router>
       <UserProvider>
-        <EventsProvider>
-          <TopNavigation />
-          <SideNavigation />
-          <div className="content">
-            <div className="primary-content">
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="events/upcoming" element={<EventsUpcoming />} />
-                <Route path="events/calendar" element={<EventsCalendar />} />
-                <Route path="projects" element={<Projects />} />
-                <Route path="polls" element={<Polls />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </div>
-          </div>
-          <div className="pinned-content">
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <>
-                    <SmallCalendar />
-                    <EmployeeMap />
-                    <CurrentPoll />
-                  </>
-                }
-              />
-              <Route exact path="*" element={<></>} />
-            </Routes>
-          </div>
-        </EventsProvider>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="*" element={
+            <EventsProvider>
+              <TopNavigation />
+              <SideNavigation />
+              <div className="content">
+                <div className="primary-content">
+                  <Routes>
+                    <Route exact path="/" element={<PrivateRoute><Home /></PrivateRoute>} />
+                    <Route path="events/upcoming" element={<PrivateRoute><EventsUpcoming /></PrivateRoute>} />
+                    <Route path="events/calendar" element={<PrivateRoute><EventsCalendar /></PrivateRoute>} />
+                    <Route path="projects" element={<PrivateRoute><Projects /></PrivateRoute>} />
+                    <Route path="polls" element={<PrivateRoute><Polls /></PrivateRoute>} />
+                    <Route path="*" element={<PrivateRoute><NotFound /></PrivateRoute>} />
+                  </Routes>
+                </div>
+              </div>
+              <div className="pinned-content">
+                <Routes>
+                  <Route
+                    path="/"
+                    element={
+                      <PrivateRoute>
+                        <SmallCalendar />
+                        <EmployeeMap />
+                        <CurrentPoll />
+                      </PrivateRoute>
+                    }
+                  />
+                  <Route exact path="*" element={<></>} />
+                </Routes>
+              </div>
+            </EventsProvider>
+          } />
+        </Routes>
       </UserProvider>
       <Contact />
     </Router>
