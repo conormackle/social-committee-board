@@ -20,8 +20,13 @@ export function getZohoToken(code) {
   return post(`${domain}/oauth/v2/token?access_type=offline&scope=${scope}&grant_type=authorization_code&client_id=${ZOHO_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&client_secret=${ZOHO_CLIENT_SECRET}&code=${code}&response_type=code&prompt=consent`)
 }
 
-export function refreshZohoToken(refreshToken) {
-  return post(`${domain}/oauth/v2/token?refresh_token=${refreshToken}&client_id=${ZOHO_CLIENT_ID}&client_secret=${ZOHO_CLIENT_SECRET}&grant_type=refresh_token`)
+export async function refreshZohoToken(refreshToken) {
+  const { data } = await post(`${domain}/oauth/v2/token?refresh_token=${refreshToken}&client_id=${ZOHO_CLIENT_ID}&client_secret=${ZOHO_CLIENT_SECRET}&grant_type=refresh_token`)
+  if (data.access_token) {
+    setAccessToken(data.access_token)
+    setAccessTokenExpiry(data.expires_in)
+    return true
+  } return false
 }
 
 export function setAccessToken(token) {
@@ -70,7 +75,6 @@ export function getPayload() {
   const token = getAccessToken()
   if (!token) return false
   const parts = token.split('.')
-  console.log('parts', parts)
   if (parts.length < 3) return false
   return JSON.parse(Buffer.from(parts[1], 'base64'))
 }
@@ -85,14 +89,10 @@ export function isTokenValid() {
   return false
 }
 
-export async function isAuthenticated() {
+export function isAuthenticated() {
   if (isTokenValid()) return true
   const refreshToken = getRefreshToken()
   if (!refreshToken) return false
-  const { data } = await refreshZohoToken()
-  if (data.access_token) {
-    setAccessToken(data.access_token)
-    setAccessTokenExpiry(data.expires_in)
-    return true
-  } return false
+  refreshZohoToken()
+  return true
 }
