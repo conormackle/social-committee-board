@@ -85,8 +85,14 @@ export function isTokenValid() {
   return false
 }
 
-export function isAuthenticated() {
+export async function isAuthenticated() {
   if (isTokenValid()) return true
   const refreshToken = getRefreshToken()
   if (!refreshToken) return false
+  const { data } = await refreshZohoToken()
+  if (data.access_token) {
+    setAccessToken(data.access_token)
+    setAccessTokenExpiry(data.expires_in)
+    return true
+  } return false
 }
