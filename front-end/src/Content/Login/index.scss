@@ -20,13 +20,6 @@
     button {
       padding: .4em;
       font-size: 2em;
-      border-radius: .2em;
-      border: none;
-      background-color: $gray4;
-      &:hover {
-        cursor: pointer;
-        background-color: $blue2;
-      }
     }
   }
 }
