@@ -14,7 +14,7 @@ import Contact from './Content/Contact'
 import NotFound from './NotFound'
 import { UserProvider } from './context/UserContext'
 import Login from './Content/Login'
-import PrivateOutlet from './Content/Reusable/PrivateRoute'
+import PrivateOutlet from './Content/Reusable/PrivateOutlet'
 
 export default function Main() {
   return (
@@ -50,8 +50,8 @@ export default function Main() {
                         <CurrentPoll />
                       </>
                     } />
+                    <Route exact path="*" element={<></>} />
                   </Route>
-                  <Route exact path="*" element={<></>} />
                 </Routes>
               </div>
             </EventsProvider>
