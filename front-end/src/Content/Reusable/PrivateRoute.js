@@ -1,7 +1,7 @@
-import { Navigate } from 'react-router-dom'
+import { Navigate, Outlet } from 'react-router-dom'
 import { isAuthenticated } from '../../auth'
 
-export default function PrivateRoute({ children }) {
+export default function PrivateRoute() {
     const auth = isAuthenticated()
-    return auth ? children : <Navigate to="/login"/>
+    return auth ? <Outlet /> : <Navigate to="/login"/>
 }

@@ -14,7 +14,7 @@ import Contact from './Content/Contact'
 import NotFound from './NotFound'
 import { UserProvider } from './context/UserContext'
 import Login from './Content/Login'
-import PrivateRoute from './Content/Reusable/PrivateRoute'
+import PrivateOutlet from './Content/Reusable/PrivateRoute'
 
 export default function Main() {
   return (
@@ -29,27 +29,28 @@ export default function Main() {
               <div className="content">
                 <div className="primary-content">
                   <Routes>
-                    <Route exact path="/" element={<PrivateRoute><Home /></PrivateRoute>} />
-                    <Route path="events/upcoming" element={<PrivateRoute><EventsUpcoming /></PrivateRoute>} />
-                    <Route path="events/calendar" element={<PrivateRoute><EventsCalendar /></PrivateRoute>} />
-                    <Route path="projects" element={<PrivateRoute><Projects /></PrivateRoute>} />
-                    <Route path="polls" element={<PrivateRoute><Polls /></PrivateRoute>} />
-                    <Route path="*" element={<PrivateRoute><NotFound /></PrivateRoute>} />
+                    <Route path="/" element={<PrivateOutlet/>}>
+                      <Route exact path="/" element={<Home />} />
+                      <Route path="events/upcoming" element={<EventsUpcoming />} />
+                      <Route path="events/calendar" element={<EventsCalendar />} />
+                      <Route path="projects" element={<Projects />} />
+                      <Route path="polls" element={<Polls />} />
+                      <Route path="*" element={<NotFound />} />
+                    </Route>
                   </Routes>
                 </div>
               </div>
               <div className="pinned-content">
                 <Routes>
-                  <Route
-                    path="/"
-                    element={
-                      <PrivateRoute>
+                  <Route path="/" element={<PrivateOutlet />} >
+                    <Route path="/" element={
+                      <>
                         <SmallCalendar />
                         <EmployeeMap />
                         <CurrentPoll />
-                      </PrivateRoute>
-                    }
-                  />
+                      </>
+                    } />
+                  </Route>
                   <Route exact path="*" element={<></>} />
                 </Routes>
               </div>
