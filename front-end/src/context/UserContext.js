@@ -1,12 +1,11 @@
 import { createContext, useState, useEffect } from 'react'
 import queryString from 'query-string'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { getPayload, isAuthenticated, setAccessToken, setRefreshToken, getZohoToken, setAccessTokenExpiry } from '../auth'
+import { isAuthenticated, setAccessToken, setRefreshToken, getZohoToken, setAccessTokenExpiry } from '../auth'
 
 export const UserContext = createContext()
 
 export const UserProvider = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(isAuthenticated())
   const [user, setUser] = useState(null)
   const navigate= useNavigate()
   const location = useLocation()
