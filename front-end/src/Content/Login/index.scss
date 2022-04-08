@@ -1,0 +1,25 @@
+@import '../../colours.scss';
+
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-page{
+  width: 100vw;
+  height: 100vh;
+  @include center();
+  .container {
+    @include center();
+    flex-direction: column;
+    h1 {
+      color: $blue1;
+      font-size: 4em;
+    }
+    button {
+      padding: .4em;
+      font-size: 2em;
+    }
+  }
+}

@@ -3,7 +3,7 @@ import { getAll } from '../api'
 
 export const EventsContext = createContext()
 
-export const EventsProvider = (props) => {
+export const EventsProvider = ({ children }) => {
   const [events, setEvents] = useState(null)
 
   useEffect(() => {
@@ -20,7 +20,7 @@ export const EventsProvider = (props) => {
 
   return (
     <EventsContext.Provider value={{ events }}>
-      {props.children}
+      {children}
     </EventsContext.Provider>
   )
 }
