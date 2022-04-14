@@ -27,7 +27,7 @@ public class GeneralUtils {
                 .toArray(String[]::new);
     }
 
-    public static void copyModelProperties(Object source, Object target){
+    public static void copyProperties(Object source, Object target){
         BeanUtils.copyProperties(source, target, getNullPropertyNames(source));
     }
 

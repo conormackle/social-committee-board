@@ -1,6 +1,7 @@
 package com.aquaq.scb.config.security.oauth.oauth2;
 
 import com.aquaq.scb.config.security.oauth.github.GithubAuthService;
+import com.aquaq.scb.config.security.oauth.zoho.ResponseBody;
 import com.aquaq.scb.config.security.oauth.zoho.ZohoAuthService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.log4j.Log4j2;
@@ -49,7 +50,8 @@ public class OAuthAuthenticationProvider implements AuthenticationProvider {
         try {
             if (token.contains("zoho")) {
                 userData = zohoAuthService.getUser(token.replace("zoho","").trim());
-                email = zohoAuthService.getEmail(userData);
+                ResponseBody zohoResponseBody = (ResponseBody) userData;
+                email = zohoResponseBody.getEmail();
                 grantedAuthorities = zohoAuthService.getAuthorities(email);
             }else if(token.contains("github")){
                 userData = githubAuthService.getUser(token.replace("github","").trim());

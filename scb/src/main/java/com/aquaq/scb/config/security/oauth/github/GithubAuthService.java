@@ -5,22 +5,33 @@ import com.aquaq.scb.config.security.oauth.oauth2.OAuthService;
 import com.aquaq.scb.entities.users.UsersRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.http.HttpHeaders;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.client.methods.RequestBuilder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class GithubAuthService extends OAuthService {
 
     private UsersRepository usersRepository;
+    private final String tokenPrefix;
 
     public GithubAuthService(UsersRepository usersRepository) {
         super(usersRepository);
-        super.setTokenPrefix("token");
+        tokenPrefix = "token";
         super.setOauthProvider("Github");
     }
 
     @Override
     public UserData getUser(String tokenValue) throws JsonProcessingException {
-        String httpResponse = getHttpResponse(tokenValue, Constants.GITHUB_USER_URI);
+        HttpUriRequest request = RequestBuilder.get()
+                .setUri(Constants.GITHUB_USER_URI)
+                .setHeader(HttpHeaders.ACCEPT_LANGUAGE, "en-us")
+                .setHeader(HttpHeaders.ACCEPT, "application/json")
+                .setHeader(HttpHeaders.ACCEPT_ENCODING, "application/json")
+                .setHeader(HttpHeaders.AUTHORIZATION, tokenPrefix + " " + tokenValue)
+                .build();
+        String httpResponse = getHttpResponse(request);
         ObjectMapper mapper = new ObjectMapper();
         UserData userData = mapper.readValue(httpResponse, UserData.class);
         String email = getUserEmail(tokenValue);
@@ -28,13 +39,19 @@ public class GithubAuthService extends OAuthService {
         return userData;
     }
 
-    @Override
-    public String getEmail(Object userData){
+    public String getEmail(Object userData) {
         return ((UserData) userData).getEmail();
     }
 
     private String getUserEmail(String tokenValue) throws JsonProcessingException {
-        String httpResponse = getHttpResponse(tokenValue, Constants.GITHUB_USER_EMAILS_URI);
+        HttpUriRequest request = RequestBuilder.get()
+                .setUri(Constants.GITHUB_USER_EMAILS_URI)
+                .setHeader(HttpHeaders.ACCEPT_LANGUAGE, "en-us")
+                .setHeader(HttpHeaders.ACCEPT, "application/json")
+                .setHeader(HttpHeaders.ACCEPT_ENCODING, "application/json")
+                .setHeader(HttpHeaders.AUTHORIZATION, tokenPrefix + " " + tokenValue)
+                .build();
+        String httpResponse = getHttpResponse(request);
         String email = null;
         ObjectMapper mapper = new ObjectMapper();
         EmailData[] emailDataArray = mapper.readValue(httpResponse, EmailData[].class);
