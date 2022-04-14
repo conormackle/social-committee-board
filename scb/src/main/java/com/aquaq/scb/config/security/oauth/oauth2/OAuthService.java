@@ -13,6 +13,7 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.methods.RequestBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
@@ -25,16 +26,11 @@ import java.util.Set;
 public abstract class OAuthService {
 
     private String oauthProvider;
-    private String tokenPrefix;
 
     private final UsersRepository usersRepository;
 
     protected void setOauthProvider(String oauthProvider){
         this.oauthProvider = oauthProvider;
-    }
-
-    protected void setTokenPrefix(String tokenPrefix){
-        this.tokenPrefix = tokenPrefix;
     }
 
     @Autowired
@@ -43,7 +39,6 @@ public abstract class OAuthService {
     }
 
     public abstract Object getUser(String tokenValue) throws JsonProcessingException;
-    public abstract String getEmail(Object userData);
 
     public List<GrantedAuthority> getAuthorities(String email) throws OAuth2Exception {
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
@@ -59,24 +54,17 @@ public abstract class OAuthService {
         return grantedAuthorities;
     }
 
-    protected String getHttpResponse(String tokenValue, String uri) {
-        String httpResponse = httpResponseHandler(tokenValue, uri);
+    protected String getHttpResponse(HttpUriRequest request) {
+        String httpResponse = httpResponseHandler(request);
         if(httpResponse != null && httpResponse.equals(Constants.UNAUTHORIZED_CODE)){
             throw new OAuthTokenInvalidException("OAuth - "+oauthProvider+": Unauthorized access token");
         }
         return httpResponse;
     }
 
-    private String httpResponseHandler(String tokenValue, String uri) {
+    private String httpResponseHandler(HttpUriRequest request) {
         String httpResponse = null;
         HttpClient client = HttpClients.custom().build();
-        HttpUriRequest request = RequestBuilder.get()
-                .setUri(uri)
-                .setHeader("Accept-Language", "en-us")
-                .setHeader(HttpHeaders.ACCEPT, "application/json")
-                .setHeader(HttpHeaders.ACCEPT_ENCODING, "application/json")
-                .setHeader(HttpHeaders.AUTHORIZATION, tokenPrefix+" "+tokenValue)
-                .build();
         try {
             ResponseHandler<String> responseHandler = new CustomResponseHandler();
             httpResponse = client.execute(request, responseHandler);
@@ -85,5 +73,4 @@ public abstract class OAuthService {
         }
         return httpResponse;
     }
-
 }

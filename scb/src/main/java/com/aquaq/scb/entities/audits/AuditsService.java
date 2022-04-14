@@ -1,6 +1,5 @@
 package com.aquaq.scb.entities.audits;
 
-import com.aquaq.scb.entities.users.UsersModel;
 import com.aquaq.scb.response.ScbResponse;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-import static com.aquaq.scb.utils.GeneralUtils.copyModelProperties;
+import static com.aquaq.scb.utils.GeneralUtils.copyProperties;
 
 @Log4j2
 @Service
@@ -60,7 +59,7 @@ public class AuditsService {
             Optional<AuditModel> savedAuditModel = auditsRepository.findById(id);
             if(savedAuditModel.isPresent()){
                 AuditModel updateAudit = savedAuditModel.get();
-                copyModelProperties(auditModel, updateAudit);
+                copyProperties(auditModel, updateAudit);
                 updatedAuditModel = auditsRepository.save(updateAudit);
                 return ScbResponse.createSuccessResponse(updatedAuditModel);
             }else{
