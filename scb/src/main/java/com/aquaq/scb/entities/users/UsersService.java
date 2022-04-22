@@ -31,6 +31,10 @@ public class UsersService {
         }
     }
 
+    public UsersModel getByEmail(String email){
+        return usersRepository.getByEmail(email);
+    }
+
     public ScbResponse getById(int id){
         try{
             Optional<UsersModel> model = usersRepository.findById(id);

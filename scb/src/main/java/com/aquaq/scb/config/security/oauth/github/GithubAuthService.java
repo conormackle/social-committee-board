@@ -2,7 +2,7 @@ package com.aquaq.scb.config.security.oauth.github;
 
 import com.aquaq.scb.config.security.oauth.Constants;
 import com.aquaq.scb.config.security.oauth.oauth2.OAuthService;
-import com.aquaq.scb.entities.users.UsersRepository;
+import com.aquaq.scb.entities.users.UsersService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.HttpHeaders;
@@ -13,11 +13,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class GithubAuthService extends OAuthService {
 
-    private UsersRepository usersRepository;
+    private UsersService usersService;
     private final String tokenPrefix;
 
-    public GithubAuthService(UsersRepository usersRepository) {
-        super(usersRepository);
+    public GithubAuthService(UsersService usersService) {
+        super(usersService);
         tokenPrefix = "token";
         super.setOauthProvider("Github");
     }

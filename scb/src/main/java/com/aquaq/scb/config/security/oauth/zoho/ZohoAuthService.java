@@ -2,10 +2,13 @@ package com.aquaq.scb.config.security.oauth.zoho;
 
 import com.aquaq.scb.config.security.oauth.Constants;
 import com.aquaq.scb.config.security.oauth.oauth2.OAuthService;
-import com.aquaq.scb.entities.users.UsersRepository;
+import com.aquaq.scb.entities.users.UsersModel;
+import com.aquaq.scb.entities.users.UsersService;
 import com.aquaq.scb.utils.GeneralUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j2;
 import org.apache.http.HttpHeaders;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.methods.RequestBuilder;
@@ -13,7 +16,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @Service
+@Log4j2
 public class ZohoAuthService extends OAuthService {
 
     @Value("${zoho.auth.client.id}")
@@ -27,12 +33,12 @@ public class ZohoAuthService extends OAuthService {
     @Value("${zoho.auth.access.type}")
     private String accessType;
 
-    private UsersRepository usersRepository;
+    private UsersService usersService;
     private final String tokenPrefix;
 
     @Autowired
-    public ZohoAuthService(UsersRepository usersRepository) {
-        super(usersRepository);
+    public ZohoAuthService(UsersService usersService) {
+        super(usersService);
         tokenPrefix = "Zoho-oauthtoken";
         super.setOauthProvider("Zoho");
     }
@@ -92,9 +98,22 @@ public class ZohoAuthService extends OAuthService {
     public ResponseBody authenticateUser(String code) throws JsonProcessingException {
         ResponseBody accessTokenResponse = getAccessToken(code);
         ResponseBody userResponse = getUser(accessTokenResponse.getAccessToken());
+        String userEmail = userResponse.getEmail();
         GeneralUtils.copyProperties(accessTokenResponse, userResponse);
-        if(userResponse.getEmail().contains("@aquaq.co.uk")){
+        if(userEmail.contains("@aquaq.co.uk")){
             userResponse.setAquaQUser(true);
+            if(Objects.isNull(usersService.getByEmail(userEmail))){
+                try {
+                    UsersModel user = UsersModel.builder()
+                            .email(userEmail)
+                            .emailVerified(1)
+                            .name(userResponse.getFirstName() + " " + userResponse.getLastName())
+                            .build();
+                    usersService.create(user);
+                }catch(Exception exc){
+                    log.error("ZohoAuthService - authenticateUser: Issue creating user for email: {}", userEmail);
+                }
+            }
         }
         return userResponse;
     }

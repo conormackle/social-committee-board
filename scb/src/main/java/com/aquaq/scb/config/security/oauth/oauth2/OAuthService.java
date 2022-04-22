@@ -4,6 +4,7 @@ import com.aquaq.scb.config.security.oauth.Constants;
 import com.aquaq.scb.entities.roles.RolesModel;
 import com.aquaq.scb.entities.users.UsersModel;
 import com.aquaq.scb.entities.users.UsersRepository;
+import com.aquaq.scb.entities.users.UsersService;
 import com.aquaq.scb.http.CustomResponseHandler;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.http.HttpHeaders;
@@ -27,22 +28,22 @@ public abstract class OAuthService {
 
     private String oauthProvider;
 
-    private final UsersRepository usersRepository;
+    private final UsersService usersService;
 
     protected void setOauthProvider(String oauthProvider){
         this.oauthProvider = oauthProvider;
     }
 
     @Autowired
-    protected OAuthService(UsersRepository usersRepository) {
-        this.usersRepository = usersRepository;
+    protected OAuthService(UsersService usersService) {
+        this.usersService = usersService;
     }
 
     public abstract Object getUser(String tokenValue) throws JsonProcessingException;
 
     public List<GrantedAuthority> getAuthorities(String email) throws OAuth2Exception {
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        UsersModel usersModel = usersRepository.getByEmail(email != null ? email : "");
+        UsersModel usersModel = usersService.getByEmail(email != null ? email : "");
         if (usersModel != null) {
             Set<RolesModel> usersRoles = usersModel.getRoles();
             for (RolesModel rolesModel : usersRoles) {
