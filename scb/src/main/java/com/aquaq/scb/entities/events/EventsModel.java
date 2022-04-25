@@ -1,11 +1,11 @@
 package com.aquaq.scb.entities.events;
-import com.aquaq.scb.entities.posts.PostCategoriesModel;
+import com.aquaq.scb.entities.events.images.EventImagesModel;
 import com.aquaq.scb.entities.users.UsersModel;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -41,35 +41,9 @@ public class EventsModel {
     @JoinColumn(name = "event_category_id")
     private EventCategoriesModel eventCategory;
 
-    public Integer getId() {
-        return id;
-    }
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy="event")
+    private Set<EventImagesModel> eventImages;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public LocalDateTime getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDateTime date) {
-        this.date = date;
-    }
-
-    public String getDetails() {
-        return details;
-    }
-
-    public void setDetails(String details) {
-        this.details = details;
-    }
 }

@@ -7,6 +7,7 @@ import com.aquaq.scb.entities.projects.ProjectsService;
 import com.aquaq.scb.entities.users.UsersModel;
 import com.aquaq.scb.response.ResponseCodes;
 import com.aquaq.scb.response.ScbResponse;
+import com.aquaq.scb.utils.Constants;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -92,7 +93,7 @@ public class RolesServiceTest {
     void test_getById_returns_noEntityFound() {
         Mockito.when(rolesRepository.findById(id)).thenReturn(Optional.empty());
         actualResponse = rolesService.getById(id);
-        expectedResponse.setResponse("No entity found with ID: " + id);
+        expectedResponse.setResponse(Constants.NO_ENTITY_FOUND_WITH_ID + id);
         expectedResponse.setResponseCode(ResponseCodes.SUCCESS);
         testSuccessScbResponse(expectedResponse, actualResponse);
     }
@@ -140,7 +141,7 @@ public class RolesServiceTest {
         RolesModel modelRequestToChangeName = RolesModel.builder().name("testName2").id(id).build();
         Mockito.when(rolesRepository.findById(id)).thenReturn(Optional.empty());
         actualResponse = rolesService.update(modelRequestToChangeName, id);
-        expectedResponse.setResponse("No entity found with ID: " + id);
+        expectedResponse.setResponse(Constants.NO_ENTITY_FOUND_WITH_ID + id);
         expectedResponse.setResponseCode(ResponseCodes.SUCCESS);
         testSuccessScbResponse(expectedResponse, actualResponse);
     }

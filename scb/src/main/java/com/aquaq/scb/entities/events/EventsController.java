@@ -1,7 +1,7 @@
 package com.aquaq.scb.entities.events;
 
 
-import com.aquaq.scb.entities.roles.RolesModel;
+import com.aquaq.scb.entities.events.images.EventImagesModel;
 import com.aquaq.scb.response.ScbResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -45,6 +45,24 @@ public class EventsController {
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
     public ScbResponse create(@RequestBody EventsModel model) {
         return eventsService.create(model);
+    }
+
+    @PostMapping("/events/addImage/{eventId}")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ScbResponse addImage(@RequestBody EventImagesModel model, @PathVariable Integer eventId) {
+        return eventsService.addImage(model, eventId);
+    }
+
+    @PostMapping("/events/updateImage/")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ScbResponse updateImage(@RequestBody EventImagesModel model) {
+        return eventsService.updateImage(model);
+    }
+
+    @GetMapping("/events/getThumbnail/{eventId}")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ScbResponse getThumbnail(@PathVariable Integer eventId) {
+        return eventsService.getThumbnail(eventId);
     }
 
 }

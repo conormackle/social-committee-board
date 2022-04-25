@@ -2,6 +2,7 @@ package com.aquaq.scb.entities.events;
 
 import com.aquaq.scb.entities.mapper.ModelPropertyMapper;
 import com.aquaq.scb.response.ScbResponse;
+import com.aquaq.scb.utils.Constants;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,7 +36,7 @@ public class EventCategoriesService {
     public ScbResponse getById(int id){
         try{
             Optional<EventCategoriesModel> model = eventCategoriesRepository.findById(id);
-            return model.map(ScbResponse::createSuccessResponse).orElseGet(() -> ScbResponse.createSuccessResponse(String.format("No entity found with ID: %s", id)));
+            return model.map(ScbResponse::createSuccessResponse).orElseGet(() -> ScbResponse.createSuccessResponse(Constants.NO_ENTITY_FOUND_WITH_ID + id));
         }catch(Exception e){
             return ScbResponse.createExceptionResponse(e);
         }
@@ -60,7 +61,7 @@ public class EventCategoriesService {
                 updatedModel = eventCategoriesRepository.save(updateModel);
                 return ScbResponse.createSuccessResponse(updatedModel);
             }else{
-                return ScbResponse.createSuccessResponse("No entity found with ID: " + id);
+                return ScbResponse.createSuccessResponse(Constants.NO_ENTITY_FOUND_WITH_ID + id);
             }
         }catch(Exception e){
             return ScbResponse.createExceptionResponse(e);

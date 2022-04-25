@@ -2,6 +2,7 @@ package com.aquaq.scb.entities.posts;
 
 import com.aquaq.scb.entities.mapper.ModelPropertyMapper;
 import com.aquaq.scb.response.ScbResponse;
+import com.aquaq.scb.utils.Constants;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,7 +61,7 @@ public class PostCategoriesService {
                 updatedModel = postCategoriesRepository.save(updateModel);
                 return ScbResponse.createSuccessResponse(updatedModel);
             }else{
-                return ScbResponse.createSuccessResponse("No entity found with ID: " + id);
+                return ScbResponse.createSuccessResponse(Constants.NO_ENTITY_FOUND_WITH_ID + id);
             }
         }catch(Exception e){
             return ScbResponse.createExceptionResponse(e);

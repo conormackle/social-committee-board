@@ -40,3 +40,6 @@ insert into `audit_child` (audit_id, field_changed, old_value, new_value) values
 insert into post_categories (name) values ('Social commitee');
 
 insert into `posts` (content, user_id_posted_by, post_category_id) values ('This is a post', (select min(id) from `users` where email like 'joe.bloggs@aquaq.co.uk'), (select min(id) from `post_categories` where name like 'Social commitee'))
+
+insert into `event_images` (event_id, image_path, thumbnail) values ((select min(id) from `events` where name like 'first event'), 'image_path', false);
+insert into `event_images` (event_id, image_path, thumbnail) values ((select min(id) from `events` where name like 'first event'), 'image_path_1', true);
