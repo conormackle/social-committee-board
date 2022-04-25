@@ -6,6 +6,7 @@ import com.aquaq.scb.entities.posts.PostsRepository;
 import com.aquaq.scb.entities.posts.PostsService;
 import com.aquaq.scb.response.ResponseCodes;
 import com.aquaq.scb.response.ScbResponse;
+import com.aquaq.scb.utils.Constants;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -80,7 +81,7 @@ public class EventsServiceTest {
     void test_getById_returns_noEntityFound() {
         Mockito.when(eventsRepository.findById(id)).thenReturn(Optional.empty());
         actualResponse = eventsService.getById(id);
-        expectedResponse.setResponse("No entity found with ID: " + id);
+        expectedResponse.setResponse(Constants.NO_ENTITY_FOUND_WITH_ID + id);
         expectedResponse.setResponseCode(ResponseCodes.SUCCESS);
         testSuccessScbResponse(expectedResponse, actualResponse);
     }
@@ -138,7 +139,7 @@ public class EventsServiceTest {
                 .build();
         Mockito.when(eventsRepository.findById(id)).thenReturn(Optional.empty());
         actualResponse = eventsService.update(modelRequestToChangeName, id);
-        expectedResponse.setResponse("No entity found with ID: " + id);
+        expectedResponse.setResponse(Constants.NO_ENTITY_FOUND_WITH_ID + id);
         expectedResponse.setResponseCode(ResponseCodes.SUCCESS);
         testSuccessScbResponse(expectedResponse, actualResponse);
     }

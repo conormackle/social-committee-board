@@ -3,6 +3,7 @@ package com.aquaq.scb.entities.projects;
 import com.aquaq.scb.entities.mapper.ModelPropertyMapper;
 import com.aquaq.scb.response.ResponseCodes;
 import com.aquaq.scb.response.ScbResponse;
+import com.aquaq.scb.utils.Constants;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -74,7 +75,7 @@ class ProjectsServiceTest {
     void test_getById_returns_noEntityFound() {
         Mockito.when(projectsRepository.findById(id)).thenReturn(Optional.empty());
         actualResponse = projectsService.getById(id);
-        expectedResponse.setResponse("No entity found with ID: " + id);
+        expectedResponse.setResponse(Constants.NO_ENTITY_FOUND_WITH_ID + id);
         expectedResponse.setResponseCode(ResponseCodes.SUCCESS);
         testSuccessScbResponse(expectedResponse, actualResponse);
     }
@@ -122,7 +123,7 @@ class ProjectsServiceTest {
         ProjectsModel modelRequestToChangeName = ProjectsModel.builder().details("details updated").id(id).build();
         Mockito.when(projectsRepository.findById(id)).thenReturn(Optional.empty());
         actualResponse = projectsService.update(modelRequestToChangeName, id);
-        expectedResponse.setResponse("No entity found with ID: " + id);
+        expectedResponse.setResponse(Constants.NO_ENTITY_FOUND_WITH_ID + id);
         expectedResponse.setResponseCode(ResponseCodes.SUCCESS);
         testSuccessScbResponse(expectedResponse, actualResponse);
     }

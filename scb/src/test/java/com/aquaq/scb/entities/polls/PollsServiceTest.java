@@ -3,6 +3,7 @@ package com.aquaq.scb.entities.polls;
 import com.aquaq.scb.entities.mapper.ModelPropertyMapper;
 import com.aquaq.scb.response.ResponseCodes;
 import com.aquaq.scb.response.ScbResponse;
+import com.aquaq.scb.utils.Constants;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -75,7 +76,7 @@ class PollsServiceTest {
     void test_getById_returns_noEntityFound() {
         Mockito.when(pollsRepository.findById(id)).thenReturn(Optional.empty());
         actualResponse = pollsService.getById(id);
-        expectedResponse.setResponse("No entity found with ID: " + id);
+        expectedResponse.setResponse(Constants.NO_ENTITY_FOUND_WITH_ID + id);
         expectedResponse.setResponseCode(ResponseCodes.SUCCESS);
         testSuccessScbResponse(expectedResponse, actualResponse);
     }
@@ -122,7 +123,7 @@ class PollsServiceTest {
         PollsModel modelRequestToChangeName = PollsModel.builder().name("testName2").id(id).build();
         Mockito.when(pollsRepository.findById(id)).thenReturn(Optional.empty());
         actualResponse = pollsService.update(modelRequestToChangeName, id);
-        expectedResponse.setResponse("No entity found with ID: " + id);
+        expectedResponse.setResponse(Constants.NO_ENTITY_FOUND_WITH_ID + id);
         expectedResponse.setResponseCode(ResponseCodes.SUCCESS);
         testSuccessScbResponse(expectedResponse, actualResponse);
     }

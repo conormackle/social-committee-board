@@ -117,3 +117,14 @@ CREATE TABLE `poll_option_vote` (
       FOREIGN KEY (poll_option_id) REFERENCES poll_options(id),
 	  PRIMARY KEY (poll_option_id, user_id)
 );
+
+/* conor mackle create event_images table */
+
+CREATE TABLE `event_images` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+	`event_id` INT NOT NULL,
+	`image_path` VARCHAR(250) NOT NULL,
+	`thumbnail` boolean DEFAULT FALSE,
+	 PRIMARY KEY (`id`),
+     FOREIGN KEY (event_id) REFERENCES events(id)
+);

@@ -1,8 +1,10 @@
 package com.aquaq.scb.entities.events;
 
+import com.aquaq.scb.entities.events.images.EventImagesModel;
+import com.aquaq.scb.entities.events.images.EventImagesRepository;
 import com.aquaq.scb.entities.mapper.ModelPropertyMapper;
-import com.aquaq.scb.entities.polls.PollsModel;
 import com.aquaq.scb.response.ScbResponse;
+import com.aquaq.scb.utils.Constants;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,12 +17,14 @@ import java.util.Optional;
 public class EventsService {
 
     private final EventsRepository eventsRepository;
+    private final EventImagesRepository eventImagesRepository;
 
     private final ModelPropertyMapper modelPropertyMapper;
 
     @Autowired
-    public EventsService(EventsRepository eventsRepository, ModelPropertyMapper modelPropertyMapper){
+    public EventsService(EventsRepository eventsRepository, EventImagesRepository eventImagesRepository, ModelPropertyMapper modelPropertyMapper){
         this.eventsRepository = eventsRepository;
+        this.eventImagesRepository = eventImagesRepository;
         this.modelPropertyMapper  = modelPropertyMapper;
     }
 
@@ -28,9 +32,9 @@ public class EventsService {
         try{
             Optional<EventsModel> model = eventsRepository.findById(id);
             if(model.isPresent()){
-               return model.map(ScbResponse::createSuccessResponse).orElseGet(() -> ScbResponse.createSuccessResponse(String.format("No entity found with ID: %s", id)));
+               return model.map(ScbResponse::createSuccessResponse).orElseGet(() -> ScbResponse.createSuccessResponse(Constants.NO_ENTITY_FOUND_WITH_ID + id));
             }else{
-                return ScbResponse.createSuccessResponse(String.format("No entity found with ID: %s", id));
+                return ScbResponse.createSuccessResponse(Constants.NO_ENTITY_FOUND_WITH_ID + id);
             }
         }catch(Exception e){
             return ScbResponse.createExceptionResponse(e);
@@ -68,8 +72,49 @@ public class EventsService {
                 updatedModel = eventsRepository.save(updateModel);
                 return ScbResponse.createSuccessResponse(updatedModel);
             }else{
-                return ScbResponse.createSuccessResponse("No entity found with ID: " + id);
+                return ScbResponse.createSuccessResponse(Constants.NO_ENTITY_FOUND_WITH_ID + id);
             }
+        }catch(Exception e){
+            return ScbResponse.createExceptionResponse(e);
+        }
+    }
+
+    public ScbResponse addImage(EventImagesModel model, int id){
+        try {
+            Optional<EventsModel> event = eventsRepository.findById(id);
+            if(event.isPresent()){
+                model.setEvent(event.get());
+                eventImagesRepository.save(model);
+                return ScbResponse.createSuccessResponse("Success");
+            }else{
+                return ScbResponse.createSuccessResponse(Constants.NO_ENTITY_FOUND_WITH_ID + id);
+            }
+        }catch(Exception e){
+            return ScbResponse.createExceptionResponse(e);
+        }
+    }
+
+    public ScbResponse updateImage(EventImagesModel model){
+        try {
+            EventImagesModel updatedModel;
+            Optional<EventImagesModel> savedModel = eventImagesRepository.findById(model.getId());
+            if(savedModel.isPresent()){
+                EventImagesModel updateModel = savedModel.get();
+                modelPropertyMapper.copyModelProperties(model, updateModel);
+                updatedModel = eventImagesRepository.save(updateModel);
+                return ScbResponse.createSuccessResponse(updatedModel);
+            }else{
+                return ScbResponse.createSuccessResponse(Constants.NO_ENTITY_FOUND_WITH_ID + model.getId());
+            }
+        }catch(Exception e){
+            return ScbResponse.createExceptionResponse(e);
+        }
+    }
+
+    public ScbResponse getThumbnail(int id){
+        try {
+            Optional<EventImagesModel> eventImageThumbnail = eventImagesRepository.findFirstByEventIdAndThumbnailTrue(id);
+            return eventImageThumbnail.map(ScbResponse::createSuccessResponse).orElseGet(() -> ScbResponse.createSuccessResponse(Constants.NO_ENTITY_FOUND_WITH_ID + id));
         }catch(Exception e){
             return ScbResponse.createExceptionResponse(e);
         }
