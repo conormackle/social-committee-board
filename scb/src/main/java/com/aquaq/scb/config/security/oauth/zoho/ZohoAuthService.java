@@ -64,7 +64,7 @@ public class ZohoAuthService extends OAuthService {
                 .addParameter("code", code)
                 .addParameter("prompt", prompt)
                 .addParameter("access_type", accessType)
-                .addParameter("scope", "ZOHOPEOPLE.forms.ALL,Aaaserver.profile.read")
+                .addParameter("scope", "ZOHOPEOPLE.forms.ALL,ZOHOPEOPLE.Announcement.ALL,Aaaserver.profile.read")
                 .addParameter("response_type", "code")
                 .build();
         String response = getHttpResponse(request);

@@ -3,6 +3,7 @@ package com.aquaq.scb.entities.polls;
 import lombok.*;
 import javax.persistence.*;
 import java.util.HashSet;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Set;
 
 @Data
@@ -24,7 +25,7 @@ public class PollsModel {
     @Column(name="details")
     private String details;
 
-    //@JsonIgnore
+    @JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(cascade = { CascadeType.ALL }, mappedBy = "poll")
