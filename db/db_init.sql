@@ -128,3 +128,17 @@ CREATE TABLE `event_images` (
 	 PRIMARY KEY (`id`),
      FOREIGN KEY (event_id) REFERENCES events(id)
 );
+
+CREATE TABLE `event_attendee` (
+	`user_id` INT NOT NULL,
+	`event_id` INT NOT NULL,
+    `rsvp`  VARCHAR(50),
+    `comment` VARCHAR(150),
+     FOREIGN KEY (user_id) REFERENCES users(id),
+      FOREIGN KEY (event_id) REFERENCES events(id),
+	  PRIMARY KEY (event_id, user_id)
+);
+
+alter table posts
+add `title` VARCHAR(50);
+
