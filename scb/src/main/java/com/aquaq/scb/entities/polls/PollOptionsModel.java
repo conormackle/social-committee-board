@@ -27,6 +27,7 @@ public class PollOptionsModel {
     @ManyToOne
     private PollsModel poll;
 
+    @JsonIgnore
     @OneToMany(mappedBy ="id.pollOption")
     private Set<PollOptionVoteModel> votes;
 
