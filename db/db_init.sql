@@ -142,3 +142,14 @@ CREATE TABLE `event_attendee` (
 alter table posts
 add `title` VARCHAR(50);
 
+ALTER TABLE posts add `created_datetime` datetime;
+ALTER TABLE posts add `updated_datetime` datetime;
+
+ALTER TABLE polls add `created_datetime` datetime;
+ALTER TABLE polls add `updated_datetime` datetime;
+
+ALTER TABLE events add `created_datetime` datetime;
+ALTER TABLE events add `updated_datetime` datetime;
+
+ALTER TABLE projects add `created_datetime` datetime;
+ALTER TABLE projects add `updated_datetime` datetime;
