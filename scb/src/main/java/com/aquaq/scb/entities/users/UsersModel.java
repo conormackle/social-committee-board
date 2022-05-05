@@ -1,6 +1,7 @@
 package com.aquaq.scb.entities.users;
 
 import com.aquaq.scb.entities.audits.AuditModel;
+import com.aquaq.scb.entities.events.EventAttendeeModel;
 import com.aquaq.scb.entities.events.EventsModel;
 import com.aquaq.scb.entities.polls.PollOptionVoteModel;
 import com.aquaq.scb.entities.posts.PostsModel;
@@ -72,5 +73,11 @@ public class UsersModel {
     @JsonIgnore
     @OneToMany(mappedBy = "id.user")
     private Set<PollOptionVoteModel> pollOptionVotes;
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @JsonIgnore
+    @OneToMany(mappedBy = "id.user")
+    private Set<EventAttendeeModel> eventAttendeeModels;
 
 }

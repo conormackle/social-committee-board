@@ -1,6 +1,8 @@
 package com.aquaq.scb.entities.events;
 import com.aquaq.scb.entities.events.images.EventImagesModel;
+import com.aquaq.scb.entities.polls.PollOptionVoteModel;
 import com.aquaq.scb.entities.users.UsersModel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -45,5 +47,9 @@ public class EventsModel {
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy="event")
     private Set<EventImagesModel> eventImages;
+
+    @JsonIgnore
+    @OneToMany(mappedBy ="id.eventsModel")
+    private Set<EventAttendeeModel> attendees;
 
 }
