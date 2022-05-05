@@ -25,7 +25,7 @@ public class PollsModel {
     @Column(name="details")
     private String details;
 
-    @JsonIgnore
+
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(cascade = { CascadeType.ALL }, mappedBy = "poll")
