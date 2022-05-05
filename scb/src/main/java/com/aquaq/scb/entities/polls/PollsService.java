@@ -43,6 +43,12 @@ public class PollsService {
 
     public ScbResponse create(PollsModel model){
         try {
+            if(model.getPollOptions() != null) {
+                for (PollOptionsModel pollOption: model.getPollOptions()
+                     ) {
+                    pollOption.setPoll(model);
+                }
+            }
             return ScbResponse.createSuccessResponse(pollsRepository.save(model));
         }catch(Exception e){
             return ScbResponse.createExceptionResponse(e);

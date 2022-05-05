@@ -24,7 +24,8 @@ public class PollOptionsModel {
     @JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @JoinColumn(name="poll_id", nullable=false)
     private PollsModel poll;
 
     @JsonIgnore
@@ -35,6 +36,8 @@ public class PollOptionsModel {
     public int numberOfVotes;
 
     public Integer getNumberOfVotes() {
-        return votes.size();
+        if(votes != null){return votes.size();}else{
+            return 0;
+        }
     }
 }
