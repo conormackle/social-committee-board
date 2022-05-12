@@ -1,5 +1,6 @@
 package com.aquaq.scb.entities.polls;
 
+import com.aquaq.scb.entities.events.EventAttendeeModel;
 import com.aquaq.scb.response.ScbResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -43,4 +44,17 @@ public class PollsController {
     public ScbResponse update(@RequestBody PollsModel model,  @PathVariable Integer id) {
         return pollsService.update(model, id);
     }
+
+    @PutMapping("/polls/addVote")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ScbResponse addVote(@RequestBody PollOptionVoteModel pollOptionVoteModel){
+        return pollsService.addVote(pollOptionVoteModel);
+    }
+
+    @PutMapping("/polls/deleteVote")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ScbResponse deleteVote(@RequestBody PollOptionVoteModel pollOptionVoteModel){
+        return pollsService.deleteVote(pollOptionVoteModel);
+    }
+
 }

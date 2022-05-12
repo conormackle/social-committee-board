@@ -23,4 +23,18 @@ public class EventAttendeeModel {
 
     @Column(name="comment")
     private String comment;
+
+    @Override
+    public boolean equals (Object object) {
+        boolean result = false;
+        if (object == null || object.getClass() != getClass()) {
+            result = false;
+        } else {
+            EventAttendeeModel eventAttendeeModel = (EventAttendeeModel) object;
+            if (this.getId().getUser().getId() == eventAttendeeModel.getId().getUser().getId() && this.getId().getEventsModel().getId() == eventAttendeeModel.getId().getEventsModel().getId()) {
+                result = true;
+            }
+        }
+        return result;
+    }
 }

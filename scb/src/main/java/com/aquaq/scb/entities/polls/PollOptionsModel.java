@@ -1,9 +1,12 @@
 package com.aquaq.scb.entities.polls;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Optional;
 import java.util.Set;
 
 @Data
@@ -28,8 +31,8 @@ public class PollOptionsModel {
     @JoinColumn(name="poll_id", nullable=false)
     private PollsModel poll;
 
-    @JsonIgnore
-    @OneToMany(mappedBy ="id.pollOption")
+    @JsonIgnoreProperties(value = "id.pollOption", allowSetters = true)
+    @OneToMany(mappedBy ="id.pollOption", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<PollOptionVoteModel> votes;
 
     @Transient
@@ -39,5 +42,27 @@ public class PollOptionsModel {
         if(votes != null){return votes.size();}else{
             return 0;
         }
+    }
+
+    public void addVote(PollOptionVoteModel pollOptionVoteModel){
+        if(votes == null){
+            votes = new HashSet<>();
+        }
+        pollOptionVoteModel.getId().setPollOption(this);
+        votes.add(pollOptionVoteModel);
+    }
+
+    public boolean deleteVote(PollOptionVoteModel pollOptionVoteModel){
+        if(votes == null){
+            return false;
+        }
+        for(Iterator<PollOptionVoteModel> it = votes.iterator(); it.hasNext();){
+            PollOptionVoteModel poll = it.next();
+            if(poll.getId().getUser().getId().equals(pollOptionVoteModel.getId().getUser().getId()) && poll.getId().getPollOption().getId().equals(pollOptionVoteModel.getId().getPollOption().getId())){
+                votes.remove(poll);
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -120,4 +120,20 @@ public class EventsService {
         }
     }
 
+    public ScbResponse addEventAttendee(EventAttendeeModel attendeeModel){
+        try{
+            EventsModel updatedModel;
+            Optional<EventsModel> savedModel = eventsRepository.findById(attendeeModel.getId().getEventsModel().getId());
+            if(savedModel.isPresent()){
+                EventsModel updateModel = savedModel.get();
+                updateModel.addAttendee(attendeeModel);
+                updatedModel = eventsRepository.save(updateModel);
+                return ScbResponse.createSuccessResponse(updatedModel);
+            }else{
+                return ScbResponse.createSuccessResponse(Constants.NO_ENTITY_FOUND_WITH_ID + attendeeModel.getId().getEventsModel().getId());
+            }
+        }catch(Exception e){
+            return ScbResponse.createExceptionResponse(e);
+        }
+    }
 }
