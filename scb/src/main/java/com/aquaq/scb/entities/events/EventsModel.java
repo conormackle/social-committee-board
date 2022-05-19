@@ -1,12 +1,13 @@
 package com.aquaq.scb.entities.events;
+
 import com.aquaq.scb.entities.events.images.EventImagesModel;
-import com.aquaq.scb.entities.polls.PollOptionVoteModel;
 import com.aquaq.scb.entities.users.UsersModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Set;
 
 @Data
@@ -30,6 +31,12 @@ public class EventsModel {
 
     @Column(name="details")
     private String details;
+
+    @Column(name="created_datetime")
+    private LocalDateTime createdDateTime;
+
+    @Column(name="updated_datetime")
+    private LocalDateTime updatedDateTime;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude

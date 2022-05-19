@@ -1,6 +1,5 @@
 package com.aquaq.scb.entities.events;
 
-import com.aquaq.scb.entities.polls.PollOptionsModel;
 import com.aquaq.scb.entities.users.UsersModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;

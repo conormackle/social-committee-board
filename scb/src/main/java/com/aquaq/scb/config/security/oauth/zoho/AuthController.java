@@ -1,6 +1,5 @@
 package com.aquaq.scb.config.security.oauth.zoho;
 
-import com.aquaq.scb.config.security.oauth.oauth2.OAuthService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -8,7 +7,6 @@ import io.swagger.annotations.Authorization;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 

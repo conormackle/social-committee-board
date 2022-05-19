@@ -1,5 +1,7 @@
 package com.aquaq.scb.entities.users;
 
+import com.aquaq.scb.entities.users.projects.UserProjectsService;
+import com.aquaq.scb.entities.users.roles.UserRolesService;
 import com.aquaq.scb.response.ScbResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -15,10 +17,16 @@ public class UsersController {
 
     final
     UsersService userService;
+    final
+    UserProjectsService usersProjectsService;
+    final
+    UserRolesService userRolesService;
 
     @Autowired
-    public UsersController(UsersService userService) {
+    public UsersController(UsersService userService, UserProjectsService usersProjectsService, UserRolesService userRolesService) {
         this.userService = userService;
+        this.usersProjectsService = usersProjectsService;
+        this.userRolesService = userRolesService;
     }
 
     @GetMapping("/users/getById/{id}")
@@ -48,8 +56,31 @@ public class UsersController {
     @PutMapping("/users/delete/{id}")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
     public ScbResponse delete(@PathVariable Integer id) {
-//        return userService.delete(id);
-        return null;
+        return userService.delete(id);
+    }
+
+    @PostMapping("/users/addUserToRole/")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ScbResponse addUserToRole(@RequestParam("userId") int userId, @RequestParam("roleId") int roleId) {
+        return userRolesService.addUserToRole(userId, roleId);
+    }
+
+    @DeleteMapping("/users/deleteUserFromRole/")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ScbResponse deleteUserFromRole(@RequestParam("userId") int userId, @RequestParam("roleId") int roleId) {
+        return userRolesService.deleteUserFromRole(userId, roleId);
+    }
+
+    @PostMapping("/users/addUserToProject/")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ScbResponse addUserToProject(@RequestParam("userId") int userId, @RequestParam("roleId") int roleId) {
+        return usersProjectsService.addUserToProject(userId, roleId);
+    }
+
+    @DeleteMapping("/users/deleteUserFromProject/")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ScbResponse deleteUserFromProject(@RequestParam("userId") int userId, @RequestParam("roleId") int roleId) {
+        return usersProjectsService.deleteUserFromProject(userId, roleId);
     }
 
 }

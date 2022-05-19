@@ -1,10 +1,6 @@
 package com.aquaq.scb.entities.roles;
 
 import com.aquaq.scb.entities.mapper.ModelPropertyMapper;
-import com.aquaq.scb.entities.projects.ProjectsModel;
-import com.aquaq.scb.entities.projects.ProjectsRepository;
-import com.aquaq.scb.entities.projects.ProjectsService;
-import com.aquaq.scb.entities.users.UsersModel;
 import com.aquaq.scb.response.ResponseCodes;
 import com.aquaq.scb.response.ScbResponse;
 import com.aquaq.scb.utils.Constants;
