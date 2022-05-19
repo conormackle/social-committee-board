@@ -62,21 +62,6 @@ public abstract class EntityServiceAbstract implements EntityService {
     }
 
     @Override
-    public Page<Object> findByDateBefore(LocalDateTime endDateTime, Pageable page) {
-        return null;
-    }
-
-    @Override
-    public Page<Object> findByDate(LocalDateTime endDateTime, Pageable page) {
-        return null;
-    }
-
-    @Override
-    public Page<Object> findByDateBetween(LocalDateTime startDateTime, LocalDateTime endDateTime, Pageable page) {
-        return null;
-    }
-
-    @Override
     public ScbResponse findByCreatedDateTime(String startDate, String endDate, Integer page, Integer size){
         LocalDateTime startDateTime = dateStringToLocalDateTime(startDate);
         LocalDateTime endDateTime = dateStringToLocalDateTime(endDate);
@@ -102,6 +87,21 @@ public abstract class EntityServiceAbstract implements EntityService {
         responseMap.put("page",response.getPageable().getPageNumber());
         responseMap.put("offset",response.getPageable().getOffset());
         return responseMap;
+    }
+
+    @Override
+    public Page<Object> findByDateBefore(LocalDateTime endDateTime, Pageable page) {
+        return null;
+    }
+
+    @Override
+    public Page<Object> findByDate(LocalDateTime endDateTime, Pageable page) {
+        return null;
+    }
+
+    @Override
+    public Page<Object> findByDateBetween(LocalDateTime startDateTime, LocalDateTime endDateTime, Pageable page) {
+        return null;
     }
 
 }

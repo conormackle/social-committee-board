@@ -53,11 +53,11 @@ public class UserRolesService {
         }
     }
 
-    public ScbResponse deleteUserFromRole(int userId, int roleId){
+    public ScbResponse deleteUserFromRole(UserRolesKey userRolesKey){
         try {
-            Optional<UserRolesModel> userRoles = userRolesRepository.findByUserIdAndRoleId(userId,roleId);
+            Optional<UserRolesModel> userRoles = userRolesRepository.findByUserIdAndRoleId(userRolesKey.getUserId(),userRolesKey.getRoleId());
             if(userRoles.isEmpty()) {
-                return ScbResponse.createSuccessResponse("User Role relationship does not exist for User ID: " + userId + " and Role ID: " + roleId);
+                return ScbResponse.createSuccessResponse("User Role relationship does not exist for User ID: " + userRolesKey.getUserId() + " and Role ID: " + userRolesKey.getRoleId());
             }else{
                 userRolesRepository.delete(userRoles.get());
                 return ScbResponse.createSuccessResponse("Success");

@@ -1,6 +1,8 @@
 package com.aquaq.scb.entities.users;
 
+import com.aquaq.scb.entities.users.projects.UserProjectsKey;
 import com.aquaq.scb.entities.users.projects.UserProjectsService;
+import com.aquaq.scb.entities.users.roles.UserRolesKey;
 import com.aquaq.scb.entities.users.roles.UserRolesService;
 import com.aquaq.scb.response.ScbResponse;
 import io.swagger.annotations.Api;
@@ -67,8 +69,8 @@ public class UsersController {
 
     @DeleteMapping("/users/deleteUserFromRole/")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
-    public ScbResponse deleteUserFromRole(@RequestParam("userId") int userId, @RequestParam("roleId") int roleId) {
-        return userRolesService.deleteUserFromRole(userId, roleId);
+    public ScbResponse deleteUserFromRole(@RequestBody UserRolesKey userRolesKey) {
+        return userRolesService.deleteUserFromRole(userRolesKey);
     }
 
     @PostMapping("/users/addUserToProject/")
@@ -79,8 +81,8 @@ public class UsersController {
 
     @DeleteMapping("/users/deleteUserFromProject/")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
-    public ScbResponse deleteUserFromProject(@RequestParam("userId") int userId, @RequestParam("roleId") int roleId) {
-        return usersProjectsService.deleteUserFromProject(userId, roleId);
+    public ScbResponse deleteUserFromProject(@RequestBody UserProjectsKey userProjectsKey) {
+        return usersProjectsService.deleteUserFromProject(userProjectsKey);
     }
 
 }

@@ -1,19 +1,23 @@
 package com.aquaq.scb.entities.posts;
 
+import com.aquaq.scb.entities.EntityServiceAbstract;
 import com.aquaq.scb.entities.mapper.ModelPropertyMapper;
 import com.aquaq.scb.entities.users.UsersModel;
 import com.aquaq.scb.response.ScbResponse;
 import com.aquaq.scb.utils.Constants;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 @Log4j2
 @Service
-public class PostsService {
+public class PostsService extends EntityServiceAbstract {
 
     private final PostsRepository postsRepository;
 
@@ -67,6 +71,21 @@ public class PostsService {
         }catch(Exception e){
             return ScbResponse.createExceptionResponse(e);
         }
+    }
+
+    @Override
+    public Page<Object> findByCreatedDateTimeBefore(LocalDateTime endDateTime, Pageable page) {
+        return postsRepository.findByCreatedDateTimeBefore(endDateTime, page);
+    }
+
+    @Override
+    public Page<Object> findByCreatedDateTime(LocalDateTime endDateTime, Pageable page) {
+        return postsRepository.findByCreatedDateTime(endDateTime, page);
+    }
+
+    @Override
+    public Page<Object> findByCreatedDateTimeBetween(LocalDateTime startDateTime, LocalDateTime endDateTime, Pageable page) {
+        return postsRepository.findByCreatedDateTimeBetween(startDateTime, endDateTime, page);
     }
 
 }

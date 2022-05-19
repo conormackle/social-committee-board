@@ -1,17 +1,22 @@
 package com.aquaq.scb.entities.polls;
 
+import com.aquaq.scb.entities.EntityServiceAbstract;
 import com.aquaq.scb.entities.mapper.ModelPropertyMapper;
 import com.aquaq.scb.response.ScbResponse;
 import com.aquaq.scb.utils.Constants;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 @Log4j2
 @Service
-public class PollsService {
+public class PollsService extends EntityServiceAbstract {
 
     private final PollsRepository pollsRepository;
 
@@ -70,6 +75,21 @@ public class PollsService {
         }catch(Exception e){
             return ScbResponse.createExceptionResponse(e);
         }
+    }
+
+    @Override
+    public Page<Object> findByCreatedDateTimeBefore(LocalDateTime endDateTime, Pageable page) {
+        return pollsRepository.findByCreatedDateTimeBefore(endDateTime, page);
+    }
+
+    @Override
+    public Page<Object> findByCreatedDateTime(LocalDateTime endDateTime, Pageable page) {
+        return pollsRepository.findByCreatedDateTime(endDateTime, page);
+    }
+
+    @Override
+    public Page<Object> findByCreatedDateTimeBetween(LocalDateTime startDateTime, LocalDateTime endDateTime, Pageable page) {
+        return pollsRepository.findByCreatedDateTimeBetween(startDateTime, endDateTime, page);
     }
 
 }

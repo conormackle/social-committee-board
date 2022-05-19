@@ -44,4 +44,23 @@ public class ProjectsController {
     public ScbResponse update(@RequestBody ProjectsModel model,  @PathVariable Integer id) {
         return projectsService.update(model, id);
     }
+
+
+    @GetMapping("/projects/findByDate/")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ScbResponse findByDate(@RequestParam(required = false, name="startDate") String startDate,
+                                  @RequestParam("endDate") String endDate,
+                                  @RequestParam(required = false, name="page") Integer page,
+                                  @RequestParam(required = false, name="size") Integer size) {
+        return projectsService.findByDate(startDate, endDate, page, size);
+    }
+
+    @GetMapping("/projects/findByCreatedDate/")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ScbResponse findByCreatedDateTime(@RequestParam(required = false, name="startDate") String startDate,
+                                             @RequestParam("endDate") String endDate,
+                                             @RequestParam(required = false, name="page") Integer page,
+                                             @RequestParam(required = false, name="size") Integer size) {
+        return projectsService.findByCreatedDateTime(startDate, endDate, page, size);
+    }
 }

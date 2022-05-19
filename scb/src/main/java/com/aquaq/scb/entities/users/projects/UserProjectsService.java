@@ -53,11 +53,11 @@ public class UserProjectsService {
         }
     }
 
-    public ScbResponse deleteUserFromProject(int userId, int projectId){
+    public ScbResponse deleteUserFromProject(UserProjectsKey userProjectsKey){
         try {
-            Optional<UserProjectsModel> userProjectsModel = userProjectsRepository.findByUserIdAndProjectId(userId,projectId);
+            Optional<UserProjectsModel> userProjectsModel = userProjectsRepository.findByUserIdAndProjectId(userProjectsKey.getUserId(),userProjectsKey.getProjectId());
             if(userProjectsModel.isEmpty()) {
-                return ScbResponse.createSuccessResponse("User Project relationship does not exist for User ID: " + userId + " and Project ID: " + projectId);
+                return ScbResponse.createSuccessResponse("User Project relationship does not exist for User ID: " + userProjectsKey.getUserId() + " and Project ID: " + userProjectsKey.getProjectId());
             }else{
                 userProjectsRepository.delete(userProjectsModel.get());
                 return ScbResponse.createSuccessResponse("Success");
