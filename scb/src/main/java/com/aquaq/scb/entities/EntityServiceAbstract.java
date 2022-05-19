@@ -13,7 +13,7 @@ import java.time.temporal.ChronoField;
 import java.util.HashMap;
 import java.util.Objects;
 
-public abstract class EntityServiceAbstract implements EntityService, EntityServiceDate {
+public abstract class EntityServiceAbstract implements EntityService {
 
     @Value("${spring.data.web.pageable.default-page-size}")
     Integer defaultPageSize;
@@ -59,6 +59,21 @@ public abstract class EntityServiceAbstract implements EntityService, EntityServ
             default:
                 return null;
         }
+    }
+
+    @Override
+    public Page<Object> findByDateBefore(LocalDateTime endDateTime, Pageable page) {
+        return null;
+    }
+
+    @Override
+    public Page<Object> findByDate(LocalDateTime endDateTime, Pageable page) {
+        return null;
+    }
+
+    @Override
+    public Page<Object> findByDateBetween(LocalDateTime startDateTime, LocalDateTime endDateTime, Pageable page) {
+        return null;
     }
 
     @Override
