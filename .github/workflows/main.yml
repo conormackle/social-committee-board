@@ -18,13 +18,15 @@ jobs:
           java-version: '11'
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots verify --file scb/pom.xml
+      - name: Move jar file to deployment folder
+        run: mv scb/target/scb-0.0.1-SNAPSHOT.jar scb/main/resources/deployment_dev
       - name: Zip Folder
-        run: zip -r release.zip scb/target/scb-0.0.1-SNAPSHOT.jar
+        run: (cd scb/main/resources/deployment_dev; zip -r release.zip scb-0.0.1-SNAPSHOT.jar .platform .ebextensions)
       - name: Upload JAR
         uses: actions/upload-artifact@v2
         with:
           name: artifact
-          path: release.zip  
+          path: scb/main/resources/deployment_dev/release.zip  
   deploy:
     needs: build
     name: Deploy
