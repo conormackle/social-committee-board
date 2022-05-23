@@ -19,9 +19,9 @@ jobs:
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots verify --file scb/pom.xml
       - name: Move jar file to deployment folder
-        run: mv scb/target/scb-0.0.1-SNAPSHOT.jar scb/src/main/resources/deployment_dev
+        run: mv scb/target/scb-0.0.1-SNAPSHOT.jar scb/src/main/resources/deployment-dev
       - name: Zip Folder
-        run: (cd scb/src/main/resources/deployment_dev; zip -r release.zip scb-0.0.1-SNAPSHOT.jar .platform .ebextensions)
+        run: (cd scb/src/main/resources/deployment-dev; zip -r release.zip scb-0.0.1-SNAPSHOT.jar .platform .ebextensions)
       - name: Upload JAR
         uses: actions/upload-artifact@v2
         with:
