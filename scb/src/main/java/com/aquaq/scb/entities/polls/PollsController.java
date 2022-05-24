@@ -44,15 +44,6 @@ public class PollsController {
         return pollsService.update(model, id);
     }
 
-    @GetMapping("/polls/findByDate/")
-    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
-    public ScbResponse findByDate(@RequestParam(required = false, name = "startDate") String startDate,
-                                  @RequestParam("endDate") String endDate,
-                                  @RequestParam(required = false, name = "page") Integer page,
-                                  @RequestParam(required = false, name = "size") Integer size) {
-        return pollsService.findByDate(startDate, endDate, page, size);
-    }
-
     @GetMapping("/polls/findByCreatedDate/")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
     public ScbResponse findByCreatedDateTime(@RequestParam(required = false, name = "startDate") String startDate,
