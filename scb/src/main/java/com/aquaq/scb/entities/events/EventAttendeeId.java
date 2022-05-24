@@ -2,6 +2,7 @@ package com.aquaq.scb.entities.events;
 
 import com.aquaq.scb.entities.users.UsersModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,7 +21,7 @@ public class EventAttendeeId implements Serializable {
     private UsersModel user;
 
     @ManyToOne
-    @JsonIgnore
+    @JsonIgnoreProperties(value = "attendees", allowSetters = true)
     @JoinColumn(name = "event_id", referencedColumnName = "id")
     private EventsModel eventsModel;
 

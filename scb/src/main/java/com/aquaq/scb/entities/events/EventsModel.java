@@ -2,12 +2,12 @@ package com.aquaq.scb.entities.events;
 
 import com.aquaq.scb.entities.events.images.EventImagesModel;
 import com.aquaq.scb.entities.users.UsersModel;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -15,7 +15,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Builder
-@Table(name="events")
+@Table(name = "events")
 public class EventsModel {
 
     @Id
@@ -23,19 +23,19 @@ public class EventsModel {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name="date")
+    @Column(name = "date")
     private LocalDateTime date;
 
-    @Column(name="details")
+    @Column(name = "details")
     private String details;
 
-    @Column(name="created_datetime")
+    @Column(name = "created_datetime")
     private LocalDateTime createdDateTime;
 
-    @Column(name="updated_datetime")
+    @Column(name = "updated_datetime")
     private LocalDateTime updatedDateTime;
 
     @ToString.Exclude
@@ -52,11 +52,22 @@ public class EventsModel {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy="event")
+    @OneToMany(mappedBy = "event")
     private Set<EventImagesModel> eventImages;
 
-    @JsonIgnore
-    @OneToMany(mappedBy ="id.eventsModel")
+    @JsonIgnoreProperties(value = "id.pollOption", allowSetters = true)
+    @OneToMany(mappedBy = "id.eventsModel", cascade = CascadeType.ALL)
     private Set<EventAttendeeModel> attendees;
+
+    public void addAttendee(EventAttendeeModel eventAttendeeModel) {
+        if (attendees == null) {
+            attendees = new HashSet<>();
+        }
+        if (attendees.contains(eventAttendeeModel)) {
+            return;
+        }
+        eventAttendeeModel.getId().setEventsModel(this);
+        attendees.add(eventAttendeeModel);
+    }
 
 }

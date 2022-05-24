@@ -10,8 +10,6 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-
 @Log4j2
 @RestController
 @Api(tags = {"Events"})
@@ -69,20 +67,25 @@ public class EventsController {
 
     @GetMapping("/events/findByDate/")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
-    public ScbResponse findByDate(@RequestParam(required = false, name="startDate") String startDate,
+    public ScbResponse findByDate(@RequestParam(required = false, name = "startDate") String startDate,
                                   @RequestParam("endDate") String endDate,
-                                  @RequestParam(required = false, name="page") Integer page,
-                                  @RequestParam(required = false, name="size") Integer size) {
+                                  @RequestParam(required = false, name = "page") Integer page,
+                                  @RequestParam(required = false, name = "size") Integer size) {
         return eventsService.findByDate(startDate, endDate, page, size);
     }
 
     @GetMapping("/events/findByCreatedDate/")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
-    public ScbResponse findByCreatedDateTime(@RequestParam(required = false, name="startDate") String startDate,
-                                         @RequestParam("endDate") String endDate,
-                                         @RequestParam(required = false, name="page") Integer page,
-                                         @RequestParam(required = false, name="size") Integer size) {
+    public ScbResponse findByCreatedDateTime(@RequestParam(required = false, name = "startDate") String startDate,
+                                             @RequestParam("endDate") String endDate,
+                                             @RequestParam(required = false, name = "page") Integer page,
+                                             @RequestParam(required = false, name = "size") Integer size) {
         return eventsService.findByCreatedDateTime(startDate, endDate, page, size);
     }
 
+    @PutMapping("/events/addAttendee/")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ScbResponse addAttendee(@RequestBody EventAttendeeModel eventAttendeeModel) {
+        return eventsService.addEventAttendee(eventAttendeeModel);
+    }
 }
