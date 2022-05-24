@@ -65,4 +65,9 @@ public class EventsController {
         return eventsService.getThumbnail(eventId);
     }
 
+    @PutMapping("/events/addAttendee/")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ScbResponse addAttendee(@RequestBody EventAttendeeModel eventAttendeeModel){
+        return eventsService.addEventAttendee(eventAttendeeModel);
+    }
 }

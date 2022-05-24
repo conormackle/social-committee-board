@@ -3,10 +3,12 @@ import com.aquaq.scb.entities.events.images.EventImagesModel;
 import com.aquaq.scb.entities.polls.PollOptionVoteModel;
 import com.aquaq.scb.entities.users.UsersModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -48,8 +50,19 @@ public class EventsModel {
     @OneToMany(mappedBy="event")
     private Set<EventImagesModel> eventImages;
 
-    @JsonIgnore
-    @OneToMany(mappedBy ="id.eventsModel")
+    @JsonIgnoreProperties(value = "id.pollOption", allowSetters = true)
+    @OneToMany(mappedBy ="id.eventsModel", cascade = CascadeType.ALL)
     private Set<EventAttendeeModel> attendees;
+
+    public void addAttendee(EventAttendeeModel eventAttendeeModel){
+        if (attendees == null) {
+            attendees = new HashSet<>();
+        }
+        if(attendees.contains(eventAttendeeModel)){
+            return;
+        }
+        eventAttendeeModel.getId().setEventsModel(this);
+        attendees.add(eventAttendeeModel);
+    }
 
 }

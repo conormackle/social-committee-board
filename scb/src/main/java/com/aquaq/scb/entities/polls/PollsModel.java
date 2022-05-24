@@ -30,5 +30,4 @@ public class PollsModel {
     @EqualsAndHashCode.Exclude
     @OneToMany(cascade = { CascadeType.ALL }, mappedBy = "poll", fetch = FetchType.LAZY)
     private Set<PollOptionsModel> pollOptions = new HashSet<>();
-
 }
