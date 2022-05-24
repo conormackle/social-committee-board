@@ -1,7 +1,5 @@
 package com.aquaq.scb.entities.posts;
 
-import com.aquaq.scb.entities.polls.PollsModel;
-import com.aquaq.scb.entities.polls.PollsService;
 import com.aquaq.scb.response.ScbResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -44,5 +42,23 @@ public class PostsController {
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
     public ScbResponse update(@RequestBody PostsModel model,  @PathVariable Integer id) {
         return postsService.update(model, id);
+    }
+
+    @GetMapping("/posts/findByDate/")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ScbResponse findByDate(@RequestParam(required = false, name="startDate") String startDate,
+                                  @RequestParam("endDate") String endDate,
+                                  @RequestParam(required = false, name="page") Integer page,
+                                  @RequestParam(required = false, name="size") Integer size) {
+        return postsService.findByDate(startDate, endDate, page, size);
+    }
+
+    @GetMapping("/posts/findByCreatedDate/")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ScbResponse findByCreatedDateTime(@RequestParam(required = false, name="startDate") String startDate,
+                                             @RequestParam("endDate") String endDate,
+                                             @RequestParam(required = false, name="page") Integer page,
+                                             @RequestParam(required = false, name="size") Integer size) {
+        return postsService.findByCreatedDateTime(startDate, endDate, page, size);
     }
 }

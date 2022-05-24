@@ -1,8 +1,6 @@
 package com.aquaq.scb.entities.roles;
 
 import com.aquaq.scb.entities.mapper.ModelPropertyMapper;
-import com.aquaq.scb.entities.posts.PostsModel;
-import com.aquaq.scb.entities.posts.PostsRepository;
 import com.aquaq.scb.response.ScbResponse;
 import com.aquaq.scb.utils.Constants;
 import lombok.extern.log4j.Log4j2;

@@ -4,6 +4,7 @@ import com.aquaq.scb.entities.users.UsersModel;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -36,6 +37,12 @@ public class PostsModel {
     @ManyToOne
     @JoinColumn(name = "post_category_id")
     private PostCategoriesModel postCategory;
+
+    @Column(name="created_datetime")
+    private LocalDateTime createdDateTime;
+
+    @Column(name="updated_datetime")
+    private LocalDateTime updatedDateTime;
 
 
 }

@@ -65,9 +65,27 @@ public class EventsController {
         return eventsService.getThumbnail(eventId);
     }
 
+    @GetMapping("/events/findByDate/")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ScbResponse findByDate(@RequestParam(required = false, name = "startDate") String startDate,
+                                  @RequestParam("endDate") String endDate,
+                                  @RequestParam(required = false, name = "page") Integer page,
+                                  @RequestParam(required = false, name = "size") Integer size) {
+        return eventsService.findByDate(startDate, endDate, page, size);
+    }
+
+    @GetMapping("/events/findByCreatedDate/")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ScbResponse findByCreatedDateTime(@RequestParam(required = false, name = "startDate") String startDate,
+                                             @RequestParam("endDate") String endDate,
+                                             @RequestParam(required = false, name = "page") Integer page,
+                                             @RequestParam(required = false, name = "size") Integer size) {
+        return eventsService.findByCreatedDateTime(startDate, endDate, page, size);
+    }
+
     @PutMapping("/events/addAttendee/")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
-    public ScbResponse addAttendee(@RequestBody EventAttendeeModel eventAttendeeModel){
+    public ScbResponse addAttendee(@RequestBody EventAttendeeModel eventAttendeeModel) {
         return eventsService.addEventAttendee(eventAttendeeModel);
     }
 }

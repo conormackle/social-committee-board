@@ -49,17 +49,15 @@ public class UsersService {
         }
     }
 
-//    public ScbResponse delete(int id){
-//        try{
-//
-//            Optional<UsersModel> model = usersRepository.findById(id);
-//            model.setDeleted(false);
-//            usersRepository.save(model);
-//            return ScbResponse.createSuccessResponse("Success");
-//        }catch(Exception e){
-//            return ScbResponse.createExceptionResponse(e);
-//        }
-//    }
+    public ScbResponse delete(int id){
+        try{
+            Optional<UsersModel> model = usersRepository.findById(id);
+            model.ifPresent(usersRepository::delete);
+            return ScbResponse.createSuccessResponse("Success");
+        }catch(Exception e){
+            return ScbResponse.createExceptionResponse(e);
+        }
+    }
 
     public ScbResponse update(UsersModel model, int id){
         try {
@@ -78,5 +76,6 @@ public class UsersService {
             return ScbResponse.createExceptionResponse(e);
         }
     }
+
 
 }

@@ -2,6 +2,7 @@ package com.aquaq.scb.entities.polls;
 
 import lombok.*;
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Set;
@@ -24,6 +25,12 @@ public class PollsModel {
 
     @Column(name="details")
     private String details;
+
+    @Column(name="created_datetime")
+    private LocalDateTime createdDateTime;
+
+    @Column(name="updated_datetime")
+    private LocalDateTime updatedDateTime;
 
 
     @ToString.Exclude
