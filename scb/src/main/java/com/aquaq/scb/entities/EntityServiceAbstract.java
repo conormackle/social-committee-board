@@ -53,7 +53,11 @@ public abstract class EntityServiceAbstract implements EntityService {
             case findByDateTimeBefore:
                 return ScbResponse.createSuccessResponse(getScbResponseWithPaging(findByDateBefore(endDateTime, paging)));
             case findByDateTime:
-                return ScbResponse.createSuccessResponse(getScbResponseWithPaging(findByDate(endDateTime, paging)));
+                if(!Objects.isNull(endDateTime)){
+                    startDateTime = endDateTime.withHour(0).withMinute(0);
+                    endDateTime = endDateTime.withHour(23).withMinute(59);
+                }
+                return ScbResponse.createSuccessResponse(getScbResponseWithPaging(findByDateBetween(startDateTime, endDateTime, paging)));
             case findByTimeBetween:
                 return ScbResponse.createSuccessResponse(getScbResponseWithPaging(findByDateBetween(startDateTime, endDateTime, paging)));
             default:
@@ -71,7 +75,11 @@ public abstract class EntityServiceAbstract implements EntityService {
             case findByDateTimeBefore:
                 return ScbResponse.createSuccessResponse(getScbResponseWithPaging(findByCreatedDateTimeBefore(endDateTime, paging)));
             case findByDateTime:
-                return ScbResponse.createSuccessResponse(getScbResponseWithPaging(findByCreatedDateTime(endDateTime, paging)));
+                if(!Objects.isNull(endDateTime)){
+                    startDateTime = endDateTime.withHour(0).withMinute(0);
+                    endDateTime = endDateTime.withHour(23).withMinute(59);
+                }
+                return ScbResponse.createSuccessResponse(getScbResponseWithPaging(findByCreatedDateTimeBetween(startDateTime, endDateTime, paging)));
             case findByTimeBetween:
                 return ScbResponse.createSuccessResponse(getScbResponseWithPaging(findByCreatedDateTimeBetween(startDateTime, endDateTime, paging)));
             default:
@@ -91,11 +99,6 @@ public abstract class EntityServiceAbstract implements EntityService {
 
     @Override
     public Page<Object> findByDateBefore(LocalDateTime endDateTime, Pageable page) {
-        return null;
-    }
-
-    @Override
-    public Page<Object> findByDate(LocalDateTime endDateTime, Pageable page) {
         return null;
     }
 

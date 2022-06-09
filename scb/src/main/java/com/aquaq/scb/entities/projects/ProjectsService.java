@@ -78,11 +78,6 @@ public class ProjectsService extends EntityServiceAbstract {
     }
 
     @Override
-    public Page<Object> findByCreatedDateTime(LocalDateTime endDateTime, Pageable page) {
-        return projectsRepository.findByCreatedDateTime(endDateTime, page);
-    }
-
-    @Override
     public Page<Object> findByCreatedDateTimeBetween(LocalDateTime startDateTime, LocalDateTime endDateTime, Pageable page) {
         return projectsRepository.findByCreatedDateTimeBetween(startDateTime, endDateTime, page);
     }

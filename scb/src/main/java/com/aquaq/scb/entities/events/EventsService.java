@@ -134,11 +134,6 @@ public class EventsService extends EntityServiceAbstract {
     }
 
     @Override
-    public Page<Object> findByCreatedDateTime(LocalDateTime endDateTime, Pageable page) {
-        return eventsRepository.findByCreatedDateTime(endDateTime, page);
-    }
-
-    @Override
     public Page<Object> findByCreatedDateTimeBetween(LocalDateTime startDateTime, LocalDateTime endDateTime, Pageable page) {
         return eventsRepository.findByCreatedDateTimeBetween(startDateTime, endDateTime, page);
     }
@@ -146,11 +141,6 @@ public class EventsService extends EntityServiceAbstract {
     @Override
     public Page<Object> findByDateBefore(LocalDateTime endDateTime, Pageable page) {
         return eventsRepository.findByDateBefore(endDateTime, page);
-    }
-
-    @Override
-    public Page<Object> findByDate(LocalDateTime endDateTime, Pageable page) {
-        return eventsRepository.findByDate(endDateTime, page);
     }
 
     @Override

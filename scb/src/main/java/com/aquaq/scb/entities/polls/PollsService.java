@@ -86,11 +86,6 @@ public class PollsService extends EntityServiceAbstract {
     }
 
     @Override
-    public Page<Object> findByCreatedDateTime(LocalDateTime endDateTime, Pageable page) {
-        return pollsRepository.findByCreatedDateTime(endDateTime, page);
-    }
-
-    @Override
     public Page<Object> findByCreatedDateTimeBetween(LocalDateTime startDateTime, LocalDateTime endDateTime, Pageable page) {
         return pollsRepository.findByCreatedDateTimeBetween(startDateTime, endDateTime, page);
     }

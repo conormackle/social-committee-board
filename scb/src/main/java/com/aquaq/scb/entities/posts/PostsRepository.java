@@ -11,9 +11,6 @@ import java.time.LocalDateTime;
 public interface PostsRepository extends JpaRepository<PostsModel, Integer> {
 
     Page<Object> findByCreatedDateTimeBefore(LocalDateTime endDateTime, Pageable pageable);
-
-    Page<Object> findByCreatedDateTime(LocalDateTime endDateTime, Pageable pageable);
-
     Page<Object> findByCreatedDateTimeBetween(
             LocalDateTime startDateTime,
             LocalDateTime endDateTime,
