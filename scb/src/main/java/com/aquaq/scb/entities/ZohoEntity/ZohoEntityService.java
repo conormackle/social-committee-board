@@ -24,7 +24,7 @@ import java.util.Optional;
 @Service
 public class ZohoEntityService {
 
-    private WebClient webClient;
+    private final WebClient webClient;
 
 
     public ZohoEntityService(){

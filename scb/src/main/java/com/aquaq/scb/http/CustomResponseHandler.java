@@ -11,7 +11,7 @@ import java.io.IOException;
 public class CustomResponseHandler implements ResponseHandler<String>{
 
     @Override
-    public String handleResponse(final HttpResponse response) throws ClientProtocolException, IOException {
+    public String handleResponse(final HttpResponse response) throws IOException {
         //Get the status of the response
         int status = response.getStatusLine().getStatusCode();
         if (status >= 200 && status < 300) {

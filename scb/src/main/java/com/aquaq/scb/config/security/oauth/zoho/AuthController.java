@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = {"AuthController"})
 public class AuthController {
 
-    private ZohoAuthService oAuthService;
+    private final ZohoAuthService oAuthService;
 
     @Autowired
     public AuthController(ZohoAuthService oAuthService) {
