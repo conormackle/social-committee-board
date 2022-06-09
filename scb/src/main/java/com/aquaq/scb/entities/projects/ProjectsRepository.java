@@ -12,8 +12,6 @@ public interface ProjectsRepository extends JpaRepository<ProjectsModel, Integer
 
     Page<Object> findByCreatedDateTimeBefore(LocalDateTime endDateTime, Pageable pageable);
 
-    Page<Object> findByCreatedDateTime(LocalDateTime endDateTime, Pageable pageable);
-
     Page<Object> findByCreatedDateTimeBetween(
             LocalDateTime startDateTime,
             LocalDateTime endDateTime,

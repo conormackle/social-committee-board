@@ -79,11 +79,6 @@ public class PostsService extends EntityServiceAbstract {
     }
 
     @Override
-    public Page<Object> findByCreatedDateTime(LocalDateTime endDateTime, Pageable page) {
-        return postsRepository.findByCreatedDateTime(endDateTime, page);
-    }
-
-    @Override
     public Page<Object> findByCreatedDateTimeBetween(LocalDateTime startDateTime, LocalDateTime endDateTime, Pageable page) {
         return postsRepository.findByCreatedDateTimeBetween(startDateTime, endDateTime, page);
     }

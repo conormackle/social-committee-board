@@ -12,16 +12,12 @@ public interface EventsRepository extends JpaRepository<EventsModel, Integer> {
 
     Page<Object> findByCreatedDateTimeBefore(LocalDateTime endDateTime, Pageable pageable);
 
-    Page<Object> findByCreatedDateTime(LocalDateTime endDateTime, Pageable pageable);
-
     Page<Object> findByCreatedDateTimeBetween(
             LocalDateTime startDateTime,
             LocalDateTime endDateTime,
             Pageable pageable);
 
     Page<Object> findByDateBefore(LocalDateTime endDateTime, Pageable pageable);
-
-    Page<Object> findByDate(LocalDateTime endDateTime, Pageable pageable);
 
     Page<Object> findByDateBetween(
             LocalDateTime startDateTime,

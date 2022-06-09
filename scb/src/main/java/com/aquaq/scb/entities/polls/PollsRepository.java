@@ -12,8 +12,6 @@ public interface PollsRepository extends JpaRepository<PollsModel, Integer> {
 
     Page<Object> findByCreatedDateTimeBefore(LocalDateTime endDateTime, Pageable pageable);
 
-    Page<Object> findByCreatedDateTime(LocalDateTime endDateTime, Pageable pageable);
-
     Page<Object> findByCreatedDateTimeBetween(
             LocalDateTime startDateTime,
             LocalDateTime endDateTime,
