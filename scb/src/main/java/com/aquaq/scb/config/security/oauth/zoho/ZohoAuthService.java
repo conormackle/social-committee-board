@@ -106,7 +106,7 @@ public class ZohoAuthService extends OAuthService {
             if(Objects.isNull(user)){
                 UsersModel newUser = UsersModel.builder()
                         .email(userResponse.getEmail())
-                        .name(userResponse.getFirstName() + " " + userResponse.getLastName()).build();
+                        .name(userResponse.getFirstName() + " " + (!Objects.isNull(userResponse.getLastName()) ? userResponse.getLastName() : "")).build();
                 user = usersRepository.save(newUser);
             }
             userResponse.setUserId(user.getId());
@@ -118,7 +118,7 @@ public class ZohoAuthService extends OAuthService {
     }
 
     public boolean isAquaQUser(String email){
-        return email.contains("@aquaq.co.uk");
+        return !Objects.isNull(email) && email.contains("@aquaq.co.uk");
     }
 
 }
