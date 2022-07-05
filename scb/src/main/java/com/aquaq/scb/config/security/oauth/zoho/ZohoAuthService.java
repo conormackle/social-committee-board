@@ -86,17 +86,21 @@ public class ZohoAuthService extends OAuthService {
                 .build();
         String response = getHttpResponse(request);
         ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(response, ResponseBody.class);
+        ResponseBody userResponse = mapper.readValue(response, ResponseBody.class);
+        userResponse.setAquaQUser(isAquaQUser(userResponse.getEmail()));
+        return userResponse;
     }
 
     public ResponseBody authenticateUser(String code) throws JsonProcessingException {
         ResponseBody accessTokenResponse = getAccessToken(code);
         ResponseBody userResponse = getUser(accessTokenResponse.getAccessToken());
         GeneralUtils.copyProperties(accessTokenResponse, userResponse);
-        if(userResponse.getEmail().contains("@aquaq.co.uk")){
-            userResponse.setAquaQUser(true);
-        }
+        userResponse.setAquaQUser(isAquaQUser(userResponse.getEmail()));
         return userResponse;
+    }
+
+    public boolean isAquaQUser(String email){
+        return email.contains("@aquaq.co.uk");
     }
 
 }
