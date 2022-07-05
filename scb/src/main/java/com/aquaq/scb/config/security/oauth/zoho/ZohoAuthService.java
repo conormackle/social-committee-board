@@ -36,6 +36,7 @@ public class ZohoAuthService extends OAuthService {
     @Autowired
     public ZohoAuthService(UsersRepository usersRepository) {
         super(usersRepository);
+        this.usersRepository = usersRepository;
         tokenPrefix = "Zoho-oauthtoken";
         super.setOauthProvider("Zoho");
     }
