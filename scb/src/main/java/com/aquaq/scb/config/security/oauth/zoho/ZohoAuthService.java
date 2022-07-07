@@ -93,21 +93,26 @@ public class ZohoAuthService extends OAuthService {
         ResponseBody accessTokenResponse = mapper.readValue(response, ResponseBody.class);
         ResponseBody userResponse = getUser(refreshToken);
         GeneralUtils.copyProperties(accessTokenResponse, userResponse);
-        userResponse.setAquaQUser(isAquaQUser(userResponse.getEmail()));
-        return userResponse;
+        return getOrCreateUser(userResponse);
     }
 
     public ResponseBody authenticateUser(String code) throws JsonProcessingException {
         ResponseBody accessTokenResponse = getAccessToken(code);
         ResponseBody userResponse = getUser(accessTokenResponse.getAccessToken());
         GeneralUtils.copyProperties(accessTokenResponse, userResponse);
+        return getOrCreateUser(userResponse);
+    }
+
+    private ResponseBody getOrCreateUser(ResponseBody userBody) {
+        ResponseBody userResponse = userBody;
         if(isAquaQUser(userResponse.getEmail())){
             userResponse.setAquaQUser(true);
             UsersModel user = usersRepository.getByEmail(userResponse.getEmail());
             if(Objects.isNull(user)){
                 UsersModel newUser = UsersModel.builder()
                         .email(userResponse.getEmail())
-                        .name(userResponse.getFirstName() + " " + (!Objects.isNull(userResponse.getLastName()) ? userResponse.getLastName() : "")).build();
+                        .name(userResponse.getFirstName() + " " + (!Objects.isNull(userResponse.getLastName()) ? userResponse.getLastName() : ""))
+                        .emailVerified(0).build();
                 user = usersRepository.save(newUser);
             }
             userResponse.setUserId(user.getId());
