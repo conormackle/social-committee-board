@@ -33,4 +33,6 @@ public class ResponseBody {
     @JsonAlias("ZUID")
     private String zuid;
     private boolean isAquaQUser;
+    private int userId;
+    private boolean emailVerified;
 }

@@ -2,6 +2,7 @@ package com.aquaq.scb.config.security.oauth.zoho;
 
 import com.aquaq.scb.config.security.oauth.Constants;
 import com.aquaq.scb.config.security.oauth.oauth2.OAuthService;
+import com.aquaq.scb.entities.users.UsersModel;
 import com.aquaq.scb.entities.users.UsersRepository;
 import com.aquaq.scb.utils.GeneralUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -12,6 +13,8 @@ import org.apache.http.client.methods.RequestBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import java.util.Objects;
 
 @Service
 public class ZohoAuthService extends OAuthService {
@@ -33,6 +36,7 @@ public class ZohoAuthService extends OAuthService {
     @Autowired
     public ZohoAuthService(UsersRepository usersRepository) {
         super(usersRepository);
+        this.usersRepository = usersRepository;
         tokenPrefix = "Zoho-oauthtoken";
         super.setOauthProvider("Zoho");
     }
@@ -86,21 +90,41 @@ public class ZohoAuthService extends OAuthService {
                 .build();
         String response = getHttpResponse(request);
         ObjectMapper mapper = new ObjectMapper();
-        ResponseBody userResponse = mapper.readValue(response, ResponseBody.class);
-        userResponse.setAquaQUser(isAquaQUser(userResponse.getEmail()));
-        return userResponse;
+        ResponseBody accessTokenResponse = mapper.readValue(response, ResponseBody.class);
+        ResponseBody userResponse = getUser(refreshToken);
+        GeneralUtils.copyProperties(accessTokenResponse, userResponse);
+        return getOrCreateUser(userResponse);
     }
 
     public ResponseBody authenticateUser(String code) throws JsonProcessingException {
         ResponseBody accessTokenResponse = getAccessToken(code);
         ResponseBody userResponse = getUser(accessTokenResponse.getAccessToken());
         GeneralUtils.copyProperties(accessTokenResponse, userResponse);
-        userResponse.setAquaQUser(isAquaQUser(userResponse.getEmail()));
+        return getOrCreateUser(userResponse);
+    }
+
+    private ResponseBody getOrCreateUser(ResponseBody userBody) {
+        ResponseBody userResponse = userBody;
+        if(isAquaQUser(userResponse.getEmail())){
+            userResponse.setAquaQUser(true);
+            UsersModel user = usersRepository.getByEmail(userResponse.getEmail());
+            if(Objects.isNull(user)){
+                UsersModel newUser = UsersModel.builder()
+                        .email(userResponse.getEmail())
+                        .name(userResponse.getFirstName() + " " + (!Objects.isNull(userResponse.getLastName()) ? userResponse.getLastName() : ""))
+                        .emailVerified(0).build();
+                user = usersRepository.save(newUser);
+            }
+            userResponse.setUserId(user.getId());
+            userResponse.setEmailVerified(user.getEmailVerified() == 1);
+        }else{
+            return null;
+        }
         return userResponse;
     }
 
     public boolean isAquaQUser(String email){
-        return email.contains("@aquaq.co.uk");
+        return !Objects.isNull(email) && email.contains("@aquaq.co.uk");
     }
 
 }
