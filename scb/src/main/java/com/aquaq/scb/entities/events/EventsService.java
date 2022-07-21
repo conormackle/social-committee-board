@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Log4j2
 @Service
@@ -47,9 +48,9 @@ public class EventsService extends EntityServiceAbstract {
 
     public ScbResponse getAll() {
         try {
-            List<EventsModel> eventsModels = eventsRepository.findAll();
-            if (!eventsModels.isEmpty()) {
-                return ScbResponse.createSuccessResponse(eventsModels);
+            List<EventsModel> models = eventsRepository.findAll();
+            if (!models.isEmpty()) {
+                return ScbResponse.createSuccessResponse(models.stream().filter(x -> !x.isDeleted()).collect(Collectors.toList()));
             } else {
                 return ScbResponse.createSuccessResponse("No entities found");
             }
@@ -159,6 +160,21 @@ public class EventsService extends EntityServiceAbstract {
                 return ScbResponse.createSuccessResponse(updatedModel);
             } else {
                 return ScbResponse.createSuccessResponse(Constants.NO_ENTITY_FOUND_WITH_ID + attendeeModel.getId().getEventsModel().getId());
+            }
+        } catch (Exception e) {
+            return ScbResponse.createExceptionResponse(e);
+        }
+    }
+
+    public ScbResponse delete(int id) {
+        try {
+            Optional<EventsModel> modelToDelete = eventsRepository.findById(id);
+            if (modelToDelete.isPresent()) {
+                modelToDelete.get().setDeleted(true);
+                eventsRepository.save(modelToDelete.get());
+                return ScbResponse.createSuccessResponse("Success");
+            } else {
+                return ScbResponse.createSuccessResponse(Constants.NO_ENTITY_FOUND_WITH_ID + id);
             }
         } catch (Exception e) {
             return ScbResponse.createExceptionResponse(e);

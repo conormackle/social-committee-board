@@ -1,5 +1,6 @@
 package com.aquaq.scb.entities.posts;
 
+import com.aquaq.scb.entities.posts.images.PostsImagesModel;
 import com.aquaq.scb.response.ScbResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -18,6 +19,24 @@ public class PostsController {
     @Autowired
     public PostsController(PostsService postsService) {
         this.postsService = postsService;
+    }
+
+    @PostMapping("/posts/addImage/{postsId}")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ScbResponse addImage(@RequestBody PostsImagesModel model, @PathVariable Integer postsId) {
+        return postsService.addImage(model, postsId);
+    }
+
+    @PutMapping("/posts/updateImage/")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ScbResponse updateImage(@RequestBody PostsImagesModel model) {
+        return postsService.updateImage(model);
+    }
+
+    @GetMapping("/posts/getThumbnail/{postsId}")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ScbResponse getThumbnail(@PathVariable Integer postsId) {
+        return postsService.getThumbnail(postsId);
     }
 
     @GetMapping("/posts/getById/{id}")
@@ -51,5 +70,11 @@ public class PostsController {
                                              @RequestParam(required = false, name="page") Integer page,
                                              @RequestParam(required = false, name="size") Integer size) {
         return postsService.findByCreatedDateTime(startDate, endDate, page, size);
+    }
+
+    @PutMapping("/posts/delete/{id}")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ScbResponse delete(@PathVariable Integer id) {
+        return postsService.delete(id);
     }
 }

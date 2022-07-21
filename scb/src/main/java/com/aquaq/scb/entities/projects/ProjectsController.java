@@ -1,5 +1,6 @@
 package com.aquaq.scb.entities.projects;
 
+import com.aquaq.scb.entities.projects.images.ProjectsImagesModel;
 import com.aquaq.scb.response.ScbResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -19,6 +20,24 @@ public class ProjectsController {
     @Autowired
     public ProjectsController(ProjectsService projectsService) {
         this.projectsService = projectsService;
+    }
+
+    @GetMapping("/events/getThumbnail/{projectId}")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ScbResponse getThumbnail(@PathVariable Integer projectId) {
+        return projectsService.getThumbnail(projectId);
+    }
+
+    @PostMapping("/projects/addImage/{projectsId}")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ScbResponse addImage(@RequestBody ProjectsImagesModel model, @PathVariable Integer projectsId) {
+        return projectsService.addImage(model, projectsId);
+    }
+
+    @PostMapping("/projects/updateImage/")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ScbResponse updateImage(@RequestBody ProjectsImagesModel model) {
+        return projectsService.updateImage(model);
     }
 
     @GetMapping("/projects/getAll")
@@ -52,5 +71,11 @@ public class ProjectsController {
                                              @RequestParam(required = false, name="page") Integer page,
                                              @RequestParam(required = false, name="size") Integer size) {
         return projectsService.findByCreatedDateTime(startDate, endDate, page, size);
+    }
+
+    @PutMapping("/projects/delete/{id}")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ScbResponse delete(@PathVariable Integer id) {
+        return projectsService.delete(id);
     }
 }
