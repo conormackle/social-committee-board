@@ -2,6 +2,7 @@ package com.aquaq.scb.config.security.oauth.oauth2;
 
 import com.aquaq.scb.config.security.oauth.Constants;
 import com.nimbusds.oauth2.sdk.util.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -14,9 +15,13 @@ import java.io.IOException;
 
 public class OAuthFilter extends OncePerRequestFilter {
 
+    @Value("${zoho.auth.local.mode}")
+    private boolean localMode;
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
+        if(localMode) return;
 
         String xAuth = request.getHeader(Constants.HEADER_NAME);
         if (StringUtils.isBlank(xAuth)) {

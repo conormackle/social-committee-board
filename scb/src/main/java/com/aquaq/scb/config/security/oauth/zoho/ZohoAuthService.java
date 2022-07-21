@@ -30,6 +30,9 @@ public class ZohoAuthService extends OAuthService {
     @Value("${zoho.auth.access.type}")
     private String accessType;
 
+    @Value("${zoho.auth.local.mode}")
+    private boolean localMode;
+
     private UsersRepository usersRepository;
     private final String tokenPrefix;
 
@@ -56,6 +59,8 @@ public class ZohoAuthService extends OAuthService {
     }
 
     public ResponseBody getAccessToken(String code) throws JsonProcessingException {
+        if(localMode) return returnLocalSession();
+
         HttpUriRequest request = RequestBuilder.post()
                 .setUri(Constants.ZOHO_TOKEN_URI)
                 .setHeader(HttpHeaders.ACCEPT_LANGUAGE, "en-us")
@@ -77,6 +82,8 @@ public class ZohoAuthService extends OAuthService {
     }
 
     public ResponseBody getRefreshToken(String refreshToken) throws JsonProcessingException {
+        if (localMode) return returnLocalSession();
+
         HttpUriRequest request = RequestBuilder.post()
                 .setUri(Constants.ZOHO_TOKEN_URI)
                 .setHeader(HttpHeaders.ACCEPT_LANGUAGE, "en-us")
@@ -97,6 +104,8 @@ public class ZohoAuthService extends OAuthService {
     }
 
     public ResponseBody authenticateUser(String code) throws JsonProcessingException {
+        if (localMode) return returnLocalSession();
+
         ResponseBody accessTokenResponse = getAccessToken(code);
         ResponseBody userResponse = getUser(accessTokenResponse.getAccessToken());
         GeneralUtils.copyProperties(accessTokenResponse, userResponse);
@@ -104,14 +113,16 @@ public class ZohoAuthService extends OAuthService {
     }
 
     private ResponseBody getOrCreateUser(ResponseBody userBody) {
+        if (localMode) return returnLocalSession();
+
         ResponseBody userResponse = userBody;
         if(isAquaQUser(userResponse.getEmail())){
             userResponse.setAquaQUser(true);
-            UsersModel user = usersRepository.getByEmail(userResponse.getEmail());
+            UsersModel user = usersRepository.getByEmail(userBody.getEmail());
             if(Objects.isNull(user)){
                 UsersModel newUser = UsersModel.builder()
                         .email(userResponse.getEmail())
-                        .name(userResponse.getFirstName() + " " + (!Objects.isNull(userResponse.getLastName()) ? userResponse.getLastName() : ""))
+                        .name(userResponse.getFirstName() + " " + (!Objects.isNull(userBody.getLastName()) ? userResponse.getLastName() : ""))
                         .emailVerified(0).build();
                 user = usersRepository.save(newUser);
             }
@@ -125,6 +136,20 @@ public class ZohoAuthService extends OAuthService {
 
     public boolean isAquaQUser(String email){
         return !Objects.isNull(email) && email.contains("@aquaq.co.uk");
+    }
+    
+    public ResponseBody returnLocalSession(){
+        return ResponseBody.builder()
+                .email("testEmail@aquaq.co.uk")
+                .accessToken("abcde")
+                .apiDomain("local")
+                .firstName("Joe")
+                .lastName("Bloggs")
+                .isAquaQUser(true)
+                .emailVerified(true)
+                .userId(1)
+                .refreshToken("edcba")
+                .build();
     }
 
 }
