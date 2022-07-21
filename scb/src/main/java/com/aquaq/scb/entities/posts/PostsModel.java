@@ -1,10 +1,12 @@
 package com.aquaq.scb.entities.posts;
 
+import com.aquaq.scb.entities.posts.images.PostsImagesModel;
 import com.aquaq.scb.entities.users.UsersModel;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -13,7 +15,6 @@ import java.time.LocalDateTime;
 @Builder
 @Table(name="posts")
 public class PostsModel {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,6 +44,14 @@ public class PostsModel {
 
     @Column(name="updated_datetime")
     private LocalDateTime updatedDateTime;
+
+    @Column(name="deleted")
+    private boolean deleted;
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "post")
+    private Set<PostsImagesModel> postImages;
 
 
 }

@@ -1,5 +1,6 @@
 package com.aquaq.scb.entities.polls;
 
+import com.aquaq.scb.entities.polls.images.PollsImagesModel;
 import com.aquaq.scb.response.ScbResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -18,6 +19,24 @@ public class PollsController {
     @Autowired
     public PollsController(PollsService pollsService) {
         this.pollsService = pollsService;
+    }
+
+    @PostMapping("/polls/addImage/{pollId}")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ScbResponse addImage(@RequestBody PollsImagesModel model, @PathVariable Integer pollId) {
+        return pollsService.addImage(model, pollId);
+    }
+
+    @PutMapping("/polls/updateImage/")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ScbResponse updateImage(@RequestBody PollsImagesModel model) {
+        return pollsService.updateImage(model);
+    }
+
+    @GetMapping("/polls/getThumbnail/{pollId}")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ScbResponse getThumbnail(@PathVariable Integer pollId) {
+        return pollsService.getThumbnail(pollId);
     }
 
     @GetMapping("/polls/getById/{id}")
@@ -63,6 +82,12 @@ public class PollsController {
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
     public ScbResponse deleteVote(@RequestBody PollOptionVoteModel pollOptionVoteModel) {
         return pollsService.deleteVote(pollOptionVoteModel);
+    }
+
+    @PutMapping("/polls/delete/{id}")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ScbResponse delete(@PathVariable Integer id) {
+        return pollsService.delete(id);
     }
 
 }

@@ -70,4 +70,7 @@ public class EventsModel {
         attendees.add(eventAttendeeModel);
     }
 
+    @Column(name="deleted")
+    private boolean deleted;
+
 }

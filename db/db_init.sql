@@ -153,3 +153,43 @@ ALTER TABLE events add `updated_datetime` datetime;
 
 ALTER TABLE projects add `created_datetime` datetime;
 ALTER TABLE projects add `updated_datetime` datetime;
+
+/*CJM - added delete column to tables*/
+
+ALTER TABLE posts add `deleted` boolean default false;
+ALTER TABLE polls add `deleted` boolean default false;
+ALTER TABLE events add `deleted` boolean default false;
+ALTER TABLE projects add `deleted` boolean default false;
+
+/* CJM - create poll_images table */
+
+CREATE TABLE `poll_images` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+	`polls_id` INT NOT NULL,
+	`image_path` VARCHAR(250) NOT NULL,
+	`thumbnail` boolean DEFAULT FALSE,
+	 PRIMARY KEY (`id`),
+     FOREIGN KEY (polls_id) REFERENCES polls(id)
+);
+
+/* CJM - create posts_images table */
+
+CREATE TABLE `posts_images` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+	`posts_id` INT NOT NULL,
+	`image_path` VARCHAR(250) NOT NULL,
+	`thumbnail` boolean DEFAULT FALSE,
+	 PRIMARY KEY (`id`),
+     FOREIGN KEY (posts_id) REFERENCES posts(id)
+);
+
+/* CJM - create polls_images table */
+
+CREATE TABLE `polls_images` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+	`polls_id` INT NOT NULL,
+	`image_path` VARCHAR(250) NOT NULL,
+	`thumbnail` boolean DEFAULT FALSE,
+	 PRIMARY KEY (`id`),
+     FOREIGN KEY (polls_id) REFERENCES polls(id)
+);

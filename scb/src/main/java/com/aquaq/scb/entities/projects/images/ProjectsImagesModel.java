@@ -1,6 +1,5 @@
-package com.aquaq.scb.entities.events.images;
+package com.aquaq.scb.entities.projects.images;
 
-import com.aquaq.scb.entities.events.EventsModel;
 import com.aquaq.scb.entities.projects.ProjectsModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
@@ -12,8 +11,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Builder
-@Table(name="event_images")
-public class EventImagesModel {
+@Table(name="projects_images")
+public class ProjectsImagesModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,9 +22,9 @@ public class EventImagesModel {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne
-    @JoinColumn(name = "event_id")
+    @JoinColumn(name = "projects_id")
     @JsonIgnore
-    private EventsModel event;
+    private ProjectsModel project;
 
     @Column(name="image_path")
     private String imagePath;

@@ -1,5 +1,7 @@
 package com.aquaq.scb.entities.projects;
 
+import com.aquaq.scb.entities.events.images.EventImagesModel;
+import com.aquaq.scb.entities.projects.images.ProjectsImagesModel;
 import com.aquaq.scb.entities.users.UsersModel;
 import lombok.*;
 
@@ -41,5 +43,13 @@ public class ProjectsModel {
 
     @Column(name="created_by_user_id")
     private Integer createdByUserId;
+
+    @Column(name="deleted")
+    private boolean deleted;
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "project")
+    private Set<ProjectsImagesModel> projectImages;
 
 }

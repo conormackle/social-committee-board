@@ -88,4 +88,10 @@ public class EventsController {
     public ScbResponse addAttendee(@RequestBody EventAttendeeModel eventAttendeeModel) {
         return eventsService.addEventAttendee(eventAttendeeModel);
     }
+
+    @PutMapping("/events/delete/{id}")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ScbResponse delete(@PathVariable Integer id) {
+        return eventsService.delete(id);
+    }
 }
